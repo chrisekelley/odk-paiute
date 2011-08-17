@@ -10,15 +10,20 @@
         <label for='{{id}}'>{{label}}</label>
       </td>
       <td>
-      	{{#ifString datatype}}
-        <input {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='{{type}}' value='{{value}}'></input>
-      	{{else}}
       	{{debug}}
-      	<input id='datepicker' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='{{type}}' value='{{value}}'></input>
-      	{{/ifString}}
+      	{{{renderWidget}}}
       </td>
       <td class='error-message' style='display:none'>
       </td>
+    </script>
+    <script id="inputTextWidget" type="text/x-handlebars-template">
+        <input {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='text' value='{{value}}'></input>
+    </script>
+    <script id="datepickerWidget" type="text/x-handlebars-template">
+      	<input id='datepicker' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='text' value='{{value}}'></input>
+    </script>
+    <script id="checkboxWidget" type="text/x-handlebars-template">
+      	<input id='datepicker' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='checkbox' value='{{value}}'></input>
     </script>
     <script id="form-template" type="text/x-handlebars-template">
       <form>

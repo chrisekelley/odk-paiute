@@ -41,28 +41,30 @@ function createDisplaySubheader(pageItem) {
 	return output;
 }
 
-Handlebars.registerHelper('ifString', function(item, block, inverse) {
-	  var selected = false;
-	  console.log("Item: " + item);
-	  if (item == 'string') {
-		  selected = true;
+Handlebars.registerHelper("renderWidget", function(context) {
+	//console.log("this:" + JSON.stringify(this));
+	var template;
+	var html;
+	var useTemplate = true;
+	var datatype = this.datatype;
+	 if (datatype == 'string') {
+		 template = Handlebars.compile($("#inputTextWidget").html());
+	  } else if (datatype == 'DateTime') {
+		 template = Handlebars.compile($("#datepickerWidget").html());
+	  } else if (datatype == 'bool') {
+		  template = Handlebars.compile($("#checkboxWidget").html());
+	  } else {
+		  useTemplate = false; 
 	  };
-	  if (item == 'DateTime') {
-//		  $('#datepicker').datepicker({
-//				showOn: 'button', buttonImageOnly: true, buttonImage: 'images/icon_cal.png'
-//			});
-		  //$('#datepicker').datepicker({showOn: 'button', buttonImageOnly: true, buttonImage: 'images/icon_cal.png'});
-		  //return "<div id=\"datepicker\"></div><script>$(\"#datepicker\").datepicker();</script>";
-		  return "<input id='datepicker' name='datepicker' type='text' ></input><script>$('#datepicker').datepicker({showOn: 'button', buttonImageOnly: true, buttonImage: 'images/icon_cal.png'});</script>";
-	  };
+	  console.log("useTemplate: " + useTemplate + " datatype: " + datatype);
+	  if (useTemplate == true) {
 
-	  if(selected) {
-	    return block(this);
+		  html = template(this); 
+	  } else {
+		  html = "No template- datatype: " + datatype;
 	  }
-	  else {
-		  return inverse(this); 
-	}
-	  ;
+	  //console.log("html: " + html);
+	  return html;
 	});
 
 // Debug handlebars.js templates
