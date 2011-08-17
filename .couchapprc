@@ -1,7 +1,5 @@
-{
-  "env" : {
-    "default" : {
-      "db" : "http://localhost:5984/odk"
-    }
+{ "env":
+  { "dev"    : {"db": "http://admin:luvcouch@localhost:5984/odk"}
+  , "mob": {"db": "http://admin:luvcouch@localhost:5984/odk"}
   }
 }

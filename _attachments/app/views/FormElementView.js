@@ -15,7 +15,14 @@ var FormElementView = Backbone.View.extend({
     return this.model.validate({value: this.$("input").val()});
   },
   render: function(){
-    $(this.el).html(this.template(this.model.toJSON()));
+	  var type = this.model.get("datatype");
+	  // console.log(type + ": " + JSON.stringify(type));
+	  if (type == "display") {
+		  
+	  } else {
+		    $(this.el).html(this.template(this.model.toJSON())); 
+	  }
+
     return this;
   },
   showErrorMessages: function (error){

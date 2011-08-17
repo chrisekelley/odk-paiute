@@ -1,0 +1,65 @@
+{
+	"_rev": "1e2585a3-715c-4119-a16f-d4276656412e",
+	"form_elements": [
+		{
+			"label": "BEGIN TABLE ",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "display",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field1427",
+			"inputType": "display-tbl-begin"
+		},
+		{
+			"label": "Date of ADR",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "DateTime",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "date_of_adr",
+			"inputType": "emptyDate"
+		},
+		{
+			"label": "Details of ADR",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "string",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "details_of_adr",
+			"inputType": "textarea"
+		},
+		{
+			"label": "END TABLE",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "display",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field1428",
+			"inputType": "display-tbl-end"
+		}
+	]
+}

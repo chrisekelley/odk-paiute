@@ -9,14 +9,22 @@ var FormElement = Backbone.Model.extend({
       switch (option.name){
         case "optional":
           if (option.value == "false" && attributes.value == ""){
-            validationErrors.push(this.get("label") + " is required");
+          	if (this.hasOwnProperty("init")) {
+          		console.log("Error: value is empty ");
+                validationErrors.push(this.get("label") + " is required");
+          	} else {
+          		this.init= "yes";
+          		console.log("init " + this.get("label"));
+          	}
           }
           break;
         // TODO need to implement these
         case "absolute-min":
           break;
         case "absolute-max":
-          break;
+        	if (parseInt(attributes.value) > parseInt(option.value)){
+                validationErrors.push(this.get("label") + " is too high. Value: " + attributes.value + " Max value: " + option.value);
+              }
         case "max":
           break;
         case "min":

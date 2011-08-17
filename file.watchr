@@ -1,11 +1,11 @@
 watch( '.html$') {|match_data|
-  `couchapp push` unless match_data[0] =~ /\.sw.$/
+  `couchapp push dev` unless match_data[0] =~ /\.sw.$/
 }
 watch( '.js$') {|match_data|
-  `couchapp push` unless match_data[0] =~ /\.sw.$/
+  `couchapp push dev` unless match_data[0] =~ /\.sw.$/
 }
 watch( '.*\.json$') {|match_data|
-  `couchapp push` unless match_data[0] =~ /\.sw.$/
+  `couchapp push dev` unless match_data[0] =~ /\.sw.$/
 }
 watch( '(.*\.coffee$)' ) {|match_data|
   puts match_data[0]
@@ -22,6 +22,6 @@ watch( '(.*\.coffee$)' ) {|match_data|
   if not error
     puts "Success!"
 #    `make combined`
-    `couchapp push`
+    `couchapp push dev`
   end
 }
