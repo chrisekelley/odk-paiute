@@ -48,6 +48,9 @@ datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html())
 checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
 </code>
 </pre>
+
+Performance test is at http://jsperf.com/test-pre-compiling-handlebars-js-templates
+
 In the current example, the form is ArrestDocket.js.
 
 Other useful info
