@@ -16,7 +16,14 @@
       	<input id='datepicker' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='text' value='{{value}}'></input>
     </script>
     <script id="checkboxWidget" type="text/x-handlebars-template">
-      	<input id='datepicker' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='checkbox' value='{{value}}'></input>
+      	<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='checkbox' value='{{value}}'></input>
+    </script>
+    <script id="dropdownWidget" type="text/x-handlebars-template">
+    	{{debug}}
+    	<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}'>
+    	{{#dropdown enumerations}}
+    	{{/dropdown}}
+    	</select>
     </script>
     <script id="form-template" type="text/x-handlebars-template">
       <form>

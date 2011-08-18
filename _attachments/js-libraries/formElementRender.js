@@ -49,6 +49,7 @@ function createDisplaySubheader(pageItem) {
 inputTextWidgetCompiledHtml = Handlebars.compile($("#inputTextWidget").html());
 datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html());
 checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
+dropdownWidgetCompiledHtml = Handlebars.compile($("#dropdownWidget").html());
 
 Handlebars.registerHelper("renderWidget", function(context) {
 	//console.log("this:" + JSON.stringify(this));
@@ -86,6 +87,10 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		template = datepickerWidgetCompiledHtml;
 	} else if (inputType == 'checkbox') {
 		template = checkboxWidgetCompiledHtml;
+	} else if (inputType == 'dropdown-add-one') {
+		template = dropdownWidgetCompiledHtml;
+	} else if (inputType == 'dropdown') {
+		template = dropdownWidgetCompiledHtml;
 	} else {
 		useTemplate = false; 
 	};
@@ -120,4 +125,14 @@ Handlebars.registerHelper("debug", function(optionalValue) {
 	    console.log("====================");
 	    console.log(optionalValue);
 	  }
+	});
+
+Handlebars.registerHelper('dropdown', function(items) {
+	  var out = "";
+	  var arry = items.split(',');
+	  for(var i=0, l=arry.length; i<l; i++) {
+	    out = out + "<option>" + arry[i] + "</option>";
+	  }
+
+	  return out;
 	});
