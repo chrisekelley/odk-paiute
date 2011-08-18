@@ -14,7 +14,7 @@ var FormElement = Backbone.Model.extend({
                 validationErrors.push(this.get("label") + " is required");
           	} else {
           		this.init= "yes";
-          		console.log("init " + this.get("label"));
+          		//console.log("init " + this.get("label"));
           	}
           }
           break;

@@ -1,0 +1,323 @@
+{
+	"header": "Generic Test",
+	"form_elements": [
+		{
+			"label": "BEGIN TABLE ",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "display",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field1",
+			"inputType": "display-tbl-begin"
+		},
+		{
+			"label": "Display Header Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "display",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field2",
+			"inputType": "display-header"
+		},
+		{
+			"label": "Date Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "DateTime",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field3",
+			"inputType": "emptyDate"
+		},
+		{
+			"label": "Text Widget.",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "string",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field4",
+			"inputType": "text"
+		},
+		{
+			"label": "Dropdown Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "long?",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "station",
+			"inputType": "field5",
+			"enumerations": "apples,oranges, bananas,lemons,berries,pineapples,mangoes, paw paws, lichi"
+		},
+		{
+			"label": "Text Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "string",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field6",
+			"inputType": "text"
+		},
+		{
+			"label": "Dropdown Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "string",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field7",
+			"inputType": "dropdown-add-one",
+			"enumerations": "Peterson, Al,"
+		},
+		{
+			"label": "Additional Investigating Officers",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "string",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field8",
+			"inputType": "text"
+		},
+		{
+			"label": "Text Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "string",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field9",
+			"inputType": "text"
+		},
+		{
+			"label": "Date Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "DateTime",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field10",
+			"inputType": "emptyDate"
+		},
+		{
+			"label": "Dropdown Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "long?",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field11",
+			"inputType": "select",
+			"enumerations": "Not enrolled,Remanded,Enrolled"
+		},
+		{
+			"label": "Display Header Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "display",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field12",
+			"inputType": "display-header"
+		},
+		{
+			"label": "Checkbox Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "bool",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field13",
+			"inputType": "checkbox"
+		},
+		{
+			"label": "Checkbox Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "bool",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field14",
+			"inputType": "checkbox"
+		},
+		{
+			"label": "Checkbox Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "bool",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field15",
+			"inputType": "checkbox"
+		},
+		{
+			"label": "Checkbox Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "bool",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field16",
+			"inputType": "checkbox"
+		},
+		{
+			"label": "Checkbox Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "bool",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field17",
+			"inputType": "checkbox"
+		},
+		{
+			"label": "Checkbox Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "bool",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field18",
+			"inputType": "checkbox"
+		},
+		{
+			"label": "Checkbox Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "bool",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "field19",
+			"inputType": "checkbox"
+		},
+		{
+			"label": "Textarea Widget",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "datatype",
+			"visible": "false",
+			"tblCols": "0",
+			"identifier": "field20",
+			"inputType": "textarea"
+		},
+		{
+			"label": "END TABLE",
+			"value": "",
+			"options": [
+				{
+					"name": "optional",
+					"value": "false"
+				}
+			],
+			"datatype": "display",
+			"visible": "true",
+			"tblCols": "0",
+			"identifier": "fieldend",
+			"inputType": "display-tbl-end"
+		}
+	]
+}

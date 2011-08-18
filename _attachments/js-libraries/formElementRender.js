@@ -41,6 +41,10 @@ function createDisplaySubheader(pageItem) {
 	return output;
 }
 
+inputTextWidgetCompiledHtml = Handlebars.compile($("#inputTextWidget").html());
+datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html());
+checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
+
 Handlebars.registerHelper("renderWidget", function(context) {
 	//console.log("this:" + JSON.stringify(this));
 	var template;
@@ -48,17 +52,16 @@ Handlebars.registerHelper("renderWidget", function(context) {
 	var useTemplate = true;
 	var datatype = this.datatype;
 	 if (datatype == 'string') {
-		 template = Handlebars.compile($("#inputTextWidget").html());
+			 template = inputTextWidgetCompiledHtml;
 	  } else if (datatype == 'DateTime') {
-		 template = Handlebars.compile($("#datepickerWidget").html());
+			 template = datepickerWidgetCompiledHtml;
 	  } else if (datatype == 'bool') {
-		  template = Handlebars.compile($("#checkboxWidget").html());
+				 template = checkboxWidgetCompiledHtml;
 	  } else {
 		  useTemplate = false; 
 	  };
-	  console.log("useTemplate: " + useTemplate + " datatype: " + datatype);
+	  // console.log("useTemplate: " + useTemplate + " datatype: " + datatype);
 	  if (useTemplate == true) {
-
 		  html = template(this); 
 	  } else {
 		  html = "No template- datatype: " + datatype;

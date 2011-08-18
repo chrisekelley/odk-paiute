@@ -37,11 +37,17 @@ All of the backbone [models](http://documentcloud.github.com/backbone/#Model) an
 You can put json forms into the \_docs directory and they will be added to your couch when you do a couchapp push.
 
 How do I modify form widgets?
-
 ----------------------
 
 Look at the index2.html example. Each widget has its own handlebars.js template (see checkboxWidget). They are activated by the {{{renderWidget}}} tag in the form-element-template. 
-Look at Handlebars.registerHelper("renderWidget"... in formElementRender.js, which compiles the relevant template based on the datatype in the form.
+Handlebars.registerHelper("renderWidget"... in formElementRender.js compiles the relevant template based on the datatype in the form. Each widget is pre-compiled before the loop:
+<pre>
+<code>
+inputTextWidgetCompiledHtml = Handlebars.compile($("#inputTextWidget").html());
+datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html());
+checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
+</code>
+</pre>
 In the current example, the form is ArrestDocket.js.
 
 Other useful info
