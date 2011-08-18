@@ -1,0 +1,781 @@
+﻿html,body {
+	margin: 0;
+	padding: 0;
+}
+
+/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+body
+{
+    /* background-color: #5c87b2; */
+    font-size: 75%;
+    /* font-family: Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif; */
+    font-family: Tahoma,Verdana,Arial,sans-serif;
+    /* Do not set the font-size here - it will mess up the datepicker.
+    font-size: 8px; */
+    margin: 0;
+    padding: 0;
+    /* color: #696969; */
+    background-color: #ffffff;
+}
+
+a:link
+{
+    color: #034af3;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: #505abc;
+}
+a:hover
+{
+    color: #1d60ff;
+    text-decoration: none;
+}
+a:active
+{
+    color: #12eb87;
+}
+
+/* p, ul
+{
+    margin-bottom: 20px;
+    line-height: 1.6em;
+} */
+
+/* HEADINGS   
+----------------------------------------------------------*/
+/* h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #000;
+}
+
+h1
+{
+    font-size: 2em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+h2
+{
+    padding: 0 0 10px 0;
+}
+h3
+{
+    font-size: 1.2em;
+}
+h4
+{
+    font-size: 1.1em;
+}
+h5, h6
+{
+    font-size: 1em;
+}
+*/
+
+h1 {
+    font-size: 12pt;
+    font-weight: bold;
+}
+h2 {
+    font-size: 10pt;
+    font-weight: bold;
+}
+h3 {
+    font-size: 9pt;
+    font-weight: bold;
+}
+td {
+    font-size: 8pt;
+}
+th {
+    font-size: 8pt;
+}
+
+
+/* this rule styles <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+/* you can specify a greater or lesser percentage for the 
+page width. Or, you can specify an exact pixel width. */
+.page
+{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header
+{
+    position: relative;
+    margin-bottom: 0px;
+    color: #000;
+    padding: 0;
+}
+
+#header h1
+{
+    font-weight: bold;
+    padding: 5px 0;
+    margin: 0;
+    color: #fff;
+    border: none;
+    line-height: 2em;
+    font-size: 32px !important;
+}
+
+#main
+{
+    padding: 30px 30px 15px 30px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    _height: 1px; /* only IE6 applies CSS properties starting with an underscore */
+}
+
+#footer
+{
+    color: #999;
+    padding: 10px 0;
+    text-align: center;
+    line-height: normal;
+    margin: 0;
+    font-size: .9em;
+}
+
+/* TAB MENU   
+----------------------------------------------------------*/
+ul#menu
+{
+    border-bottom: 1px #5C87B2 solid;
+    padding: 0 0 2px;
+    position: relative;
+    margin: 0;
+    text-align: right;
+}
+
+ul#menu li
+{
+    display: inline;
+    list-style: none;
+}
+
+ul#menu li#greeting
+{
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 2.8em;
+    color: #fff;
+}
+
+ul#menu li a
+{
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 2.8em;
+    background-color: #e8eef4;
+    color: #034af3;
+}
+
+ul#menu li a:hover
+{
+    background-color: #fff;
+    text-decoration: none;
+}
+
+ul#menu li a:active
+{
+    background-color: #a6e2a6;
+    text-decoration: none;
+}
+
+ul#menu li.selected a
+{
+    background-color: #fff;
+    color: #000;
+}
+
+/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset 
+{
+    border:1px solid #ddd;
+    padding:0 1.4em 1.4em 1.4em;
+    margin:0 0 1.5em 0;
+}
+
+legend 
+{
+    font-size:1.2em;
+    font-weight: bold;
+}
+
+textarea 
+{
+    min-height: 75px;
+    margin-top: 6px;
+}
+
+input 
+{
+    margin-top: 6px;
+}
+
+input[type="text"] 
+{
+    /* width: 200px; */
+    border: 1px solid #CCC;
+    margin-top: 6px;
+}
+
+input[type="password"] 
+{
+    width: 200px;
+    border: 1px solid #CCC;
+}
+
+select 
+{
+    margin-top: 6px;
+}
+
+select, textarea {
+    background-color: #EBF1FA;
+    color: #222222;
+    font-size: 8pt;
+}
+
+input[type="submit"], input[type="reset"], input[type="button"], button {
+    background-color: #B2B9C6;
+    color: #000000;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+.razortable 
+{
+  border: solid 1px #e8eef4;
+  border-collapse: collapse;
+}
+
+.razortable td 
+{
+  padding: 5px;   
+  border: solid 1px #e8eef4;
+}
+
+.razortable th
+{
+  padding: 6px 5px;
+  text-align: left;
+  /* background-color: #e8eef4; */
+  background-color: #2175bc;
+  /* border: solid 1px #e8eef4; */
+  border: solid 1px #2175bc;  
+}
+
+/* MISC  
+----------------------------------------------------------*/
+.clear
+{
+    clear: both;
+}
+
+.error {
+    color: Red;
+    font-family: Tahoma,Verdana,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#menucontainer
+{
+    margin-top:40px;
+}
+
+div#title
+{
+    display:block;
+    float:left;
+    text-align:left;
+}
+
+#logindisplay
+{
+    font-size:1.1em;
+    display:block;
+    text-align:right;
+    margin:10px;
+    color:White;
+}
+
+#logindisplay a:link
+{
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:visited
+{
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:hover
+{
+    color: white;
+    text-decoration: none;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label,
+.editor-label
+{
+    margin: 1em 0 0 0;
+}
+
+.display-field,
+.editor-field
+{
+    margin:0.5em 0 0 0;
+}
+
+.text-box
+{
+    width: 30em;
+}
+
+.text-box.multi-line
+{
+    height: 6.5em;
+}
+
+.tri-state
+{
+    width: 6em;
+}
+
+/* TIMS styles */
+.sectionHeaderIE {
+	background-color: Silver;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+	padding : 0px 0px 0px 0px;
+	text-align:left;
+	text-transform:uppercase;
+}
+.sectionHeader {
+    background: none repeat scroll 0 0 #DDDDDD;
+    font-family: Tahoma,Verdana,Arial,sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    padding: 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+.sectionSubHeader {
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+	color : #162E56;
+	text-align:left;
+	line-height:3px;
+	background-color:transparent;
+}
+#banner-home {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 46px;
+	width: 100%;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	font-size: 10pt;
+	font-weight: bold;
+	color: white;
+	background-image: url("/Content/images/banner_bkgd.gif");
+}
+.serviceHeader {
+	font-weight: bold;
+	font-size: 12pt;
+	color: navy;
+	vertical-align: middle;
+	margin: 5px;
+}
+.serviceHeaderSite {
+	font-weight: bold;
+	font-size: 10pt;
+	color: navy;
+	vertical-align: middle;
+	text-align: center;
+	margin: 5px;
+}
+a:link {
+	color: Blue;
+	text-decoration: none
+}
+
+/*	text-decoration: underline; */
+a:visited {
+	color: Purple;
+	text-decoration: inherit
+}
+
+/* 	text-decoration: underline; */
+a:hover {
+	color: Red;
+	text-decoration: none;
+}
+#loginStatus-print {
+	position: relative;
+	left: 130px;
+	width: 870px;
+	background-color: transparent;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	padding-bottom: .9em;
+	font-size: 10pt;
+	border: 1px solid grey;
+	height:32px;
+}
+#loginStatusNone {
+	position: relative;
+	left: 130px;
+	width: 870px;
+	background-color: transparent;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	padding-bottom: .9em;
+	font-size: 10pt;
+	height:32px;
+}
+.rowheader {
+	background-color: navy;
+	color: white;
+}
+.patientrowheader {
+	background-color: #2586d7;
+	color: white;
+}
+.patientrow {
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: center;
+	color: black
+}
+th {
+	font-size: 8pt;
+}
+div#search-results {
+	margin-bottom: 2px;
+}
+
+div#search-results h1 {
+	background: #2175bc top left repeat-x;
+	color: #FFF;
+	font-size: 140%;
+	font-weight: normal;
+	padding: 8px 10px;
+	margin: 0;
+}
+#search-results-form {
+	height:40px;
+	margin-bottom:2px;
+}
+
+#search-results-body {
+	background: #ffffff;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	padding-left: 4px;
+	font-size: 10pt;
+	overflow: auto;
+	border: 1px solid black;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+
+#search-results-list {
+	position: relative;
+}
+
+#search-results-list-pager {
+	position: relative;
+	/*height: 25px;
+	vertical-align: bottom;
+	overflow: auto;*/
+}
+
+#search-results-none {
+	position: relative;
+	width: 874px;
+	vertical-align: bottom;
+	overflow: auto;
+}
+#sidebar-a-print {
+	float: left;
+	position: relative;
+	left: 0px;
+	background-color: transparent;
+	width: 130px;
+	background-color: rgb(235, 235, 235);
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+}
+#sidenavcontainer {
+	width: 120px;
+	border-right: .5px solid #000;
+	padding: 0 0 2px 0;
+	margin-bottom: 1em;
+	background-color: #90bade;
+	color: #fff;
+	font-size: 9pt;
+}
+
+#sidenavcontainer ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	color: #fff;
+}
+
+#sidenavcontainer li {
+	border-bottom: 1px solid #90bade;
+	color: #000;
+	font-size: 10pt;
+}
+
+#sidenavcontainer li a {
+	display: block;
+	padding: 3px 3px 3px 3px;
+	border-left: 5px solid #1958b7;
+	border-right: 5px solid #508fc4;
+	background-color: #2175bc;
+	color: #fff;
+	text-decoration: none;
+	width: 100%;
+}
+
+html>body #sidenavcontainer li a {
+	width: auto;
+}
+
+#sidenavcontainer li a:hover {
+	border-left: 5px solid #1c64d1;
+	border-right: 5px solid #5ba3e0;
+	background-color: #2586d7;
+	color: #fff;
+}
+
+#sidenavcontainer li a:visited,#sidenavcontainer li a:active,#sidenavcontainer li a:link
+	{
+	color: #fff;
+	text-decoration: none;
+}
+#maincol {
+	background-color: #FFFFFF;
+	float: left;
+	display: inline;
+	position: relative;
+	width: 870px;
+}
+#pagewidth {
+	width: 1000px;
+}
+#twocols {
+	width: 870px;
+	float: right;
+	position: relative;
+}
+/* *** Float containers fix:
+ http://www.csscreator.com/attributes/containedfloat.php *** */
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+/* Hides from IE-mac \*/
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}
+
+.defaultCell {
+background-color:#fff;border: 1px solid silver;
+}
+
+/* This is the style for the trigger icon. The margin-bottom value causes the icon to shift down to center it. */
+.ui-datepicker-trigger {
+margin-left:5px;
+margin-top: 6px; 
+margin-bottom: -4px;
+}
+
+#formsIE {
+    position:absolute;
+    left:500px;
+    width:500px;
+    top:0px;
+	background-color: transparent;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align : top;
+	padding-bottom:1em;
+	font-size: 10pt;
+	height:530px;
+	overflow : auto;
+}
+
+#forms {
+	/* background-color: #FFFFFF; */
+	float: left;
+	display: inline;
+	position: relative;
+	width: 610px;
+	/* background: #ffffff; */
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 4px;
+	font-size: 10pt;
+}
+
+.enhancedtable {
+	border-collapse: collapse;
+	border: 1px solid #000;
+}
+
+.enhancedtable td {
+	border: 1px solid #000;
+	padding: 5px;
+	vertical-align: top;
+	background: #ffffff;
+}
+
+.enhancedtable th {
+	border: 2px solid #000;
+	padding: 2px;
+	vertical-align: middle;
+	background: #ddd;
+}
+
+.enhancedtabletighter {
+	border-collapse: collapse;
+	border-top: 1px solid #000;
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+
+	/* Calendar has problems relating to property inheritance in tables. You need to reset any properties in the super table
+if they are causing problems. If you need enhancedtable, use this one  */
+.enhancedtabletighter {
+	border: 1px solid #000;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.enhancedtabletighter th {
+	border: 1px solid #000;
+	vertical-align: middle;
+	background: #ddd;
+}
+
+.enhancedtabletighter td {
+	border: 1px solid #000;
+	vertical-align: top;
+}
+
+#tasklist {
+	background-color: #FFFFFF;
+	float: left;
+	display: inline;
+	position: relative;
+	width: 610px;
+	background: #ffffff;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	padding-bottom: 5px;
+	padding-left: 4px;
+	font-size: 10pt;
+}
+
+.formTable {
+	margin: 0px;
+	background-color: transparent;
+}
+
+.renderedValue {
+	background-color: #AFEEEE;
+	margin: 2px 2px 2px 2px;
+}
+#widePageNoWidth {
+	background-color: #FFFFFF;
+	float: left;
+	display: inline;
+	position: relative;
+	background: #ffffff;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	padding-bottom: 5px;
+	padding-left: 4px;
+	font-size: 10pt;
+}

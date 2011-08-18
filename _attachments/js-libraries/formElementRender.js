@@ -18,18 +18,23 @@ function createTableEnd() {
 	return "</table>\n";
 }
 
-function createDisplayHeader(pageItem) {
+function createDisplayHeader(formElement) {
+	var closeRow = formElement.get("closeRow");
+	var identifier = formElement.get("identifier");
+	var tblCols = formElement.get("tblCols");
+	var label = formElement.get("label");
+	console.log("createDisplayHeader tblCols:" + tblCols + " element:" + JSON.stringify(formElement));
 	var output = "";
-	if ((pageItem.isVisible() == false)) {
-		styleText = " style=\"display:none; border:none;\"";
-		sbufViewWidgets.append("\t<tr class=\"sectionHeader\" id=\"" + identifier + "\"" + styleText + "><td colspan=\"" + tblCols + "\">" +
-				"<span class=\"sectionHeader\">" + formField.getLabel() + "</span>" +
-		"</td></tr>\n");
-	} else {
-		sbufViewWidgets.append("\t<tr class=\"sectionHeader\" id=\"" + identifier + "\"><td colspan=\"" + tblCols + "\">" +
-				"<span class=\"sectionHeader\">" + formField.getLabel() + "</span>" +
-		"</td></tr>\n");
-	}
+//	if ((visible == false)) {
+//		styleText = " style=\"display:none; border:none;\"";
+//		output = "\t<tr class=\"sectionHeader\" id=\"" + pageItem.identifier + "\"" + styleText + "><td colspan=\"" + pageItem.tblCols + "\">" +
+//				"<span class=\"sectionHeader\">" + pageItem.label + "</span>" +
+//		"</td></tr>\n";
+//	} else {
+		output ="\t<tr class=\"sectionHeader\" id=\"" + identifier + "\"><td colspan=\"" + tblCols + "\">" +
+				"<span class=\"sectionHeader\">" + label + "</span>" +
+		"</td></tr>\n";
+	//}
 	return output;
 }
 
