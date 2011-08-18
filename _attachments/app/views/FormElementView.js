@@ -1,5 +1,5 @@
 var FormElementView = Backbone.View.extend({
-  tagName: "tr",
+  tagName: "td",
   template: Handlebars.compile($("#form-element-template").html()),
   initialize: function (){
     this.model.bind('change', this.render, this);
@@ -15,15 +15,10 @@ var FormElementView = Backbone.View.extend({
     return this.model.validate({value: this.$("input").val()});
   },
   render: function(){
-	  var type = this.model.get("datatype");
+	  //var type = this.model.get("datatype");
 	  // console.log(type + ": " + JSON.stringify(type));
-	  if (type == "display") {
-		  
-	  } else {
-		    $(this.el).html(this.template(this.model.toJSON())); 
-	  }
-
-    return this;
+	  $(this.el).html(this.template(this.model.toJSON())); 
+	  return this;
   },
   showErrorMessages: function (error){
     this.$(".error-message").html(error.join(". ")).show();

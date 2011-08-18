@@ -6,14 +6,7 @@
 <script type="text/javascript" src="js-libraries/jquery-ui-1.8.15.custom.min.js"></script>
 
     <script id="form-element-template" type="text/x-handlebars-template">
-      <td>
-        <label for='{{id}}'>{{label}}</label>
-      </td>
-      <td>
       	{{{renderWidget}}}
-      </td>
-      <td class='error-message' style='display:none'>
-      </td>
     </script>
     <script id="inputTextWidget" type="text/x-handlebars-template">
         <input {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='text' value='{{value}}'></input>
@@ -26,8 +19,7 @@
     </script>
     <script id="form-template" type="text/x-handlebars-template">
       <form>
-        <table>
-        </table>
+      	<div id="formElements"></div>
         <!-- type='button' stops the button from submitting the form on click -->
         <button type='button' id='form-save'>Save</button>
       </form>

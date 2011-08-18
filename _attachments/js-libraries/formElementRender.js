@@ -6,11 +6,11 @@ function createTableBegin(pageItem) {
 	} else {
 		output = "<table border=\"0\" cellpadding=\"4\" cellspacing=\"2\" width=\"95%\"  id=\"tbl" + pageItem.identifier + "\" class=\"formTable\">\n";
 	}
-	if ((pageItem.getCols() != null) && (pageItem.getCols() > 1)) {
-		tblCols = pageItem.getCols();
-	} else {
-		tblCols = 1;
-	}
+//	if ((pageItem.getCols() != null) && (pageItem.getCols() > 1)) {
+//		tblCols = pageItem.getCols();
+//	} else {
+//		tblCols = 1;
+//	}
 	return output;
 }
 
@@ -48,25 +48,57 @@ checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
 Handlebars.registerHelper("renderWidget", function(context) {
 	//console.log("this:" + JSON.stringify(this));
 	var template;
-	var html;
+	var html = "";
 	var useTemplate = true;
 	var datatype = this.datatype;
-	 if (datatype == 'string') {
-			 template = inputTextWidgetCompiledHtml;
-	  } else if (datatype == 'DateTime') {
-			 template = datepickerWidgetCompiledHtml;
-	  } else if (datatype == 'bool') {
-				 template = checkboxWidgetCompiledHtml;
+	var inputType = this.inputType;
+	var visible = this.visible;
+	var tblCols = this.tblCols;
+	var closeRow = this.closeRow;
+	var identifier = this.identifier;
+//	var beginElement = "<td>";
+//	var endElement = "</td>";
+	var beginElement = "";
+	var endElement = "";
+	if (closeRow == "true") {
+		//endElement = "</td></tr>\n<tr>\n";
+	}
+//	if (inputType == 'display-tbl-begin') {
+//		useTemplate = false; 
+////		html = createTableBegin(this);
+////		console.log("useTemplate: " + useTemplate + " inputType: " + inputType + " html: " + html);
+//		tableBegin = document.createElement('table');
+//		return tableBegin;
+//	} else if (inputType == 'display-tbl-end') {
+//		useTemplate = false; 
+//		html = "</table>";
+//		console.log("useTemplate: " + useTemplate + " inputType: " + inputType + " html: " + html);
+//		return html;
+//	} else 
+		if (inputType == 'text') {
+		template = inputTextWidgetCompiledHtml;
+	} else if (inputType == 'emptyDate') {
+		template = datepickerWidgetCompiledHtml;
+	} else if (inputType == 'checkbox') {
+		template = checkboxWidgetCompiledHtml;
+	} else {
+		useTemplate = false; 
+	};
+	  if (useTemplate) {
+		  if (datatype == "Display") {
+			  html = beginElement + template(this) + endElement;  
+		  } else {
+			  var labelHtml = "<label for='" + identifier + "'>" + this.label + "</label>: ";
+			  var errorHtml = " <span class='error-message' style='display:none'></span>";
+			  html = beginElement + labelHtml + template(this) + errorHtml + endElement; 
+			  //console.log("useTemplate: " + useTemplate + " inputType: " + inputType + " closeRow: " + closeRow + " html: "+ html);
+		  }
 	  } else {
-		  useTemplate = false; 
-	  };
-	  // console.log("useTemplate: " + useTemplate + " datatype: " + datatype);
-	  if (useTemplate == true) {
-		  html = template(this); 
-	  } else {
-		  html = "No template- datatype: " + datatype;
+		  if (html == "") {
+			  html = beginElement + "No template- inputType: " + inputType + endElement; 
+		  }
+		  console.log("html: " + html);
 	  }
-	  //console.log("html: " + html);
 	  return html;
 	});
 

@@ -1,5 +1,5 @@
 {
-	"_rev": "1e2585a3-715c-4119-a16f-d4276656412e",
+	"_rev": "9e183620-e3ea-4a54-90fa-7e132ff92a1c",
 	"form_elements": [
 		{
 			"label": "BEGIN TABLE ",
@@ -12,7 +12,11 @@
 			],
 			"datatype": "display",
 			"visible": "true",
-			"tblCols": "0",
+			"closeRow": "false",
+			"colspan": "null",
+			"size": "null",
+			"rows": "null",
+			"cols": "2",
 			"identifier": "field1427",
 			"inputType": "display-tbl-begin"
 		},
@@ -27,7 +31,11 @@
 			],
 			"datatype": "DateTime",
 			"visible": "true",
-			"tblCols": "0",
+			"closeRow": "false",
+			"colspan": "0",
+			"size": "0",
+			"rows": "0",
+			"cols": "0",
 			"identifier": "date_of_adr",
 			"inputType": "emptyDate"
 		},
@@ -42,7 +50,11 @@
 			],
 			"datatype": "string",
 			"visible": "true",
-			"tblCols": "0",
+			"closeRow": "true",
+			"colspan": "1",
+			"size": "0",
+			"rows": "6",
+			"cols": "80",
 			"identifier": "details_of_adr",
 			"inputType": "textarea"
 		},
@@ -57,7 +69,11 @@
 			],
 			"datatype": "display",
 			"visible": "true",
-			"tblCols": "0",
+			"closeRow": "false",
+			"colspan": "null",
+			"size": "null",
+			"rows": "null",
+			"cols": "null",
 			"identifier": "field1428",
 			"inputType": "display-tbl-end"
 		}
