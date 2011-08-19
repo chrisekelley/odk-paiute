@@ -2,18 +2,28 @@ var currentParent;
 
 var FormView = Backbone.View.extend({
   el: $("body"),
-  template: Handlebars.compile($("#form-template").html()),
+  //template: Handlebars.compile($("#form-template").html()),
+  template: loadTemplate("editor.template.html"),
   initialize: function (){
-    _.bindAll(this, "render", "addOne");
+	  var formElements = new FormElements(this.model.get("form_elements"));
+	  //console.log("this in FormView: " +JSON.stringify(formElements));
+    //_.bindAll(this, "render", "addOne");
     return this;
   },
   render: function(){
+	//console.log("render in FormView: " +JSON.stringify(this));
+
     $(this.el).html(this.template());
-    this.collection.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
+	//console.log("render in FormView: ");
+	var formElements = new FormElements(this.model.get("form_elements"));
+    //this.collection.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
+	formElements.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
     return this;
+//    $(this.el).html(this.template(this.model.toJSON()));
+//    return this;
   },
   addOne: function(formElement){
-//	console.log("add one:" + JSON.stringify(formElement));
+	//console.log("add one:" + JSON.stringify(formElement));
 	var inputType = formElement.get("inputType");
 	var closeRow = formElement.get("closeRow");
 	var identifier = formElement.get("identifier");

@@ -23,7 +23,7 @@ function createDisplayHeader(formElement) {
 	var identifier = formElement.get("identifier");
 	var tblCols = formElement.get("tblCols");
 	var label = formElement.get("label");
-	console.log("createDisplayHeader tblCols:" + tblCols + " element:" + JSON.stringify(formElement));
+	//console.log("createDisplayHeader tblCols:" + tblCols + " element:" + JSON.stringify(formElement));
 	var output = "";
 //	if ((visible == false)) {
 //		styleText = " style=\"display:none; border:none;\"";
@@ -52,7 +52,7 @@ checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
 dropdownWidgetCompiledHtml = Handlebars.compile($("#dropdownWidget").html());
 
 Handlebars.registerHelper("renderWidget", function(context) {
-	//console.log("this:" + JSON.stringify(this));
+	//console.log("renderWidget:" + JSON.stringify(context));
 	var template;
 	var html = "";
 	var useTemplate = true;

@@ -1,15 +1,5 @@
-var Form = Backbone.Collection.extend({
-  model: FormElement,
-  url: "/form",
-  validate: function(){
-    var validationErrors = [];
-    this.each(function(formElement){
-      validationErrors.push(formElement.view.validate());
-    });
-    return _.compact(validationErrors);
+var Form = Backbone.Model.extend({
+  initialize: function(){
   },
-  valid: function(){
-    return this.validate().length == 0
-  }
+  url: "/form"
 });
-
