@@ -130,8 +130,9 @@ Handlebars.registerHelper("debug", function(optionalValue) {
 Handlebars.registerHelper('dropdown', function(items) {
 	  var out = "";
 	  var arry = items.split(',');
+	  out = out + "<option value=\"\">--Select--</option>";
 	  for(var i=0, l=arry.length; i<l; i++) {
-	    out = out + "<option>" + arry[i] + "</option>";
+	    out = out + "<option value=\"" + arry[i] + "\">" + arry[i] + "</option>";
 	  }
 
 	  return out;

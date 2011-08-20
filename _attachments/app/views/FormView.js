@@ -58,14 +58,39 @@ var FormView = Backbone.View.extend({
 	  //console.log("this: "+ JSON.stringify(this));
 	  //var formElements = this.model.get("form_elements");
 	    //this.model.set({"content": this.$("textarea").val()}).save();
-
-    if(this.formElements.valid()){
+	  
+	var validationErrors = [];
+    this.formElements.each(function(formElement){
+    	var datatype = formElement.get("datatype");
+    	if (datatype != "display") {
+    	      //validationErrors.push(formElement.view.validate());
+    	    //var inputValue = this.$("input").val();
+    	    var inputValue = $("#" + formElement.get("identifier")).val();
+    	    console.log("validate:" + formElement.get("label") + " field value:" + formElement.get("value") + " inputValue:" + inputValue);
+    	    validationErrors.push(formElement.validate({value:inputValue}));	
+    	}
+    });
+    console.log("validationErrors: " + validationErrors);
+    var errors = _.compact(validationErrors);
+    if (errors.length == 0) {
     	console.log("Ready to save");
     	var obj = $(this.$("form")).toObject();
     	console.log("saving: "+ JSON.stringify(obj));
     	//this.model.save(obj);
     	//formElements.create(obj);
       $.couch.db("odk").saveDoc(obj);
+    } else {
+    	console.log("Errors:" + JSON.stringify(errors));
+    	alert(errors);
     }
+    
+//    if(this.formElements.valid()){
+//    	console.log("Ready to save");
+//    	var obj = $(this.$("form")).toObject();
+//    	console.log("saving: "+ JSON.stringify(obj));
+//    	//this.model.save(obj);
+//    	//formElements.create(obj);
+//      $.couch.db("odk").saveDoc(obj);
+//    }
   }
 });

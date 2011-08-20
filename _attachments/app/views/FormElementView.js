@@ -13,15 +13,24 @@ var FormElementView = Backbone.View.extend({
     // clear old error messages before validation occurs
 	
     this.$(".error-message").html("").hide();
+    console.log("inputType: " + this.model.get("inputType"));
+    var inputType = this.model.get("inputType");
     var currentValue = this.$("input").val();
+    if (inputType == "dropdown") {
+    	currentValue = this.$("select").val();
+    } else if (inputType == "dropdown-add-one") {
+    	currentValue = this.$("select").val();
+    } else if (inputType == "checkbox") {
+    	currentValue = this.$("checkbox").val();
+    }
     console.log("FormElementView validate currentValue: " + currentValue);
     var validationResult = this.model.validate({value:currentValue });
     if (validationResult == null) {
     	//this.model.save({value: this.$("input").val()});
-    	this.model.set({value: currentValue});
+    	//this.model.set({value: currentValue});
     	//console.log("this.model:" + JSON.stringify(this.model));
     } else {
-        console.log("validation result: " + validationResult);
+        console.log("validation error: " + validationResult);
     }
     return validationResult;
   },

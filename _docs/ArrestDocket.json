@@ -141,7 +141,7 @@
 			"rows": "0",
 			"cols": "0",
 			"identifier": "investigating_offier_uuid",
-			"enumerations": "Peterson, Al,",
+			"enumerations": "Peterson Al,Smith John",
 			"inputType": "dropdown-add-one"
 		},
 		{

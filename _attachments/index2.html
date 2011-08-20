@@ -7,10 +7,10 @@
   	{{{renderWidget}}}
 </script>
 <script id="inputTextWidget" type="text/x-handlebars-template">
-    <input {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}'></input>
+    <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}'></input>
 </script>
 <script id="datepickerWidget" type="text/x-handlebars-template">
-  	<input id='datepicker' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}'></input>
+  	<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}'></input>
 </script>
 <script id="checkboxWidget" type="text/x-handlebars-template">
   	<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1'></input>
