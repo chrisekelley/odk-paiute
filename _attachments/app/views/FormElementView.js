@@ -26,17 +26,12 @@ var FormElementView = Backbone.View.extend({
     console.log("FormElementView validate currentValue: " + currentValue);
     var validationResult = this.model.validate({value:currentValue });
     if (validationResult == null) {
-    	//this.model.save({value: this.$("input").val()});
-    	//this.model.set({value: currentValue});
-    	//console.log("this.model:" + JSON.stringify(this.model));
     } else {
         console.log("validation error: " + validationResult);
     }
     return validationResult;
   },
   render: function(){
-	  //var type = this.model.get("datatype");
-	  // console.log(type + ": " + JSON.stringify(type));
 	  $(this.el).html(this.template(this.model.toJSON())); 
 	  return this;
   },

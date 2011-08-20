@@ -6,8 +6,6 @@ var FormElements = Backbone.Collection.extend({
     this.each(function(formElement){
     	var datatype = formElement.get("datatype");
     	if (datatype != "display") {
-    	      //validationErrors.push(formElement.view.validate());
-    	    //var inputValue = this.$("input").val();
     	    console.log("validate:" + formElement.get("label") + " field value:" + formElement.get("value"));
     	    validationErrors.push(formElement.validate({value:formElement.get("value")}));	
     	}

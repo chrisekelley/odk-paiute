@@ -15,6 +15,9 @@
 <script id="checkboxWidget" type="text/x-handlebars-template">
   	<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1'></input>
 </script>
+<script id="textareaWidget" type="text/x-handlebars-template">
+  	<br/><textarea id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'></textarea>
+</script>
 <script id="dropdownWidget" type="text/x-handlebars-template">
 	<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
 	{{#dropdown enumerations}}

@@ -50,6 +50,7 @@ inputTextWidgetCompiledHtml = Handlebars.compile($("#inputTextWidget").html());
 datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html());
 checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
 dropdownWidgetCompiledHtml = Handlebars.compile($("#dropdownWidget").html());
+textareaWidgetCompiledHtml = Handlebars.compile($("#textareaWidget").html());
 
 Handlebars.registerHelper("renderWidget", function(context) {
 	//console.log("renderWidget:" + JSON.stringify(context));
@@ -91,6 +92,10 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		template = dropdownWidgetCompiledHtml;
 	} else if (inputType == 'dropdown') {
 		template = dropdownWidgetCompiledHtml;
+	} else if (inputType == 'select') {
+		template = dropdownWidgetCompiledHtml;
+	} else if (inputType == 'textarea') {
+		template = textareaWidgetCompiledHtml;
 	} else {
 		useTemplate = false; 
 	};
