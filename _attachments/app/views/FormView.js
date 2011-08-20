@@ -5,9 +5,9 @@ var FormView = Backbone.View.extend({
   //template: Handlebars.compile($("#form-template").html()),
   template: loadTemplate("editor.template.html"),
   initialize: function (){
-	  //var formElements = new FormElements(this.model.get("form_elements"));
-	  //console.log("this in FormView: " +JSON.stringify(formElements));
-    //_.bindAll(this, "render", "addOne");
+	this.formElements = new FormElements(this.model.get("form_elements"));
+	//console.log("this in FormView: " +JSON.stringify(formElements));
+    _.bindAll(this, "render", "addOne");
     return this;
   },
   render: function(){
@@ -15,9 +15,9 @@ var FormView = Backbone.View.extend({
 	   $(this.el).html(this.template(this.model.toJSON()));
    // $(this.el).html(this.template());
 	//console.log("render in FormView: ");
-	var formElements = new FormElements(this.model.get("form_elements"));
+	//var formElements = new FormElements(this.model.get("form_elements"));
     //this.collection.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
-	formElements.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
+	this.formElements.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
     return this;
 //    $(this.el).html(this.template(this.model.toJSON()));
 //    return this;
@@ -54,16 +54,18 @@ var FormView = Backbone.View.extend({
   },
   save: function(){
 	  
-	  var formElements = new FormElements(this.model.get("form_elements"));
-	  
+	  //var formElements = new FormElements(this.model.get("form_elements"));
+	  //console.log("this: "+ JSON.stringify(this));
+	  //var formElements = this.model.get("form_elements");
 	    //this.model.set({"content": this.$("textarea").val()}).save();
 
-    if(formElements.valid()){
+    if(this.formElements.valid()){
     	console.log("Ready to save");
     	var obj = $(this.$("form")).toObject();
     	console.log("saving: "+ JSON.stringify(obj));
-    	this.model.save(obj);
-      //$.couch.db("odk").saveDoc($(this.$("form")).toObject())
+    	//this.model.save(obj);
+    	//formElements.create(obj);
+      $.couch.db("odk").saveDoc(obj);
     }
   }
 });
