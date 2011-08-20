@@ -11,8 +11,16 @@ var FormElementView = Backbone.View.extend({
   },
   validate: function() {
     // clear old error messages before validation occurs
+	console.log("FormElementView validate");
     this.$(".error-message").html("").hide();
-    return this.model.validate({value: this.$("input").val()});
+    var result = this.model.validate({value: this.$("input").val()});
+    console.log("result: " + result);
+    if (result == null) {
+    	//this.model.save({value: this.$("input").val()});
+    	this.model.set({value: this.$("input").val()});
+    	console.log("this.model:" + JSON.stringify(this.model));
+    }
+    return result;
   },
   render: function(){
 	  //var type = this.model.get("datatype");

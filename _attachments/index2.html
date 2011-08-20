@@ -1,21 +1,22 @@
 <html>
   <head>
   	<title>ODK Form </title>
-  	
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.15.custom.css" rel="stylesheet" />	
+<link type="text/css" href="css/Site.css" rel="stylesheet" />	 	
 <script id="form-element-template" type="text/x-handlebars-template">
   	{{{renderWidget}}}
 </script>
 <script id="inputTextWidget" type="text/x-handlebars-template">
-    <input {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='text' value='{{value}}'></input>
+    <input {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}'></input>
 </script>
 <script id="datepickerWidget" type="text/x-handlebars-template">
-  	<input id='datepicker' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='text' value='{{value}}'></input>
+  	<input id='datepicker' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}'></input>
 </script>
 <script id="checkboxWidget" type="text/x-handlebars-template">
-  	<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}' type='checkbox' value='{{value}}'></input>
+  	<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='{{value}}'></input>
 </script>
 <script id="dropdownWidget" type="text/x-handlebars-template">
-	<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{name}}'>
+	<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
 	{{#dropdown enumerations}}
 	{{/dropdown}}
 	</select>

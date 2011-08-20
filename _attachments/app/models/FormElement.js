@@ -24,9 +24,13 @@ var FormElement = Backbone.Model.extend({
           break;
         case "absolute-max":
         	if (parseInt(attributes.value) > parseInt(option.value)){
+                validationErrors.push(this.get("label") + " is too high. Value: " + attributes.value + " Absolute Max value: " + option.value);
+              }
+        	break;
+        case "max":
+        	if (parseInt(attributes.value) > parseInt(option.value)){
                 validationErrors.push(this.get("label") + " is too high. Value: " + attributes.value + " Max value: " + option.value);
               }
-        case "max":
           break;
         case "min":
           break;

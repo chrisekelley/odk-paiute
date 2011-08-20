@@ -1,11 +1,7 @@
 {
 	"_rev": "907ec042-0762-46a0-847e-c592210305ac",
 	 "_id": "ArrestDocket",
-	   "pageType": "TextPage",
-  "pageId": "ReadingComprehensionInstructions",
-    "content": "Subtest instructions: <br/>\nREMOVE the passage from in front of the child. Say:<b>\n\nNow I am going to ask you a few questions about the story you just read.  Try to answer the questions as well as you can.</b>\n\nReminders:<li>You will only be able to ask questions corresponding to the parts of the story the child read (according to the word you indicated as the last word read).<li>Give the child at most 15 seconds to answer the question, mark the child’s response, and move to the next question.<li>Touch the button that corresponds to the child's answer: [Correct], if they provide the correct answer; [Incorrect] If they provide a wrong answer or if they say they don't know the answer; [No answer] if the child remains silent for more than 15 seconds.</li>",
-  "urlPath": "Assessment.The Gambia EGRA May 2011.ReadingComprehensionInstructions",
-  "urlScheme": "http",
+	  "label": "Arrest Docket",
 	"form_elements": [
 		{
 			"label": "BEGIN TABLE ",
@@ -13,7 +9,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "display",
@@ -32,7 +28,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "display",
@@ -51,7 +47,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "DateTime",
@@ -68,12 +64,18 @@
 			"label": "C.A.S.",
 			"value": "",
 			"options": [
-				{
-					"name": "optional",
-					"value": "false"
-				}
+				 {
+              "name": "absolute-max",
+              "value": "130"
+            }, {
+              "name": "absolute-min",
+              "value": "0"
+            }, {
+              "name": "max",
+              "value": "95"
+            }
 			],
-			"datatype": "string",
+			"datatype": "number",
 			"visible": "true",
 			"closeRow": "false",
 			"colspan": "1",
@@ -89,7 +91,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "long?",
@@ -109,7 +111,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "string",
@@ -128,7 +130,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "string",
@@ -148,7 +150,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "string",
@@ -167,7 +169,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "string",
@@ -186,7 +188,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "DateTime",
@@ -205,7 +207,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "long?",
@@ -225,7 +227,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "display",
@@ -244,7 +246,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "bool",
@@ -263,7 +265,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "bool",
@@ -282,7 +284,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "bool",
@@ -301,7 +303,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "bool",
@@ -320,7 +322,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "bool",
@@ -339,7 +341,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "bool",
@@ -358,7 +360,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "bool",
@@ -377,7 +379,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "string",
@@ -396,7 +398,7 @@
 			"options": [
 				{
 					"name": "optional",
-					"value": "false"
+					"value": "true"
 				}
 			],
 			"datatype": "display",

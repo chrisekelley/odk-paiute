@@ -4,12 +4,22 @@ var FormElements = Backbone.Collection.extend({
   validate: function(){
     var validationErrors = [];
     this.each(function(formElement){
-      validationErrors.push(formElement.view.validate());
+    	var datatype = formElement.get("datatype");
+    	if (datatype != "display") {
+    	      //validationErrors.push(formElement.view.validate());
+    	    var inputValue = this.$("input").val();
+    	    console.log("validate:" + formElement.get("label") + " field value:" + formElement.get("value")  + " input value: " + inputValue);
+    	      validationErrors.push(formElement.validate({value:formElement.get("value")}));	
+    	}
     });
+    console.log("validationErrors: " + validationErrors);
     return _.compact(validationErrors);
   },
   valid: function(){
-    return this.validate().length == 0
+    return this.validate().length == 0;
   }
 });
+
+
+
 

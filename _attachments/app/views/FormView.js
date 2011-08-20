@@ -5,15 +5,15 @@ var FormView = Backbone.View.extend({
   //template: Handlebars.compile($("#form-template").html()),
   template: loadTemplate("editor.template.html"),
   initialize: function (){
-	  var formElements = new FormElements(this.model.get("form_elements"));
+	  //var formElements = new FormElements(this.model.get("form_elements"));
 	  //console.log("this in FormView: " +JSON.stringify(formElements));
     //_.bindAll(this, "render", "addOne");
     return this;
   },
   render: function(){
 	//console.log("render in FormView: " +JSON.stringify(this));
-
-    $(this.el).html(this.template());
+	   $(this.el).html(this.template(this.model.toJSON()));
+   // $(this.el).html(this.template());
 	//console.log("render in FormView: ");
 	var formElements = new FormElements(this.model.get("form_elements"));
     //this.collection.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
@@ -53,8 +53,17 @@ var FormView = Backbone.View.extend({
     "click #form-save " : "save",
   },
   save: function(){
-    if(this.collection.valid()){
-      $.couch.db("odk").saveDoc($(this.$("form")).toObject())
+	  
+	  var formElements = new FormElements(this.model.get("form_elements"));
+	  
+	    //this.model.set({"content": this.$("textarea").val()}).save();
+
+    if(formElements.valid()){
+    	console.log("Ready to save");
+    	var obj = $(this.$("form")).toObject();
+    	console.log("saving: "+ JSON.stringify(obj));
+    	this.model.save(obj);
+      //$.couch.db("odk").saveDoc($(this.$("form")).toObject())
     }
   }
 });
