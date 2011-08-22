@@ -73,8 +73,31 @@ Look at the index2.html example. Each widget has its own handlebars.js template 
 
 Performance test is at http://jsperf.com/test-pre-compiling-handlebars-js-templates
 
-In the current example, the form is PatientRegistration and ArrestDocket.js.
+In the current example, the forms are PatientRegistration and ArrestDocket.js.
 
+How do I customise page flow?
+-----------------
+
+app.js constructs the Backbone.Router. List the routes in the routes method:
+```javascript
+routes: {
+        	"home":                 "home",    // #home
+        	"newPatient":                 "newPatient",    // #newPatient
+        	"arrestDocket":                 "arrestDocket",    // #arrestDocket
+            "*actions": "defaultRoute" // matches http://example.com/#anything-here
+        }
+``` 
+and create a method for each route:
+```javascript
+        newPatient: function () {
+        	registration = new Form({_id: "PatientRegistration"});
+        	registration.fetch({
+        		success: function(model){
+        			(new FormView({model: model})).render(); 
+        		}
+        	});
+        },
+ ```        
 Other useful info
 -----------------
 
