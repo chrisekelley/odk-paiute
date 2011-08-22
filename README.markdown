@@ -79,7 +79,7 @@ How do I customise page flow?
 -----------------
 
 app.js constructs the Backbone.Router. List the routes in the routes method:
-    javascript
+    
     routes: {
         	"home":                 "home",    // #home
         	"newPatient":                 "newPatient",    // #newPatient
@@ -88,7 +88,7 @@ app.js constructs the Backbone.Router. List the routes in the routes method:
         }
     
 and create a method for each route:
-    javascript
+    
         newPatient: function () {
         	registration = new Form({_id: "PatientRegistration"});
         	registration.fetch({
