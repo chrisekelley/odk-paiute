@@ -11,7 +11,6 @@ var FormElementView = Backbone.View.extend({
   },
   validate: function() {
     // clear old error messages before validation occurs
-	
     this.$(".error-message").html("").hide();
     console.log("inputType: " + this.model.get("inputType"));
     var inputType = this.model.get("inputType");

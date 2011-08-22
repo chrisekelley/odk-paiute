@@ -36,11 +36,22 @@ All of the backbone [models](http://documentcloud.github.com/backbone/#Model) an
 
 You can put json forms into the \_docs directory and they will be added to your couch when you do a couchapp push.
 
-How do I modify form widgets?
+How do I render a form?
 ----------------------
 
-Look at the index2.html example. Each widget has its own handlebars.js template (see checkboxWidget). They are activated by the {{{renderWidget}}} tag in the form-element-template. 
-Handlebars.registerHelper("renderWidget"... in formElementRender.js compiles the relevant template based on the datatype in the form. Each widget is pre-compiled before the loop:
+FormView loads the form.template.html, which provides the formElements div, where each form element is appended. FormView's render
+function loops through each of the formElements using the addOne function. AddOne sets up the table and inserts new rows when a formelement's closeRow == "true".
+It also renders a few other special widgets, such as headers and hidden fields. 
+Most form elements are inserted using the following code:
+<pre><code>
+currentParent.append((new FormElementView({model: formElement})).render().el);
+</code>
+</pre>
+Note how the currentParentName is saved in FormView's currentParentName field - this shows where the element should be appended.
+
+FormElementView renders each element inside a td using the form-element-template, which calls the {{{renderWidget}}} tag.
+Handlebars.registerHelper("renderWidget"... in formElementRender.js uses the relevant template based on the inputType for the element. 
+Each widget is pre-compiled before the loop:
 <pre>
 <code>
 inputTextWidgetCompiledHtml = Handlebars.compile($("#inputTextWidget").html());
@@ -48,10 +59,21 @@ datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html())
 checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
 </code>
 </pre>
+Look at the index2.html example. Each widget has its own handlebars.js template (see inputTextWidget).  
+<pre>
+<code>
+<script id="dropdownWidget" type="text/x-handlebars-template">
+	<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
+	{{#dropdown enumerations}}
+	{{/dropdown}}
+	</select>
+</script>
+</code>
+</pre>
 
 Performance test is at http://jsperf.com/test-pre-compiling-handlebars-js-templates
 
-In the current example, the form is ArrestDocket.js.
+In the current example, the form is PatientRegistration and ArrestDocket.js.
 
 Other useful info
 -----------------

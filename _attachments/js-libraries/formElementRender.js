@@ -1,51 +1,3 @@
-function createTableBegin(pageItem) {
-	var output = "";
-	if ((pageItem.visible == false)) {
-		styleText = " style=\"display:none; border:none;\"";
-		output = "<table border=\"0\" cellpadding=\"4\" cellspacing=\"2\" width=\"95%\"  id=\"tbl" + pageItem.identifier + "\"" + styleText + ">\n";
-	} else {
-		output = "<table border=\"0\" cellpadding=\"4\" cellspacing=\"2\" width=\"95%\"  id=\"tbl" + pageItem.identifier + "\" class=\"formTable\">\n";
-	}
-//	if ((pageItem.getCols() != null) && (pageItem.getCols() > 1)) {
-//		tblCols = pageItem.getCols();
-//	} else {
-//		tblCols = 1;
-//	}
-	return output;
-}
-
-function createTableEnd() {
-	return "</table>\n";
-}
-
-function createDisplayHeader(formElement) {
-	var closeRow = formElement.get("closeRow");
-	var identifier = formElement.get("identifier");
-	var tblCols = formElement.get("tblCols");
-	var label = formElement.get("label");
-	//console.log("createDisplayHeader tblCols:" + tblCols + " element:" + JSON.stringify(formElement));
-	var output = "";
-//	if ((visible == false)) {
-//		styleText = " style=\"display:none; border:none;\"";
-//		output = "\t<tr class=\"sectionHeader\" id=\"" + pageItem.identifier + "\"" + styleText + "><td colspan=\"" + pageItem.tblCols + "\">" +
-//				"<span class=\"sectionHeader\">" + pageItem.label + "</span>" +
-//		"</td></tr>\n";
-//	} else {
-		output ="\t<tr class=\"sectionHeader\" id=\"" + identifier + "\"><td colspan=\"" + tblCols + "\">" +
-				"<span class=\"sectionHeader\">" + label + "</span>" +
-		"</td></tr>\n";
-	//}
-	return output;
-}
-
-function createDisplaySubheader(pageItem) {
-	var output = "";
-	sbufViewWidgets.append("\t<tr style=\"background-color:" + tdBackgroundColor + ";\"><td colspan=\"" + tblCols + "\" style=\"background-color:#E6E6FA;\">" +
-			"<span class=\"sectionSubHeader\">" + formField.getLabel() + "</span>" +
-	"</td></tr>\n");
-	return output;
-}
-
 inputTextWidgetCompiledHtml = Handlebars.compile($("#inputTextWidget").html());
 datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html());
 checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
@@ -71,8 +23,6 @@ Handlebars.registerHelper("renderWidget", function(context) {
 	var identifier = this.identifier;
 	var size = this.size;
 	var maxlength = this.maxlength;
-//	var beginElement = "<td>";
-//	var endElement = "</td>";
 	var beginElement = "";
 	var endElement = "";
 	if (closeRow == "true") {
