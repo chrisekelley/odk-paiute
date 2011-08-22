@@ -5,11 +5,18 @@ form.fetch({
    // (new FormView({model: model})).render();
 	  //console.log("model:" + JSON.stringify(model.get("form_elements")));
 	 // (new FormView({collection: new FormElements(model.get("form_elements"))})).render();
-	 (new FormView({model: model})).render(); 
+	 //(new FormView({model: model})).render(); 
   }
-})
-
-
+});
+registration = new Form({_id: "PatientRegistration"});
+registration.fetch({
+	success: function(model){
+		// (new FormView({model: model})).render();
+		//console.log("model:" + JSON.stringify(model));
+		// (new FormView({collection: new FormElements(model.get("form_elements"))})).render();
+		(new FormView({model: model})).render(); 
+	}
+});
 
 // Download the form document from couch (sample_form.json is in _docs)
 //$.couch.db("odk").openDoc("ArrestDocket", {

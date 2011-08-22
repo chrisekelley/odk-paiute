@@ -51,6 +51,12 @@ datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html())
 checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
 dropdownWidgetCompiledHtml = Handlebars.compile($("#dropdownWidget").html());
 textareaWidgetCompiledHtml = Handlebars.compile($("#textareaWidget").html());
+displayTableWidgetCompiledHtml = Handlebars.compile($("#displayTableWidget").html());
+displayHeaderWidgetCompiledHtml = Handlebars.compile($("#displayHeaderWidget").html());
+displaySubHeaderWidgetCompiledHtml = Handlebars.compile($("#displaySubHeaderWidget").html());
+displayInfotextWidgetCompiledHtml = Handlebars.compile($("#displayInfotextWidget").html());
+yesnoWidgetCompiledHtml = Handlebars.compile($("#yesnoWidget").html());
+genderWidgetCompiledHtml = Handlebars.compile($("#genderWidget").html());
 
 Handlebars.registerHelper("renderWidget", function(context) {
 	//console.log("renderWidget:" + JSON.stringify(context));
@@ -63,6 +69,8 @@ Handlebars.registerHelper("renderWidget", function(context) {
 	var tblCols = this.tblCols;
 	var closeRow = this.closeRow;
 	var identifier = this.identifier;
+	var size = this.size;
+	var maxlength = this.maxlength;
 //	var beginElement = "<td>";
 //	var endElement = "</td>";
 	var beginElement = "";
@@ -70,20 +78,18 @@ Handlebars.registerHelper("renderWidget", function(context) {
 	if (closeRow == "true") {
 		//endElement = "</td></tr>\n<tr>\n";
 	}
-//	if (inputType == 'display-tbl-begin') {
-//		useTemplate = false; 
-////		html = createTableBegin(this);
-////		console.log("useTemplate: " + useTemplate + " inputType: " + inputType + " html: " + html);
-//		tableBegin = document.createElement('table');
-//		return tableBegin;
-//	} else if (inputType == 'display-tbl-end') {
-//		useTemplate = false; 
-//		html = "</table>";
-//		console.log("useTemplate: " + useTemplate + " inputType: " + inputType + " html: " + html);
-//		return html;
-//	} else 
-		if (inputType == 'text') {
+	if (inputType == 'text') {
+		if (size == null || size == 0) {
+			this.size = 20;
+		}
+		if (maxlength == null || maxlength == 0) {
+			this.maxlength = 255;
+		}
 		template = inputTextWidgetCompiledHtml;
+	} else if (inputType == 'patientid') {
+			template = inputTextWidgetCompiledHtml;
+	} else if (inputType == 'birthdate') {
+		template = datepickerWidgetCompiledHtml;
 	} else if (inputType == 'emptyDate') {
 		template = datepickerWidgetCompiledHtml;
 	} else if (inputType == 'checkbox') {
@@ -96,11 +102,25 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		template = dropdownWidgetCompiledHtml;
 	} else if (inputType == 'textarea') {
 		template = textareaWidgetCompiledHtml;
+	} else if (inputType == 'yesno_br') {
+		template = yesnoWidgetCompiledHtml;
+	} else if (inputType == 'Yes/No') {
+		template = yesnoWidgetCompiledHtml;
+	} else if (inputType == 'gender') {
+		template = genderWidgetCompiledHtml;
+//	} else if (inputType == 'display-tbl-begin') {
+//		template = displayTableWidgetCompiledHtml;
+	} else if (inputType == 'display-header') {
+		template = displayHeaderWidgetCompiledHtml;
+	} else if (inputType == 'display-sub-header') {
+		template = displaySubHeaderWidgetCompiledHtml;
+	} else if (inputType == 'infotext') {
+		template = displayInfotextWidgetCompiledHtml;
 	} else {
 		useTemplate = false; 
 	};
 	  if (useTemplate) {
-		  if (datatype == "Display") {
+		  if (datatype == "display") {
 			  html = beginElement + template(this) + endElement;  
 		  } else {
 			  var labelHtml = "<label for='" + identifier + "'>" + this.label + "</label>: ";

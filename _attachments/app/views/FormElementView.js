@@ -32,6 +32,12 @@ var FormElementView = Backbone.View.extend({
     return validationResult;
   },
   render: function(){
+	  var colspan = this.model.get("colspan");
+	  //console.log("colspan: " + colspan);
+	  if (colspan == null) {
+		  colspan = 1;
+	  }
+	  $(this.el).attr('colspan',colspan);
 	  $(this.el).html(this.template(this.model.toJSON())); 
 	  return this;
   },

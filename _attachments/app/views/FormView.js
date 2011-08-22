@@ -11,33 +11,59 @@ var FormView = Backbone.View.extend({
   render: function(){
 	$(this.el).html(this.template(this.model.toJSON()));
 	this.formElements.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
-    return this;
+	return this;
   },
+  currentParentName: "body",
   addOne: function(formElement){
 	//console.log("add one:" + JSON.stringify(formElement));
 	var inputType = formElement.get("inputType");
 	var closeRow = formElement.get("closeRow");
 	var identifier = formElement.get("identifier");
-	var tableCols = 3;
-	if (closeRow == "true") {
-		$("table").append("<tr id=\"" + identifier + "\"></tr>");
-		currentParent = $("#" + identifier);
+	var tblCols = formElement.get("cols");
+	//var currentParentName = "";
+	if (tblCols == null) {
+		tblCols = 3;	
 	}
 	if (inputType == 'display-tbl-begin') {
-		useTemplate = false; 
-		html = createTableBegin(this);
+		//useTemplate = false; 
+		//html = createTableBegin(this);
+		 //$(this.$("#formElements")).append(html);
+		template = displayTableWidgetCompiledHtml;
+		//$(this.el).html(this.template(this.model.toJSON())); 
+		html = template(formElement.toJSON());
+		
 		 $(this.$("#formElements")).append(html);
-		 $("table").append("<tr id=\"beginTableRow\"></tr>");
-		 currentParent = $("#beginTableRow");
-		 tblCols = formElement.get("cols");
+		// $("table").append("<tr id=\"beginTableRow\"></tr>");
+		 currentParentName = "#beginTableRow" + identifier;
+		 currentParent = $(currentParentName);
+		// console.log("currentParent:" + currentParentName);
 	} else if (inputType == 'display-tbl-end') {
+	} else if (inputType == 'hidden-empty') {
+	    html = "<input id='" + identifier + "'name='" + identifier + "' type='hidden'></input>";
+	    //console.log("html:" + html);
+	    $(this.$("#formElements")).append(html);
+	} else if (inputType == 'hidden-preset') {
+		html = "<input id='" + identifier + "'name='" + identifier + "' type='hidden'></input>";
+		//console.log("html:" + html);
+		$(this.$("#formElements")).append(html);
 	} else if (inputType == 'display-header') {
 		formElement.set({"tblCols" : tblCols});
-		html = createDisplayHeader(formElement);
-		$("tbody").append(html);
+		//html = createDisplayHeader(formElement);
+		//$("tbody").append(html);
+		//$("tbody").append((new FormElementView({model: formElement})).render().el);
+		//console.log("Element: " + identifier + " currentParent:" + currentParentName);
+		currentParent.append((new FormElementView({model: formElement})).render().el);
 	} else {
+		//console.log("Element: " + identifier + " currentParent:" + currentParentName);
 	    currentParent.append((new FormElementView({model: formElement})).render().el);
 	}
+	if (closeRow == "true") {
+		$("table").append("<tr id=\"row" + identifier + "\"></tr>");
+		currentParentName = "#row" + identifier;
+		//console.log("Create new row for Element: " + identifier + " currentParent:" + currentParentName);
+		currentParent = $(currentParentName);
+	}
+	 //console.log("Element: " + identifier + " currentParentName: " + currentParentName);
   },
   events: {
     "click #form-save " : "save",
