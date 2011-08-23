@@ -7,8 +7,8 @@
   	{{{renderWidget}}}
 </script>
 <script id="patient-template" type="text/x-handlebars-template">
-    {{surname}}, {{forenames}}
-    </script>
+    <a href="#patient?id={{_id}}">{{surname}}, {{forenames}}</a>
+</script>
 <script id="inputTextWidget" type="text/x-handlebars-template">
     <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}' size='{{size}}' maxlength='{{maxlength}}'></input>
 </script>
