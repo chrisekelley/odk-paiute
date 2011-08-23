@@ -64,7 +64,7 @@
       _view = this.config.view_name;
       // console.log("read_collection view: " + _view + " json: " + JSON.stringify(coll));
       keys = [this.helpers.extract_collection_name(coll)];
-      console.log("read_collection view: " + _view + " keys: " + JSON.stringify(keys));
+      //console.log("read_collection view: " + _view + " keys: " + JSON.stringify(keys));
       if (coll.db != null) {
         if (coll.db.changes || this.config.global_changes) {
           coll.listen_to_changes();

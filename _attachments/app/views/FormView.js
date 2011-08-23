@@ -74,6 +74,7 @@ var FormView = Backbone.View.extend({
     	//this.model.save(obj);
     	//formElements.create(obj);
       $.couch.db("odk").saveDoc(obj);
+      router.navigate('home', true);
     } else {
     	console.log("Errors:" + JSON.stringify(errors));
     	alert(errors);
