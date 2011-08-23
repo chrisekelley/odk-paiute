@@ -10,8 +10,12 @@
 		</div>
        <div id="loginStatusNone"></div>   
         <div id="twocols" class="clearfix">
-        	<div id="search-results-list">{{content}}
-        		<ul id="patients"></ul>
+        	<div id="search-results-list">{{surname}}, {{forenames}} {{middle_name}}<br/>
+        		ID: {{_id}}
+        		<p>List of records would go here. Also, notice that Arrest Docket is on the left nav strip.<br/>
+        			This patient's record id is passed to that form and is used to associate records for the patient.
+        		</p>
+        		<ul id="records"></ul>
         		</div>
         </div>
         <div id="sidebar-a-print">
@@ -20,6 +24,8 @@
                 <li><a href="#home" border="0">TIMS</a></li>
                 <li>&nbsp;</li>
                 <li><a href="#newPatient">New Client</a></li>
+                <li>&nbsp;</li>
+                <li><a href="#arrestDocket/{{_id}}">Arrest Docket</a></li>
                 <li>&nbsp;</li>
                 <li><a href="#config">Configuration</a></li> 
                 </ul>

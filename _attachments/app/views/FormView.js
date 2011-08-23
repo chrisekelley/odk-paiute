@@ -10,6 +10,7 @@ var FormView = Backbone.View.extend({
   },
   render: function(){
 	$(this.el).html(this.template(this.model.toJSON()));
+	console.log("render patientId:: " + this.model.patientId);
 	this.formElements.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
 	return this;
   },
@@ -69,8 +70,13 @@ var FormView = Backbone.View.extend({
     	console.log("Ready to save");
     	var obj = $(this.$("form")).toObject();
     	var formCollection = this.model.get("formCollection");
+    	//var patientId = this.model.get("patientId");
+    	var patientId = this.model.patientId;
+    	if (patientId != null) {
+    		obj.patientId = patientId;
+    	}
     	obj.collection = formCollection;
-    	console.log("saving formCollection: " + formCollection + ";data: " + JSON.stringify(obj));
+    	//console.log("saving formCollection: " + formCollection + "; patientId: " + patientId + ";data: " + JSON.stringify(obj));
     	//this.model.save(obj);
     	//formElements.create(obj);
       $.couch.db("odk").saveDoc(obj);

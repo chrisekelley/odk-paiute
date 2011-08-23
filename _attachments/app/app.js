@@ -4,7 +4,8 @@ var AppRouter = Backbone.Router.extend({
         	"/":                 "home",    // #home
         	"home":                 "home",    // #home
         	"newPatient":                 "newPatient",    // #newPatient
-        	"arrestDocket":                 "arrestDocket",    // #arrestDocket
+        	"arrestDocket/:query":                 "arrestDocket",    // #arrestDocket
+        	"patient/:query":                 "patient",    // #patient
             "*actions": "defaultRoute" // matches http://example.com/#anything-here
         },
         defaultRoute: function( actions ){
@@ -27,13 +28,27 @@ var AppRouter = Backbone.Router.extend({
         		}
         	});
         },
-        arrestDocket: function () {
+        arrestDocket: function (query) {
         	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
         	form = new Form({_id: "ArrestDocket"});
         	form.fetch({
         	  success: function(model){
+        		  model.patientId = query;
+        		  //console.log("patientId:: " + model.patientId + "; model: " + JSON.stringify(model));
+        		  //console.log("patientId:: " + model.patientId);
         		 (new FormView({model: model})).render(); 
         	  }
+        	});
+        },
+        patient: function (query) {
+        	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
+        	console.log("Patient: " + query);
+        	patient = new Patient({_id: query});
+        	patient.fetch({
+        		success: function(model){
+                	console.log("patient function in app.js: " + JSON.stringify(model));
+        			(new PatientRecordView({model: model})).render(); 
+        		}
         	});
         }
     });

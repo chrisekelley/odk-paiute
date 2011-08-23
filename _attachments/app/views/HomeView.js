@@ -21,7 +21,7 @@ var HomeView = Backbone.View.extend({
 		}
 	}, 
     addRow : function(patient){
-        var view = new PatientView({model: patient});
+        var view = new PatientListItemView({model: patient});
         var rendered = view.render().el;
         //console.log("add one in HomeView:" + JSON.stringify(patient));
         $(this.$("#patients")).append(rendered);
@@ -35,7 +35,7 @@ var HomeView = Backbone.View.extend({
         },
     
     render: function() {
-    	var json = {"content": "This is a test."};
+    	var json = {"content": "List of patients:"};
     	 //$(this.el).html(this.template(this.model.toJSON()));
     	html = this.template(json);
     	//console.log("rendering PageView html: " + html);
@@ -43,3 +43,20 @@ var HomeView = Backbone.View.extend({
     	 return this;
       },
 });
+
+var PatientListItemView = Backbone.View.extend({
+    tagName : "li",
+    template: Handlebars.compile($("#patient-template").html()),
+     initialize : function(){
+      //_.bindAll(this, 'render');
+      //this.model.bind('change', this.render);
+    },
+    
+    render : function(){ 
+      var content = this.model.toJSON();
+      html = this.template(content);
+      $(this.el).html(html);
+      //console.log("render PatientListItemView: "+ JSON.stringify(html));
+      return this;
+    }
+  });

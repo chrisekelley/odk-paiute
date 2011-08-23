@@ -6,8 +6,11 @@
 <script id="form-element-template" type="text/x-handlebars-template">
   	{{{renderWidget}}}
 </script>
+<script id="record-template" type="text/x-handlebars-template">
+    <a href="#record?id={{_id}}">{{_id}}</a>
+</script>
 <script id="patient-template" type="text/x-handlebars-template">
-    <a href="#patient?id={{_id}}">{{surname}}, {{forenames}}</a>
+    <a href="#patient/{{_id}}">{{surname}}, {{forenames}}</a>
 </script>
 <script id="inputTextWidget" type="text/x-handlebars-template">
     <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}' size='{{size}}' maxlength='{{maxlength}}'></input>
@@ -81,8 +84,9 @@
   <script type="text/javascript" src="app/views/HomeView.js"></script>
   <script type="text/javascript" src="app/models/Patient.js"></script>
   <script type="text/javascript" src="app/models/PatientsList.js"></script>
+  <script type="text/javascript" src="app/views/PatientRecordView.js"></script>
 <!--   <script type="text/javascript" src="app/views/PatientsListView.js"></script> -->
-  <script type="text/javascript" src="app/views/PatientView.js"></script>
+<!--   <script type="text/javascript" src="app/views/PatientView.js"></script> -->
 <!--     <script type="text/javascript" src="app/models/Subtest.js"></script>
   <script type="text/javascript" src="app/views/SubtestView.js"></script> -->
   <script type="text/javascript" src="app/app.js"></script>
