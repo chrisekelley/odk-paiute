@@ -1,6 +1,7 @@
 {
     "_id": "PatientRegistration",
     "label": "Patient Registration",
+    "formCollection": "patients",
     "form_elements": [
         {
             "label": "BEGIN GENERAL TABLE",

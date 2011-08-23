@@ -68,7 +68,9 @@ var FormView = Backbone.View.extend({
     if (errors.length == 0) {
     	console.log("Ready to save");
     	var obj = $(this.$("form")).toObject();
-    	console.log("saving: "+ JSON.stringify(obj));
+    	var formCollection = this.model.get("formCollection");
+    	obj.collection = formCollection;
+    	console.log("saving formCollection: " + formCollection + ";data: " + JSON.stringify(obj));
     	//this.model.save(obj);
     	//formElements.create(obj);
       $.couch.db("odk").saveDoc(obj);

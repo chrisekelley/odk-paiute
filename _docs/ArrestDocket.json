@@ -2,6 +2,7 @@
 	"_rev": "907ec042-0762-46a0-847e-c592210305ac",
 	 "_id": "ArrestDocket",
 	  "label": "Arrest Docket",
+	 "formCollection": "arrestDockets",
 	"form_elements": [
 		{
 			"label": "BEGIN TABLE ",

@@ -1,6 +1,6 @@
 /** Configure the database **/
 Backbone.couch_connector.config.db_name = "odk";
-Backbone.couch_connector.config.ddoc_name = "app";
+Backbone.couch_connector.config.ddoc_name = "render";
 Backbone.couch_connector.config.global_changes = false;
 
 //This allows us to have separate template files
