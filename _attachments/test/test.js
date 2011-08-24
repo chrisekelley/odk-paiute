@@ -31,7 +31,7 @@ module("db relevant", {
                     "map": "function(doc) {\n  if (doc.patientId && doc.patientId == 'test_id_1') {\n    emit(doc.mambo, doc);\n  }\n};"
                 },
                "byPatientId": {
-            	   "map": "function(doc) {\n  if(doc.patientId) {\n    emit(doc.patientId, null);\n  }\n};"
+            	   "map": "function(doc) {\n  if(doc.patientId) {\n    emit(doc.patientId, doc);\n  }\n};"
                }
            }
         };
@@ -41,6 +41,7 @@ module("db relevant", {
         var test_doc_4 = { _id : "test_id_4", collection: "patients",  forenames: "test4", middle_name : "t", surname : "user"  };
         var test_doc_5 = { _id : "test_id_5", collection: "arrestDockets", mambo: "test4",  patientId: "test_id_1", date_of_arrest : "6/5/2011", not_leave_country : "1"  };
         var test_doc_6 = { _id : "test_id_6", collection: "arrestDockets", mambo: "test5",  patientId: "test_id_2", date_of_arrest : "9/4/2011", not_leave_country : "1"  };
+        var test_doc_7 = { _id : "test_id_7", collection: "medical", mambo: "test6",  patientId: "test_id_1", colour : "blue"  };
 
         ct = 0
         opts = { success : function(){ ct++; if(ct == 5){ start(); } }, error : function(){ alert("could no create a test doc"); }};
@@ -51,6 +52,7 @@ module("db relevant", {
         db.saveDoc(test_doc_4, opts);
         db.saveDoc(test_doc_5, opts);
         db.saveDoc(test_doc_6, opts);
+        db.saveDoc(test_doc_7, opts);
       },
       error : function(){
         stop();
@@ -107,7 +109,7 @@ asyncTest("read collection with custom view" , function(){
 	Patients.fetch({
 	  success : function(){
 		  //log.console("Patients: " + JSON.stringify(Patients));
-      equals(Patients.length, 1, "Collection contains the right amount of docs after fetching" + JSON.stringify(Patients));
+      equals(Patients.length, 2, "Collection contains the right amount of docs after fetching" + JSON.stringify(Patients));
 	    start();
 	  },
 	  error : function(){
@@ -134,6 +136,48 @@ asyncTest("read collection with custom view and custom keys" , function(){
 	  error : function(){
 	    console.log("error");
 	  }
+	});
+});
+
+asyncTest("read collection with byPatientId view and custom keys" , function(){
+	var PatientsList = Backbone.Collection.extend({
+		db : {
+			view : "byPatientId",
+			changes : false,
+			keys : ["test_id_1"]
+		},
+		url : "/patients"
+	});
+	var Patients = new PatientsList();
+	Patients.fetch({
+		success : function(){
+			equals(Patients.length, 2, "Collection contains the right amount of docs after fetching:" + JSON.stringify(Patients));
+			start();
+		},
+		error : function(){
+			console.log("error");
+		}
+	});
+});
+
+asyncTest("read collection with byPatientId view, custom keys, and other stuff." , function(){
+	var PatientsList = Backbone.Collection.extend({
+		db : {
+			view : "byPatientId",
+			changes : false,
+			keys : ["test_id_1"]
+		},
+		url : "/patients"
+	});
+	var Patients = new PatientsList();
+	Patients.fetch({
+		success : function(){
+			equals(Patients.length, 2, "Collection contains the right amount of docs after fetching:" + JSON.stringify(Patients));
+			start();
+		},
+		error : function(){
+			console.log("error");
+		}
 	});
 });
 
