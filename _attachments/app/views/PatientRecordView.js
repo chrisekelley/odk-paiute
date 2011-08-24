@@ -4,17 +4,31 @@ var PatientRecordView = Backbone.View.extend({
 	initialize: function() {
 	},      
     render: function() {
-    	//var json = {"content": "This is a test."};
-    	//var json = {"_id":"6857e31aa71f998c907d57b25e199cf2","date":1314113870471,"_rev":"2-3174d588be5ee4767de088549bbec2e9","forenames":"test","middle_name":"a","surname":"person","sex":"1","collection":"patients"};
-    	 //$(this.el).html(this.template(this.model.toJSON()));
     	patient.fetch();
+    	records = new PatientRecordList();
+    	records.fetch();
+    	console.log("render records: "+ JSON.stringify(records));
     	thisHtml = this.template(this.model.toJSON());
-    	console.log("rendering PatientRecordView html: " + JSON.stringify(this.model.toJSON()));
-    	//console.log("rendering PatientRecordView html: " + JSON.stringify(json));
     	 $(this.el).html(thisHtml);
     	 return this;
       },
 });
+
+var PatientRecordList = Backbone.Collection.extend({
+    db : {
+      view : "byPatientId",
+      changes : false,
+      //filter : Backbone.couch_connector.config.ddoc_name + "/byPatientId",
+      keys : ["6857e31aa71f998c907d57b25e199cf2"]
+    },	
+    url : "/patientId",
+    model : Record,
+//    comparator : function(patient){
+//        return patient.get("surname");	
+//      }
+    });
+//console.log("PatientsList");
+
 
 var RecordListItemView = Backbone.View.extend({
     tagName : "li",

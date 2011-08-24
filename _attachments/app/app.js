@@ -42,11 +42,11 @@ var AppRouter = Backbone.Router.extend({
         },
         patient: function (query) {
         	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
-        	console.log("Patient: " + query);
+        	//console.log("Patient: " + query);
         	patient = new Patient({_id: query});
         	patient.fetch({
         		success: function(model){
-                	console.log("patient function in app.js: " + JSON.stringify(model));
+                	//console.log("patient function in app.js: " + JSON.stringify(model));
         			(new PatientRecordView({model: model})).render(); 
         		}
         	});

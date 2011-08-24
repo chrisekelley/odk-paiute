@@ -14,8 +14,8 @@
   };
   Backbone.couch_connector = con = {
     config: {
-      db_name: "backbone_connect",
-      ddoc_name: "backbone_example",
+      db_name: "odk",
+      ddoc_name: "app",
       view_name: "byCollection",
       global_changes: false,
       base_url: null
@@ -52,6 +52,7 @@
       }
     },
     read: function(model, opts) {
+    	//console.log("read model: " + JSON.stringify(model));
       if (model.models) {
         return con.read_collection(model, opts);
       } else {
@@ -59,22 +60,21 @@
       }
     },
     read_collection: function(coll, opts) {
-      var keys, _opts, _view;
+      var keys, _ref, _view;
       _view = this.config.view_name;
+      // console.log("read_collection view: " + _view + " json: " + JSON.stringify(coll));
       keys = [this.helpers.extract_collection_name(coll)];
-      console.log("keys", keys, this.helpers.extract_collection_name(coll));
+      //console.log("read_collection view: " + _view + " keys: " + JSON.stringify(keys));
       if (coll.db != null) {
         if (coll.db.changes || this.config.global_changes) {
           coll.listen_to_changes();
         }
         if (coll.db.view != null) {
           _view = coll.db.view;
-        }
-        if (coll.db.keys != null) {
-          keys = coll.db.keys;
+          keys = (_ref = coll.db.keys) != null ? _ref : null;
         }
       }
-      _opts = {
+      return this.helpers.make_db().view("" + this.config.ddoc_name + "/" + _view, {
         keys: keys,
         success: __bind(function(data) {
           var doc, _i, _len, _ref, _temp;
@@ -89,11 +89,7 @@
         error: function() {
           return opts.error();
         }
-      };
-      if ((coll.db != null) && (coll.db.view != null) && !(coll.db.keys != null)) {
-        delete _opts.keys;
-      }
-      return this.helpers.make_db().view("" + this.config.ddoc_name + "/" + _view, _opts);
+      });
     },
     read_model: function(model, opts) {
       if (!model.id) {
