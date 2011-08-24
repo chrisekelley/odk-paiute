@@ -1,3 +1,4 @@
+
 var AppRouter = Backbone.Router.extend({
 
         routes: {
@@ -35,28 +36,25 @@ var AppRouter = Backbone.Router.extend({
         	  success: function(model){
         		  model.patientId = query;
         		  //console.log("patientId:: " + model.patientId + "; model: " + JSON.stringify(model));
-        		  //console.log("patientId:: " + model.patientId);
         		 (new FormView({model: model})).render(); 
         	  }
         	});
         },
         patient: function (query) {
         	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
-        	//console.log("Patient: " + query);
         	patient = new Patient({_id: query});
-//        	patient.fetch();
-//        	(new PatientRecordView()).render(); 
-        	patient.fetch({
+        	patient.fetch( {
         		success: function(model){
-        			//patient.Records.fetch();
-                	//console.log("patient function in app.js: " + JSON.stringify(model));
+        			//patient.Records = new PatientRecordList({_id: query});	
         			patient.Records = new PatientRecordList();
+        			console.log("patient.Records db: "+ patient.Records.db["view"]);
+        			//patient.Records.db["keys"] = ["6857e31aa71f998c907d57b25e199cf2"];
+        			patient.Records.db["keys"] = [query];	
+        			console.log("Records:" + JSON.stringify(patient.Records));
         			patient.Records.fetch({
         			success : function(){
         				console.log("Records:" + JSON.stringify(patient.Records));
         				(new PatientRecordView({model: patient})).render(); 
-        				//console.log("this:" + JSON.stringify(this.patient));
-        				//this.patient.Records.each(this.addOne);
         			},
         			error : function(){
         				console.log("error");
