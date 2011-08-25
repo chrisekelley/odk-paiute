@@ -71,12 +71,16 @@ var FormView = Backbone.View.extend({
     	var obj = $(this.$("form")).toObject();
     	var formCollection = this.model.get("formCollection");
     	//var patientId = this.model.get("patientId");
+
+    	obj.collection = formCollection;
     	var patientId = this.model.patientId;
     	if (patientId != null) {
     		obj.patientId = patientId;
     	}
-    	obj.collection = formCollection;
-    	//console.log("saving formCollection: " + formCollection + "; patientId: " + patientId + ";data: " + JSON.stringify(obj));
+    	//obj.created =  new Date().getTime();
+    	obj.created =  new Date();
+    	obj.lastModified =  obj.created;
+    	console.log("saving formCollection: " + formCollection + "; patientId: " + patientId + ";data: " + JSON.stringify(obj));
     	//this.model.save(obj);
     	//formElements.create(obj);
       $.couch.db("odk").saveDoc(obj);

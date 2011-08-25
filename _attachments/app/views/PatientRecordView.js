@@ -32,7 +32,7 @@ var RecordListItemView = Backbone.View.extend({
       var content = this.model.toJSON();
       html = this.template(content);
       $(this.el).html(html);
-      //console.log("render RecordListItemView: "+ JSON.stringify(html));
+      //console.log("render RecordListItemView: "+ JSON.stringify(content));
       return this;
     }
   });
