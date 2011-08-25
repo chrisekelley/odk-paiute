@@ -160,23 +160,24 @@ asyncTest("read collection with byPatientId view and custom keys" , function(){
 	});
 });
 
-asyncTest("read collection with byPatientId view, custom keys, and other stuff." , function(){
-	var PatientsList = Backbone.Collection.extend({
-		db : {
-			view : "byPatientId",
-			changes : false,
-			keys : ["test_id_1"]
-		},
-		url : "/patients"
-	});
-	var Patients = new PatientsList();
-	Patients.fetch({
-		success : function(){
-			equals(Patients.length, 2, "Collection contains the right amount of docs after fetching:" + JSON.stringify(Patients));
-			start();
-		},
-		error : function(){
-			console.log("error");
+asyncTest("read collection using PatientRecordList." , function(){
+	var query = "test_id_1";
+	patient = new Patient({_id: query});
+	patient.fetch( {
+		success: function(model){
+			patient.Records = new PatientRecordList();
+			patient.Records.db["keys"] = [query];
+			patient.Records.fetch({
+			success : function(){
+				//console.log("Records:" + JSON.stringify(patient.Records));
+				//(new PatientRecordView({model: patient})).render(); 
+				equals(patient.Records.length, 2, "Collection contains the right amount of docs after fetching:" + JSON.stringify(patient.Records));
+				start();
+			},
+			error : function(){
+				console.log("error");
+			}
+			});
 		}
 	});
 });
