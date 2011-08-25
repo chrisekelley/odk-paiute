@@ -11,15 +11,17 @@ var AppRouter = Backbone.Router.extend({
         },
         defaultRoute: function( actions ){
             // The variable passed in matches the variable in the route definition "actions"
-        	Patients.fetch();
-        	(new HomeView()).render(); 
+        	//Patients.fetch();
+        	page = new Page({content: "List of patients:"});
+        	(new HomeView({model: page})).render(); 
         },
         initialize: function() {
         },
 
         home: function () {
-        	Patients.fetch();
-        	(new HomeView()).render(); 
+        	//Patients.fetch();
+        	page = new Page({content: "List of patients:"});
+        	(new HomeView({model: page})).render(); 
         },
         newPatient: function () {
         	registration = new Form({_id: "PatientRegistration"});
@@ -33,10 +35,10 @@ var AppRouter = Backbone.Router.extend({
         	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
         	form = new Form({_id: "ArrestDocket"});
         	form.fetch({
-        	  success: function(model){
-        		  model.patientId = query;
+        	  success: function(form){
+        		  form.patientId = query;
         		  //console.log("patientId:: " + model.patientId + "; model: " + JSON.stringify(model));
-        		 (new FormView({model: model})).render(); 
+        		 (new FormView({model: form})).render(); 
         	  }
         	});
         },

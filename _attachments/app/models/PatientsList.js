@@ -1,7 +1,7 @@
 var PatientsList = Backbone.Collection.extend({
     db : {
       //view : "byFormId",
-    	//view : "patients",
+    //view : "patients",
       //changes : true,
       //filter : Backbone.couch_connector.config.ddoc_name + "/patients"
     },	
@@ -11,5 +11,5 @@ var PatientsList = Backbone.Collection.extend({
 //        return patient.get("surname");	
 //      }
     });
-//console.log("PatientsList");
- var Patients = new PatientsList();
+console.log("PatientsList");
+var Patients = new PatientsList();

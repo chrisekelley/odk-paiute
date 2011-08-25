@@ -4,8 +4,9 @@ var FormView = Backbone.View.extend({
   el: $("body"),
   template: loadTemplate("form.template.html"),
   initialize: function (){
+	  console.log("init this.model:" + JSON.stringify(this.model));
 	this.formElements = new FormElements(this.model.get("form_elements"));
-    _.bindAll(this, "render", "addOne");
+    _.bindAll(this, "render", "addOne", "save");
     return this;
   },
   render: function(){
@@ -60,15 +61,16 @@ var FormView = Backbone.View.extend({
     	var datatype = formElement.get("datatype");
     	if (datatype != "display") {
     	    var inputValue = $("#" + formElement.get("identifier")).val();
-    	    console.log("validate:" + formElement.get("label") + " field value:" + formElement.get("value") + " inputValue:" + inputValue);
+    	    //console.log("validate:" + formElement.get("label") + " field value:" + formElement.get("value") + " inputValue:" + inputValue);
     	    validationErrors.push(formElement.validate({value:inputValue}));	
     	}
     });
-    console.log("validationErrors: " + validationErrors);
+    //console.log("validationErrors: " + validationErrors);
     var errors = _.compact(validationErrors);
     if (errors.length == 0) {
     	console.log("Ready to save");
     	var obj = $(this.$("form")).toObject();
+    	console.log("this.formCollection: " + this.formCollection);
     	var formCollection = this.model.get("formCollection");
     	//var patientId = this.model.get("patientId");
 
@@ -83,7 +85,14 @@ var FormView = Backbone.View.extend({
     	console.log("saving formCollection: " + formCollection + "; patientId: " + patientId + ";data: " + JSON.stringify(obj));
     	//this.model.save(obj);
     	//formElements.create(obj);
-      $.couch.db("odk").saveDoc(obj);
+    	if (formCollection == "patients") {
+    		console.log("Patients.create(obj);");
+    		Patients.create(obj);
+    		//Patients.fetch();
+    	} else {
+    		$.couch.db("odk").saveDoc(obj);
+    	}
+      
       router.navigate('home', true);
     } else {
     	console.log("Errors:" + JSON.stringify(errors));

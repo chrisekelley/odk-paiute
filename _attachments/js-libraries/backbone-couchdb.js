@@ -109,6 +109,7 @@
       });
     },
     create: function(model, opts) {
+    	console.log("Backbone-couchdb.js create");
       var coll, vals;
       vals = model.toJSON();
       coll = this.helpers.extract_collection_name(model);
