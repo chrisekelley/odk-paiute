@@ -182,6 +182,44 @@ asyncTest("read collection using PatientRecordList." , function(){
 	});
 });
 
+asyncTest("read collection in View." , function(){
+	window.FormView = Backbone.View.extend({
+		  el: $("body"),
+		  //el: $(".twocols"),
+		  template: loadTemplate("form.template.html"),
+		  initialize: function (){
+			  var col = this.model.collection;
+			  var registration = new Form({_id: "PatientRegistration", formCollection: "patients"});
+			  registration.fetch({
+	        		success: function(registration){	
+	        			//(new FormView({model: registration})).render(); 
+	        			this.model = registration;
+	        			col.put(registration);
+	        		}
+	        	});
+	        	this.docket = new Form({_id: "ArrestDocket", formCollection: "arrestDockets", patientId: query});
+	        	docket.fetch({
+	        		success: function(docket){	
+	        			//(new FormView({model: registration})).render(); 
+	        			this.model = docket;
+	        			col.put(registration);
+	        		}
+	        	});
+
+			  //var nextModel = col.at( col.indexOf(this.model) + 1);
+			  
+		    //this.model.bind("saveRecord", this.model);
+		    return this;
+		  },
+	});
+	var view = new FormView();
+	var thisCol = view.model.collection;
+	riconsole.log("view:: " + view + "; model: " + JSON.stngify(view.model));
+	thisCol.each(function(model) {
+		console.log(" this model: " + JSON.stngify(model));
+	});
+});
+
 asyncTest("read model", function(){
   var Patient = Backbone.Model.extend({});
   

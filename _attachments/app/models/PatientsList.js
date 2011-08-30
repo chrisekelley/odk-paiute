@@ -12,4 +12,4 @@ var PatientsList = Backbone.Collection.extend({
 //      }
     });
 console.log("PatientsList");
-var Patients = new PatientsList();
+this.Patients = new PatientsList();

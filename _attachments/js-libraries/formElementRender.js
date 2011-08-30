@@ -9,6 +9,7 @@ displaySubHeaderWidgetCompiledHtml = Handlebars.compile($("#displaySubHeaderWidg
 displayInfotextWidgetCompiledHtml = Handlebars.compile($("#displayInfotextWidget").html());
 yesnoWidgetCompiledHtml = Handlebars.compile($("#yesnoWidget").html());
 genderWidgetCompiledHtml = Handlebars.compile($("#genderWidget").html());
+hiddenWidgetCompiledHtml = Handlebars.compile($("#hiddenWidget").html());
 
 Handlebars.registerHelper("renderWidget", function(context) {
 	//console.log("renderWidget:" + JSON.stringify(context));
@@ -66,11 +67,15 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		template = displaySubHeaderWidgetCompiledHtml;
 	} else if (inputType == 'infotext') {
 		template = displayInfotextWidgetCompiledHtml;
+	} else if (inputType == 'hidden') {
+		template = hiddenWidgetCompiledHtml;
 	} else {
 		useTemplate = false; 
 	};
 	  if (useTemplate) {
 		  if (datatype == "display") {
+			  html = beginElement + template(this) + endElement;  
+		  } else if (inputType == 'hidden') {
 			  html = beginElement + template(this) + endElement;  
 		  } else {
 			  var labelHtml = "<label for='" + identifier + "'>" + this.label + "</label>: ";

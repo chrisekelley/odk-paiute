@@ -1,4 +1,77 @@
+var FORMY = {};
+FORMY.forms = new FormCollection();
+//var registration = new Form({_id: "PatientRegistration"});
+//registration.fetch({
+//	success: function(registration){
+//	FORMY.forms.add(registration);
+//	console.log("added PatientRegistration in init.");
+//	}
+//});
+//var docket = new Form({_id: "ArrestDocket"});
+//docket.fetch({
+//  success: function(docket){
+//	  FORMY.forms.add(docket);
+//	  console.log("added ArrestDocket in init.");
+//  }
+//});
 
+FORMY.loadForm = function(name, patientId, options) {
+	options || (options = {});
+	var form = new Form({_id: name});
+	if (FORMY.forms.get(name) === undefined) {
+		form.fetch({
+			success: function(form){
+				FORMY.forms.add(form);
+				//var formyForm = FORMY.forms.get(name);
+				//console.log("added " + name + "; into FORMY.forms: " + JSON.stringify(formyForm));
+				console.log("added " + name + "; patientId: " + patientId);
+				var formySuccess = options.success;
+				if (formySuccess) {
+					//console.log("added form: " + JSON.stringify(form.get("_id")) + " success: " + success);
+					form.patientId = patientId;
+					console.log("form.patientId: " + patientId);
+					formySuccess(form);
+				}
+				//return form;
+			}
+		});
+	} else {
+		form = FORMY.forms.get(name);
+		//console.log("this is a form: " + JSON.stringify(form) );
+		form.patientId = patientId;
+		console.log("fetched from FORMY: " + name + "; patientId: " + patientId);
+		var formySuccess = options.success;
+		if (formySuccess) {
+			formySuccess(form);
+		}
+	}
+};
+
+
+//Collection.prototype.listen_to_changes = function() {
+//    if (!this._db_changes_enabled) {
+//      this._db_changes_enabled = true;
+//      if (!this._db_inst) {
+//        this._db_inst = con.helpers.make_db();
+//      }
+//      return this._db_inst.info({
+//        "success": this._db_prepared_for_changes
+//      });
+//    }
+//  };
+  
+//function loadForm(name, callback) {
+//	var form = new Form({_id: name});
+//	form.fetch({
+//		success: function(form){
+//			FORMY.forms.add(form);
+//			//console.log("added " + form);
+//			console.log("added form: " + JSON.stringify(form.get("_id"))  + " callback: " + JSON.stringify(callback)); 
+//		}
+//	});
+//	return form;
+//}
+ 
 var AppRouter = Backbone.Router.extend({
 
         routes: {
@@ -12,35 +85,66 @@ var AppRouter = Backbone.Router.extend({
         defaultRoute: function( actions ){
             // The variable passed in matches the variable in the route definition "actions"
         	//Patients.fetch();
-        	page = new Page({content: "List of patients:"});
+        	page = new Page({content: "Default List of patients:"});
         	(new HomeView({model: page})).render(); 
         },
         initialize: function() {
+        	//var thisForm = FORMY.loadForm("PatientRegistration");
+        	//thisForm = FORMY.loadForm("ArrestDocket");
+        	console.log(" inspecting FORMY.");
+//        	FORMY.forms.each(function (form) {
+//        		console.log("form: " + JSON.stringify(form));
+//        	});
         },
 
         home: function () {
         	//Patients.fetch();
-        	page = new Page({content: "List of patients:"});
+        	var page = new Page({content: "List of patients:"});
         	(new HomeView({model: page})).render(); 
         },
         newPatient: function () {
-        	registration = new Form({_id: "PatientRegistration"});
-        	registration.fetch({
-        		success: function(model){
-        			(new FormView({model: model})).render(); 
-        		}
-        	});
+        	//$(this.el).remove();
+//        	this.registration = new Form({_id: "PatientRegistration", formCollection: "patients"});
+//        	this.registration.fetch({
+//        		success: function(registration){	
+//        			//(new FormView({model: registration})).render(); 
+//        			this.view = new FormView({model: registration});
+//        			this.view.render();
+//        		}
+//        	});
+        	FORMY.loadForm("PatientRegistration",null,{
+        			success: function(form){
+        	        	(new FormView({model: form})).render();
+        			}
+        		});
+        	//}
+        	
         },
         arrestDocket: function (query) {
         	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
-        	form = new Form({_id: "ArrestDocket"});
-        	form.fetch({
-        	  success: function(form){
-        		  form.patientId = query;
-        		  //console.log("patientId:: " + model.patientId + "; model: " + JSON.stringify(model));
-        		 (new FormView({model: form})).render(); 
-        	  }
-        	});
+//        	this.docket = new Form({_id: "ArrestDocket", formCollection: "arrestDockets", patientId: query});
+//        	this.docket.fetch({
+//        	  success: function(docket){
+//        		  //console.log("patientId:: " + docket.patientId + "; model: " + JSON.stringify(docket));
+//        		  console.log(" model: " + JSON.stringify(docket));
+//        		  docket.patientId = query;
+//        		  //this.model = docket;
+//        		  
+////        		  this.view = new FormView({model: docket});
+////        		  this.view.render();
+//        		  (new FormView({model: docket})).render();
+//        	  },
+//        	  error : function(){
+//  				console.log("error");
+//  			}
+//        	});
+        	FORMY.loadForm("ArrestDocket",query,{
+    			success: function(form){
+    	        	(new FormView({model: form})).render();
+    			}
+    		});
+        	//console.log("theForm: " + JSON.stringify(theForm));
+        	//(new FormView({model: theForm})).render();
         },
         patient: function (query) {
         	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
@@ -52,6 +156,7 @@ var AppRouter = Backbone.Router.extend({
         			patient.Records.fetch({
         			success : function(){
         				//console.log("Records:" + JSON.stringify(patient.Records));
+        				console.log("Fetching Records for :" + query);
         				(new PatientRecordView({model: patient})).render(); 
         			},
         			error : function(){

@@ -35,7 +35,7 @@
 	<tr id="beginTableRow{{{identifier}}}"></tr>
 </script>
 <script id="displayHeaderWidget" type="text/x-handlebars-template">
-	<span id='sectionHeader{{identifier}}'' class='sectionHeader''> {{label}}</span>
+	<span id='sectionHeader{{identifier}}' class='sectionHeader''> {{label}}</span>
 </script>
 <script id="displaySubHeaderWidget" type="text/x-handlebars-template">
 	<span id='sectionSubHeader{{identifier}}' class='sectionHeader'>{{label}}</span>
@@ -52,6 +52,9 @@
 	<br/>
 	<input type="radio" id = "f{{identifier}}" name="{{identifier}}" value="1" /><label for="f{{identifier}}">Female</label><br />
 	<input type="radio" id = "m{{identifier}}" name="{{identifier}}" value="2" /><label for="m{{identifier}}">Male</label>
+</script>
+<script id="hiddenWidget" type="text/x-handlebars-template">
+    <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='hidden' value='{{value}}'></input>
 </script>
   </head>
   <body>
@@ -79,6 +82,7 @@
 	<script type="text/javascript" src="app/models/FormElement.js"></script>
 	<script type="text/javascript" src="app/models/FormElements.js"></script>
 	<script type="text/javascript" src="app/models/Form.js"></script>
+	<script type="text/javascript" src="app/models/FormCollection.js"></script>
 	<script type="text/javascript" src="app/models/Page.js"></script>
 	<script type="text/javascript" src="app/views/FormElementView.js"></script>
 	<script type="text/javascript" src="app/views/FormView.js"></script>

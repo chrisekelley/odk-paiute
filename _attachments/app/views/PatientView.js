@@ -1,4 +1,4 @@
-var PatientRecordView = Backbone.View.extend({
+window.PatientRecordView = Backbone.View.extend({
 	el: $("body"),
 	template: loadTemplate("patient.template.html"),
 	initialize: function() {
@@ -14,9 +14,9 @@ var PatientRecordView = Backbone.View.extend({
 	},
 	addOne : function(record){
 		//console.log("add one in PatientRecordView:" + JSON.stringify(record));
-		var view = new RecordListItemView({model: record});
-		var rendered = view.render().el;
-		$(this.$("#records")).append(rendered);	
+		this.view = new RecordListItemView({model: record});
+		this.rendered = view.render().el;
+		$(this.$("#records")).append(this.rendered);	
 	}
 });
 
@@ -27,9 +27,9 @@ var RecordListItemView = Backbone.View.extend({
 	},
 
 	render : function(){ 
-		var content = this.model.toJSON();
-		html = this.template(content);
-		$(this.el).html(html);
+		this.content = this.model.toJSON();
+		this.html = this.template(this.content);
+		$(this.el).html(this.html);
 		//console.log("render RecordListItemView: "+ JSON.stringify(content));
 		return this;
 	}
