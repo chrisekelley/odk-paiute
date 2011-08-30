@@ -5,7 +5,6 @@ window.Form = Backbone.Model.extend({
 	  //this.patientId = "";
 	  _.bindAll(this, "save", "clear");
 	  //this.bind("reset", this.updateView);
-	  console.log("init Form");
   },
   url: "/form",
 //  clear: function() {

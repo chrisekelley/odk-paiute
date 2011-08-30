@@ -1,38 +1,25 @@
 var FORMY = {};
 FORMY.forms = new FormCollection();
-//var registration = new Form({_id: "PatientRegistration"});
-//registration.fetch({
-//	success: function(registration){
-//	FORMY.forms.add(registration);
-//	console.log("added PatientRegistration in init.");
-//	}
-//});
-//var docket = new Form({_id: "ArrestDocket"});
-//docket.fetch({
-//  success: function(docket){
-//	  FORMY.forms.add(docket);
-//	  console.log("added ArrestDocket in init.");
-//  }
-//});
-
 FORMY.loadForm = function(name, patientId, options) {
 	options || (options = {});
 	var form = new Form({_id: name});
-	if (FORMY.forms.get(name) === undefined) {
+	if (typeof FORMY.forms.get(name) === "undefined") {
+		console.log("fetching from db: " + name);
 		form.fetch({
 			success: function(form){
 				FORMY.forms.add(form);
-				//var formyForm = FORMY.forms.get(name);
 				//console.log("added " + name + "; into FORMY.forms: " + JSON.stringify(formyForm));
 				console.log("added " + name + "; patientId: " + patientId);
-				var formySuccess = options.success;
-				if (formySuccess) {
-					//console.log("added form: " + JSON.stringify(form.get("_id")) + " success: " + success);
-					form.patientId = patientId;
-					console.log("form.patientId: " + patientId);
-					formySuccess(form);
-				}
-				//return form;
+				var success = options.success;
+				//options.success = function(resp) {
+			        if (success) {
+						//console.log("added form: " + JSON.stringify(form.get("_id")) + " success: " + success);
+						form.patientId = patientId;
+						console.log("form.patientId: " + patientId);
+						success(form);
+					}
+			     //};
+				options.error = wrapError(options.error, name, options);
 			}
 		});
 	} else {
@@ -40,37 +27,30 @@ FORMY.loadForm = function(name, patientId, options) {
 		//console.log("this is a form: " + JSON.stringify(form) );
 		form.patientId = patientId;
 		console.log("fetched from FORMY: " + name + "; patientId: " + patientId);
-		var formySuccess = options.success;
-		if (formySuccess) {
-			formySuccess(form);
+		var success = options.success;
+		if (success) {
+			success(form);
 		}
 	}
 };
 
-
-//Collection.prototype.listen_to_changes = function() {
-//    if (!this._db_changes_enabled) {
-//      this._db_changes_enabled = true;
-//      if (!this._db_inst) {
-//        this._db_inst = con.helpers.make_db();
-//      }
-//      return this._db_inst.info({
-//        "success": this._db_prepared_for_changes
-//      });
-//    }
-//  };
-  
-//function loadForm(name, callback) {
-//	var form = new Form({_id: name});
-//	form.fetch({
-//		success: function(form){
-//			FORMY.forms.add(form);
-//			//console.log("added " + form);
-//			console.log("added form: " + JSON.stringify(form.get("_id"))  + " callback: " + JSON.stringify(callback)); 
-//		}
-//	});
-//	return form;
-//}
+// Wrap an optional error callback with a fallback error event.
+// kudos: http://stackoverflow.com/questions/7090202/error-callback-always-fired-even-when-it-is-successful/7101589#7101589
+var wrapError = function(onError, model, options) {
+    return function(jqXHR, textStatus, errorThrown) {
+      console.log(jqXHR);
+      console.log(textStatus);
+      console.log(errorThrown);
+      if (onError) {
+        onError(model, jqXHR, options);
+      } else {
+        //model.trigger('error', model, jqXHR, options);
+        var message = "Error with " + name + " resp: " + resp;
+    	console.log(message);
+    	alert(message);
+      }
+    };
+  };
  
 var AppRouter = Backbone.Router.extend({
 
@@ -79,7 +59,8 @@ var AppRouter = Backbone.Router.extend({
         	"home":                 "home",    // #home
         	"newPatient":                 "newPatient",    // #newPatient
         	"arrestDocket/:query":                 "arrestDocket",    // #arrestDocket
-        	"patient/:query":                 "patient",    // #patient
+        	"patientRecords/:query":                 "patientRecords",    // #patientRecords
+        	"record/:query":                 "record",    // #patientRecords
             "*actions": "defaultRoute" // matches http://example.com/#anything-here
         },
         defaultRoute: function( actions ){
@@ -103,52 +84,31 @@ var AppRouter = Backbone.Router.extend({
         	(new HomeView({model: page})).render(); 
         },
         newPatient: function () {
-        	//$(this.el).remove();
-//        	this.registration = new Form({_id: "PatientRegistration", formCollection: "patients"});
-//        	this.registration.fetch({
-//        		success: function(registration){	
-//        			//(new FormView({model: registration})).render(); 
-//        			this.view = new FormView({model: registration});
-//        			this.view.render();
-//        		}
-//        	});
         	FORMY.loadForm("PatientRegistration",null,{
-        			success: function(form){
+        			success: function(form, resp){
         	        	(new FormView({model: form})).render();
+        			},
+//        			error : function(model, resp, options){
+//          				console.log("error loading PatientRegistration");
+//          			}
+        			error: function() { 
+        				console.log("Error loading PatientRegistration: " + arguments); 
         			}
         		});
-        	//}
-        	
         },
         arrestDocket: function (query) {
-        	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
-//        	this.docket = new Form({_id: "ArrestDocket", formCollection: "arrestDockets", patientId: query});
-//        	this.docket.fetch({
-//        	  success: function(docket){
-//        		  //console.log("patientId:: " + docket.patientId + "; model: " + JSON.stringify(docket));
-//        		  console.log(" model: " + JSON.stringify(docket));
-//        		  docket.patientId = query;
-//        		  //this.model = docket;
-//        		  
-////        		  this.view = new FormView({model: docket});
-////        		  this.view.render();
-//        		  (new FormView({model: docket})).render();
-//        	  },
-//        	  error : function(){
-//  				console.log("error");
-//  			}
-//        	});
         	FORMY.loadForm("ArrestDocket",query,{
     			success: function(form){
     	        	(new FormView({model: form})).render();
-    			}
+    			},
+    			error : function(){
+      				console.log("Error loading ArrestDocket: " + arguments); 
+      			}
     		});
-        	//console.log("theForm: " + JSON.stringify(theForm));
-        	//(new FormView({model: theForm})).render();
         },
-        patient: function (query) {
+        patientRecords: function (query) {
         	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
-        	patient = new Patient({_id: query});
+        	var patient = new Patient({_id: query});
         	patient.fetch( {
         		success: function(model){
         			patient.Records = new PatientRecordList();
@@ -160,10 +120,22 @@ var AppRouter = Backbone.Router.extend({
         				(new PatientRecordView({model: patient})).render(); 
         			},
         			error : function(){
-        				console.log("error");
+        				console.log("Error loading PatientRecordList: " + arguments); 
         			}
         			});
         		}
+        	});
+        },
+        record: function (query) {
+        	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
+        	var record = new Record({_id: query});
+        	record.fetch( {
+        		success: function(model){
+        			(new RecordView({model: record})).render(); 
+        		},
+				error : function(){
+					console.log("Error loading RecordView: " + arguments); 
+				}
         	});
         }
     });

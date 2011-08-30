@@ -120,7 +120,9 @@ window.FormView = Backbone.View.extend({
 	  if (typeof thisForm === "undefined") {
 		  console.log("thisForm is undefined:");
 	  } else {
-		  console.log("thisForm _id:" + thisForm.get("_id"));
+		  // did not work on arrestdocket:
+		  //console.log(" we have the thisForm _id:" + thisForm.get("_id"));
+		  console.log(" we have the thisForm _id:" + thisForm._id);
 	  }
 	  //this.model = new Form(thisForm);
 	  this.model = thisForm;

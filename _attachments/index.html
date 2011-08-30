@@ -7,10 +7,10 @@
   	{{{renderWidget}}}
 </script>
 <script id="record-template" type="text/x-handlebars-template">
-    <a href="#record?id={{_id}}">{{collection}}: {{lastModified}}</a>
+    <a href="#record/{{_id}}">{{collection}}: {{lastModified}}</a>
 </script>
 <script id="patient-template" type="text/x-handlebars-template">
-    <a href="#patient/{{_id}}">{{surname}}, {{forenames}}</a>
+    <a href="#patientRecords/{{_id}}">{{surname}}, {{forenames}}</a>
 </script>
 <script id="inputTextWidget" type="text/x-handlebars-template">
     <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}' size='{{size}}' maxlength='{{maxlength}}'></input>
@@ -92,6 +92,7 @@
 	<script type="text/javascript" src="app/models/Patient.js"></script>
 	<script type="text/javascript" src="app/models/PatientsList.js"></script>
 	<script type="text/javascript" src="app/views/PatientView.js"></script>
+	<script type="text/javascript" src="app/views/RecordView.js"></script>
 	<script type="text/javascript" src="app/app.js"></script>
 
 </html>

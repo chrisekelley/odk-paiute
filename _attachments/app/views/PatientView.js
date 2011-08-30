@@ -15,7 +15,7 @@ window.PatientRecordView = Backbone.View.extend({
 	addOne : function(record){
 		//console.log("add one in PatientRecordView:" + JSON.stringify(record));
 		this.view = new RecordListItemView({model: record});
-		this.rendered = view.render().el;
+		this.rendered = this.view.render().el;
 		$(this.$("#records")).append(this.rendered);	
 	}
 });
@@ -27,10 +27,10 @@ var RecordListItemView = Backbone.View.extend({
 	},
 
 	render : function(){ 
-		this.content = this.model.toJSON();
-		this.html = this.template(this.content);
-		$(this.el).html(this.html);
-		//console.log("render RecordListItemView: "+ JSON.stringify(content));
+		var content = this.model.toJSON();
+		var html = this.template(content);
+		$(this.el).html(html);
+		console.log("render RecordListItemView: "+ JSON.stringify(content));
 		return this;
 	}
 });
