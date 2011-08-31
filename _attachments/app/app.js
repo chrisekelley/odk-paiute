@@ -69,17 +69,7 @@ var AppRouter = Backbone.Router.extend({
         	page = new Page({content: "Default List of patients:"});
         	(new HomeView({model: page})).render(); 
         },
-        initialize: function() {
-        	//var thisForm = FORMY.loadForm("PatientRegistration");
-        	//thisForm = FORMY.loadForm("ArrestDocket");
-        	console.log(" inspecting FORMY.");
-//        	FORMY.forms.each(function (form) {
-//        		console.log("form: " + JSON.stringify(form));
-//        	});
-        },
-
         home: function () {
-        	//Patients.fetch();
         	var page = new Page({content: "List of patients:"});
         	(new HomeView({model: page})).render(); 
         },
@@ -88,9 +78,6 @@ var AppRouter = Backbone.Router.extend({
         			success: function(form, resp){
         	        	(new FormView({model: form})).render();
         			},
-//        			error : function(model, resp, options){
-//          				console.log("error loading PatientRegistration");
-//          			}
         			error: function() { 
         				console.log("Error loading PatientRegistration: " + arguments); 
         			}
