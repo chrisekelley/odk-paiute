@@ -4,10 +4,11 @@ var HomeView = Backbone.View.extend({
 
 	initialize: function() {
 		//_.bindAll(this, "render", "addOne");
-		var Patients = new PatientsList();
-		Patients.bind('add', this.addOne, this);
-		Patients.bind('all', this.render, this);
-		Patients.fetch();
+		this.Patients = new PatientsList();
+		this.Patients.bind('add',   this.addOne, this);
+		//Patients.bind('reset', this.addAll, this);
+		this.Patients.bind('all',   this.render, this);
+		this.Patients.fetch();
 		return this;
 	}, 
 	addOne : function(patient){
@@ -18,15 +19,18 @@ var HomeView = Backbone.View.extend({
 	},
 	addAll: function() {
 		console.log("addAll");
-		Patients.each(this.addOne);
+		this.Patients.each(this.addOne);
 	},
 
 	render: function() {
 		//console.log("render in HomeView:" + JSON.stringify(this.model));
-		var homeHtml = this.template(this.model.toJSON());
+		this.content = this.model.toJSON();
+		this.html = this.template(this.content);
 		console.log("rendering HomeView");
-		$(this.el).html(homeHtml);
-		Patients.each(this.addOne);
+		$(this.el).html(this.html);
+		//if(Patients.length > 0){
+		this.Patients.each(this.addOne);
+		//}
 		return this;
 	},
 });
@@ -39,8 +43,9 @@ var PatientListItemView = Backbone.View.extend({
 	},
 
 	render : function(){ 
-		var liHtml = this.template(this.model.toJSON());
-		$(this.el).html(liHtml);
+		this.content = this.model.toJSON();
+		this.html = this.template(this.content);
+		$(this.el).html(this.html);
 		//console.log("render PatientListItemView: "+ JSON.stringify(html));
 		return this;
 	}

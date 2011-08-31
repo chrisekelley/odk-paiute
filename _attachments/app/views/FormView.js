@@ -135,6 +135,7 @@ window.FormView = Backbone.View.extend({
 		  //this.removeModel();
 		  //$(this.el).remove();
 		  this.model.clear();
+		  //this.remove();
 		  router.navigate('home', true);
 		  //$(this.$("form")).remove();
 	  } else {
