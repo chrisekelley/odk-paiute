@@ -133,7 +133,16 @@ window.FormView = Backbone.View.extend({
 		  console.log("Ready to save");
 		  //var formData = $(this.$("form")).toObject();
 		  var formData = $("#theForm").toObject();
-		  this.model.save(this.model, formData);
+		  //this.model.save(this.model, formData);
+		  this.model.save(this.model, formData,{
+  			success: function(model){
+  				console.log("_id: " + model._id);
+  				router.navigate('patientRecords/' + model._id, true);
+			},
+			error: function() { 
+				console.log("Error saving form: " + arguments); 
+			}
+		  });
 		  //this.removeModel();
 		  //$(this.el).remove();
 		  //this.model.clear();

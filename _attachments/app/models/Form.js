@@ -11,7 +11,8 @@ window.Form = Backbone.Model.extend({
 //      //this.view.remove();
 //      this.clear();
 //  },
-  save: function(formObject, formData){
+  save: function(formObject, formData, options){
+	  options || (options = {});
 	  //console.log("saving this.model:" + JSON.stringify(formObject));
 	  //var obj = $(this.$("form")).toObject();
 	  this.formCollection = formObject.get("formCollection");
@@ -41,6 +42,12 @@ window.Form = Backbone.Model.extend({
   				nextModel = model;
   				console.log("saveDoc nextModel: " + JSON.stringify(nextModel));
   				FORMY.newPatient = model;
+  				var success = options.success;
+  				if (success) {
+  					console.log("moving to the success callback.");
+					success(model);
+				}
+  				options.error = wrapError(options.error, name, options);
 			},
 			error: function() { 
 				console.log("Error saving: " + arguments); 
