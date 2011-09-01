@@ -4,11 +4,12 @@ var HomeView = Backbone.View.extend({
 
 	initialize: function() {
 		//_.bindAll(this, "render", "addOne");
-		this.Patients = new PatientsList();
-		this.Patients.bind('add',   this.addOne, this);
-		//Patients.bind('reset', this.addAll, this);
-		this.Patients.bind('all',   this.render, this);
-		this.Patients.fetch();
+		_.bindAll(this, 'addOne', 'reseted', 'render');
+		//Patients = new PatientsList();
+		FORMY.Patients.bind('add',   this.addOne, this);
+		FORMY.Patients.bind('reset', this.reseted, this);
+		FORMY.Patients.bind('all',   this.render, this);
+		FORMY.Patients.fetch();
 		return this;
 	}, 
 	addOne : function(patient){
@@ -17,19 +18,20 @@ var HomeView = Backbone.View.extend({
 		//console.log("add one in HomeView:" + JSON.stringify(patient));
 		$(this.$("#patients")).append(this.rendered);
 	},
-	addAll: function() {
-		console.log("addAll");
-		this.Patients.each(this.addOne);
+	reseted: function() {
+		console.log("reseted; Patients count: " + FORMY.Patients.length);
+		$(this.el).html("");
+		FORMY.Patients.each(this.addOne);
 	},
 
 	render: function() {
 		//console.log("render in HomeView:" + JSON.stringify(this.model));
-		this.content = this.model.toJSON();
-		this.html = this.template(this.content);
+		//this.content = this.model.toJSON();
+		var homeViewHtml = this.template(this.model.toJSON());
 		console.log("rendering HomeView");
-		$(this.el).html(this.html);
-		//if(Patients.length > 0){
-		this.Patients.each(this.addOne);
+		$(this.el).html(homeViewHtml);
+		//if(FORMY.Patients.length > 0){
+		FORMY.Patients.each(this.addOne);
 		//}
 		return this;
 	},
@@ -39,7 +41,10 @@ var PatientListItemView = Backbone.View.extend({
 	tagName : "li",
 	template: Handlebars.compile($("#patient-template").html()),
 	initialize : function(){
-		this.model.bind('change', this.render, this);
+		//this.model.bind('change', this.render, this);
+		// from backbone-couch.js chat example:
+		 _.bindAll(this, 'render');
+		this.model.bind('change', this.render);
 	},
 
 	render : function(){ 

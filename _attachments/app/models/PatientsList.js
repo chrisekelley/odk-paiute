@@ -1,5 +1,9 @@
 var PatientsList = Backbone.Collection.extend({
+    db : {
+        changes : true,
+      },
     url : "/patients",
     model : Patient
     });
-this.Patients = new PatientsList();
+FORMY.Patients = new PatientsList();
+console.log("Creating Patients ");

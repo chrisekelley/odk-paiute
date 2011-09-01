@@ -7,7 +7,7 @@ window.FormView = Backbone.View.extend({
   initialize: function (){
 	//model = this.options.model;
 	//this.model = new Form(model);
-	//console.log("init this.model:" + JSON.stringify(model));
+	//console.log("init this.model:" + JSON.stringify(this.model));
 	this.formElements = new FormElements(this.model.get("form_elements"), { view: this });
 	//this.friends = new Friends( null, { view: this });
 	//Create a formElements collection when the view is initialized.
@@ -39,7 +39,7 @@ window.FormView = Backbone.View.extend({
 	console.log("init this.formCollection:" + this.formCollection + " this.patientId: " + this.patientId);
     _.bindAll(this, "render", "addOne", "saveRecord", "remove");
     
-    //this.model.bind("saveRecord", this.model);
+    //this.model.bind("saveRecord", this.model)
     return this;
   },
   render: function(){
@@ -122,7 +122,9 @@ window.FormView = Backbone.View.extend({
 	  } else {
 		  // did not work on arrestdocket:
 		  //console.log(" we have the thisForm _id:" + thisForm.get("_id"));
-		  console.log(" we have the thisForm _id:" + thisForm._id);
+		  // also did not work the second time submitting PatientRegistration.
+		  //console.log(" we have the thisForm _id:" + thisForm._id);
+		  console.log(" we have the thisForm _id");
 	  }
 	  //this.model = new Form(thisForm);
 	  this.model = thisForm;
@@ -134,7 +136,7 @@ window.FormView = Backbone.View.extend({
 		  this.model.save(this.model, formData);
 		  //this.removeModel();
 		  //$(this.el).remove();
-		  this.model.clear();
+		  //this.model.clear();
 		  //this.remove();
 		  router.navigate('home', true);
 		  //$(this.$("form")).remove();

@@ -1,4 +1,3 @@
-var FORMY = {};
 FORMY.forms = new FormCollection();
 FORMY.loadForm = function(name, patientId, options) {
 	options || (options = {});
@@ -8,7 +7,7 @@ FORMY.loadForm = function(name, patientId, options) {
 		form.fetch({
 			success: function(form){
 				FORMY.forms.add(form);
-				//console.log("added " + name + "; into FORMY.forms: " + JSON.stringify(formyForm));
+				//console.log("added " + name + "; into FORMY.forms: " + JSON.stringify(FORMYForm));
 				console.log("added " + name + "; patientId: " + patientId);
 				var success = options.success;
 				//options.success = function(resp) {
@@ -64,14 +63,17 @@ var AppRouter = Backbone.Router.extend({
             "*actions": "defaultRoute" // matches http://example.com/#anything-here
         },
         defaultRoute: function( actions ){
+        	console.log("defaultRoute route.");
             // The variable passed in matches the variable in the route definition "actions"
-        	//Patients.fetch();
+        	//FORMY.Patients.fetch();
         	page = new Page({content: "Default List of patients:"});
         	(new HomeView({model: page})).render(); 
         },
         home: function () {
+        	//console.log("home route.");
         	var page = new Page({content: "List of patients:"});
         	(new HomeView({model: page})).render(); 
+        	//console.log("end home route.");
         },
         newPatient: function () {
         	FORMY.loadForm("PatientRegistration",null,{
@@ -130,3 +132,4 @@ var AppRouter = Backbone.Router.extend({
     var router = new AppRouter;
     // Start Backbone history a neccesary step for bookmarkable URL's
     Backbone.history.start();
+    new PatientsList();

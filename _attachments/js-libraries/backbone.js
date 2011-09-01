@@ -292,13 +292,17 @@
     // If the server returns an attributes hash that differs, the model's
     // state will be `set` again.
     save : function(attrs, options) {
+    	console.log("backbone.js - saving the model");
       options || (options = {});
       if (attrs && !this.set(attrs, options)) return false;
       var model = this;
       var success = options.success;
       options.success = function(resp, status, xhr) {
         if (!model.set(model.parse(resp, xhr), options)) return false;
-        if (success) success(model, resp, xhr);
+        if (success) {
+        	success(model, resp, xhr);
+        	console.log("backbone.js - saving the model. resp: " + JSON.stringify(resp));
+        }
       };
       options.error = wrapError(options.error, model, options);
       var method = this.isNew() ? 'create' : 'update';
@@ -529,6 +533,7 @@
     // has been created on the server, it will be added to the collection.
     // Returns the model, or 'false' if validation on a new model fails.
     create : function(model, options) {
+    	console.log("Creating via backbone.js in this collection.");
       var coll = this;
       options || (options = {});
       model = this._prepareModel(model, options);
@@ -536,6 +541,7 @@
       var success = options.success;
       options.success = function(nextModel, resp, xhr) {
         coll.add(nextModel, options);
+        console.log("Creating via backbone.js in this collection and adding to the coll. nextModel: " + JSON.stringify(nextModel));
         if (success) success(nextModel, resp, xhr);
       };
       model.save(null, options);

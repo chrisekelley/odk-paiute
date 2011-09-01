@@ -29,16 +29,31 @@ window.Form = Backbone.Model.extend({
 	  formData.lastModified =  formData.created;
 	  //console.log("saving formCollection: " + formCollection + "; patientId: " + patientId + ";data: " + JSON.stringify(formData));
 	  console.log("save formData.collection:" + formData.collection + " formData.patientId: " + formData.patientId + ";data: " + JSON.stringify(formData));
-	  //this.model.save(obj);
-	  //formElements.create(obj);
 	  if (formData.collection == "patients") {
-		  console.log("Patients.create(obj);");
-		  Patients.create(formData);
+		  console.log("FORMY.Patients.create(formData);");
+//		  opts = { 
+//				  success : function(){ console.log("success: " + JSON.stringify(nextModel));},
+//				  error : function(){ alert("could no create the doc"); }};
+		  FORMY.Patients.create(formData,{
+  			success: function(model, resp){
+  				 ids = resp.id;
+  				//console.log("resp id: " + resp.get("id")); 
+  				nextModel = model;
+  				console.log("saveDoc nextModel: " + JSON.stringify(nextModel));
+  				FORMY.newPatient = model;
+			},
+			error: function() { 
+				console.log("Error saving: " + arguments); 
+			}
+		});
+
+		  
+		  //console.log("new record info: " + JSON.stringify(newRecord));
 		  //this.clear();
 		  //this.model.clear;
 		  //updateView();
 		  //this.remove;
-		  //Patients.fetch();
+		  //FORMY.Patients.fetch();
 	  } else {
 		  $.couch.db("odk").saveDoc(formData);
 		  //model.clear;
