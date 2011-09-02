@@ -117,3 +117,11 @@ Handlebars.registerHelper('dropdown', function(items) {
 
 	  return out;
 	});
+
+Handlebars.registerHelper('dateFormat', function(item) {
+	var out = "";
+	var d1 = new Date(item);
+	//out = d1.toString('yyyy-MM-dd hh:mm');
+	out = $.format.date(d1, "yyyy-MM-dd hh:mm:ss");
+	return out;
+});

@@ -38,7 +38,7 @@ var HomeView = Backbone.View.extend({
 });
 
 var PatientListItemView = Backbone.View.extend({
-	tagName : "li",
+	tagName : "tr",
 	template: Handlebars.compile($("#patient-template").html()),
 	initialize : function(){
 		//this.model.bind('change', this.render, this);
