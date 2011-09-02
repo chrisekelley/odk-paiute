@@ -2,16 +2,12 @@
 
 window.FormView = Backbone.View.extend({
   el: $("body"),
-  //el: $(".twocols"),
   template: loadTemplate("form.template.html"),
   initialize: function (){
 	//model = this.options.model;
 	//this.model = new Form(model);
 	//console.log("init this.model:" + JSON.stringify(this.model));
 	this.formElements = new FormElements(this.model.get("form_elements"), { view: this });
-	//this.friends = new Friends( null, { view: this });
-	//Create a formElements collection when the view is initialized.
-	//Pass it a reference to this view to create a connection between the two
 	this.formCollection = this.model.get("formCollection");
 	this._id = this.model.get("_id");
 	this.patientId = this.model.patientId;
@@ -37,18 +33,18 @@ window.FormView = Backbone.View.extend({
 	this.formElements.add(formCollectionWidget,{at: 1});
 	this.formElements.add(formIdWidget,{at: 2});
 	console.log("init this.formCollection:" + this.formCollection + " this.patientId: " + this.patientId);
-    _.bindAll(this, "render", "addOne", "saveRecord", "remove");
-    
+    _.bindAll(this, "render", "addOne", "saveRecord", "remove");   
     //this.model.bind("saveRecord", this.model)
     return this;
   },
   render: function(){
 	$(this.el).html(this.template(this.model.toJSON()));
 	//console.log("render patientId:: " + this.model.get("patientId"));
-	this.formElements.each(this.addOne); // don't understand syntax - I think bindAll created default parameters for the addOne function
+	this.formElements.each(this.addOne);
 	return this;
   },
   currentParentName: "body",
+  currentParent: $(this.currentParentName),
   addOne: function(formElement){
 	//console.log("add one:" + JSON.stringify(formElement));
 	var inputType = formElement.get("inputType");
@@ -60,7 +56,6 @@ window.FormView = Backbone.View.extend({
 	}
 	if (inputType == 'display-tbl-begin') {
 		template = displayTableWidgetCompiledHtml;
-		//$(this.el).html(this.template(this.model.toJSON())); 
 		html = template(formElement.toJSON());	
 		 $(this.$("#formElements")).append(html);
 		 currentParentName = "#beginTableRow" + identifier;
@@ -79,8 +74,6 @@ window.FormView = Backbone.View.extend({
 		currentParentName = "#theForm";
 		currentParent = $(currentParentName);
 		closeRow == "true";
-		//formElement.set({"tblCols" : tblCols});
-		//formElement.set({"colspan" : "3"});
 		$(this.$("#formElements")).append((new FormElementView({model: formElement})).render().el);
 	} else {
 	    currentParent.append((new FormElementView({model: formElement})).render().el);
@@ -95,10 +88,6 @@ window.FormView = Backbone.View.extend({
   events: {
     "click #form-save " : "saveRecord",
   },
-//  saveRecord: function() {
-//	  var obj = $(this.$("form")).toObject();
-//	  this.model.save(obj);
-//  }
   saveRecord: function(){
 	  //console.log("saving this.model:" + JSON.stringify(this.model));
 	  var validationErrors = [];
