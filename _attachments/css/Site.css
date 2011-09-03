@@ -779,3 +779,7 @@ if they are causing problems. If you need enhancedtable, use this one  */
 	padding-left: 4px;
 	font-size: 10pt;
 }
+
+#patients td {
+	font-size: 14pt;
+}
