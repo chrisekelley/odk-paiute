@@ -2,18 +2,69 @@
         <div id="banner-home">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			    <tr>
-			        <td align="center" valign="middle" height="46" width="100" ><span class="serviceHeader"><a href="#home">TIMS</a></span>
+			        <td align="center" valign="middle" background="images/banner_bkgd.gif" height="46" width="100"><span class="serviceHeader"><a href="#home">TIMS</a></span>
                     <br/><span class="serviceHeaderSite"></span></td>
-			        <td align="right">&nbsp;</td>
+			        <td background="images/banner_bkgd.gif" align="right">&nbsp;</td>
 			    </tr>
 			</table>
 		</div>
        <div id="loginStatusNone"></div>   
         <div id="twocols" class="clearfix">
-        	<div id="search-results-list">{{content}}
-        		<table id="patients"><th>Name</th><th>Modified</th>
-        		</table>
-        		</div>
+        	<div id="search-results">
+	            <form name="searchForm" id="search-results-form">
+	                <input type="hidden" id="first_surname" name="first_surname"/>
+	                <input type="hidden" id="start_row" name="start_row"/>
+	                <table>
+	                    <tbody><tr>
+	                        <td><h1>Search</h1></td>
+	                        <td>
+	                            <table class="enhancedtable">
+	                                <tbody><tr>
+	                                    <td><input type="text" id="search_string" name="search_string"/></td>                                
+	                                    <td>
+	                                        <select name="site">
+	                                            <option value="all" selected="selected">All sites</option>                                                
+	                                            <option value="19">East London</option>                                                        
+	                                            <option value="21">Galeshewe</option>                                                        
+	                                            <option value="33">KaNyemazane</option>                                                       
+	                                            <option value="31">Kakamas</option>                                                        
+	                                            <option value="28">Kopanong</option>
+	                                            <option value="20">Libode</option>
+	                                            <option value="24">Mafikeng</option>
+	                                            <option value="1">Mamelodi</option>
+	                                            <option value="34">Mangkweng</option>
+	                                            <option value="18">Manneberg</option>                                                        
+	                                            <option value="29">Masakhane</option>
+	                                            <option value="37">Master</option>
+	                                            <option value="30">Mdantsane</option>
+	                                            <option value="23">Natalspruit</option>
+	                                            <option value="27">Nthabiseng</option>
+	                                            <option value="25">Phoenix</option>
+	                                            <option value="26">Sinakekelwe</option>
+	                                            <option value="16">Soweto</option>
+	                                            <option value="36">Test</option>
+	                                            <option value="32">Tshepong</option>
+	                                            <option value="35">Tshilidzini</option>
+	                                            <option value="22">Umlazi</option>
+	                                        </select>
+	                                    </td>								
+	                                    <td><button type='Search' id='form-search'>Search</button></td>
+	                                    <td style="vertical-align: middle">Search keywords: surname, TCC ID, TCC#, SA ID#, passport ID, C.A.S., or Court Case #.</td>
+	                                </tr>
+	                            </tbody></table>
+	                        </td>
+	                    </tr>
+	                </tbody></table>
+	            </form>
+	            <div id="search-results-body">
+		            Most recent clients, sorted by date record last modified
+		            <br/>
+		        	<div id="search-results-list">
+		        		<table id="patients"><th>Name</th><th>Modified</th>
+		        		</table>
+		        	</div>
+	        	</div>
+        	</div>
         </div>
         <div id="sidebar-a-print">
             <div id="sidenavcontainer">

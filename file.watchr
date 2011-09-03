@@ -7,6 +7,9 @@ watch( '.js$') {|match_data|
 watch( '.*\.json$') {|match_data|
   `couchapp push dev` unless match_data[0] =~ /\.sw.$/
 }
+watch( '.*\.css$') {|match_data|
+  `couchapp push dev` unless match_data[0] =~ /\.sw.$/
+}
 watch( '(.*\.coffee$)' ) {|match_data|
   puts match_data[0]
   result = `coffee --bare --compile #{match_data[0]} 2>&1`

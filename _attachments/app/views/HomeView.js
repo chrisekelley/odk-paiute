@@ -4,7 +4,7 @@ var HomeView = Backbone.View.extend({
 
 	initialize: function() {
 		//_.bindAll(this, "render", "addOne");
-		_.bindAll(this, 'addOne', 'reseted', 'render');
+		_.bindAll(this, 'addOne', 'reseted', 'render', 'search');
 		//Patients = new PatientsList();
 		FORMY.Patients.bind('add',   this.addOne, this);
 		FORMY.Patients.bind('reset', this.reseted, this);
@@ -18,12 +18,18 @@ var HomeView = Backbone.View.extend({
 		//console.log("add one in HomeView:" + JSON.stringify(patient));
 		$(this.$("#patients")).append(this.rendered);
 	},
+	events: {
+		"click #form-search " : "search",
+	},
 	reseted: function() {
 		console.log("reseted; Patients count: " + FORMY.Patients.length);
 		$(this.el).html("");
 		FORMY.Patients.each(this.addOne);
 	},
-
+	search: function() {
+		console.log("Searching...");
+		alert("Search TBD");
+	},
 	render: function() {
 		//console.log("render in HomeView:" + JSON.stringify(this.model));
 		//this.content = this.model.toJSON();

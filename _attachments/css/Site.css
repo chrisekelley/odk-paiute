@@ -475,8 +475,8 @@ a:hover {
 }
 #loginStatus-print {
 	position: relative;
-	left: 130px;
-	width: 870px;
+	left: 125px;
+	width: 658px;
 	background-color: transparent;
 	font-family: Tahoma, Verdana, Arial, sans-serif;
 	vertical-align: top;
@@ -488,7 +488,7 @@ a:hover {
 #loginStatusNone {
 	position: relative;
 	left: 130px;
-	width: 870px;
+	width: 660px;
 	background-color: transparent;
 	font-family: Tahoma, Verdana, Arial, sans-serif;
 	vertical-align: top;
@@ -565,7 +565,7 @@ div#search-results h1 {
 	position: relative;
 	left: 0px;
 	background-color: transparent;
-	width: 130px;
+	width: 125px;
 	background-color: rgb(235, 235, 235);
 	font-family: Tahoma, Verdana, Arial, sans-serif;
 }
@@ -628,10 +628,10 @@ html>body #sidenavcontainer li a {
 	width: 870px;
 }
 #pagewidth {
-	width: 1000px;
+	width: 785px;
 }
 #twocols {
-	width: 870px;
+	width: 660px;
 	float: right;
 	position: relative;
 }
@@ -688,7 +688,7 @@ margin-bottom: -4px;
 	float: left;
 	display: inline;
 	position: relative;
-	width: 610px;
+	width: 640px;
 	/* background: #ffffff; */
 	font-family: Tahoma, Verdana, Arial, sans-serif;
 	vertical-align: top;
