@@ -6,7 +6,7 @@ var PatientsList = Backbone.Collection.extend({
 	},
 	db : {
 		//view: "byPatientSorted?limit=15",
-		view: "byPatientSorted",
+		view: "byPatientSorted?descending=true&limit=15",
 		changes : true,
 	},
 	url : "/patients",
