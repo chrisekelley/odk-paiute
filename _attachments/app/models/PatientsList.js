@@ -5,7 +5,7 @@ var PatientsList = Backbone.Collection.extend({
 		this.page = 1;
 	},
 	db : {
-		view: "byPatientSortedTop25?limit=10",
+		view: "byPatientSorted?limit=25",
 		changes : true,
 	},
 //	url: function() {
