@@ -47,6 +47,7 @@
         db = $.couch.db(con.config.db_name);
         if (con.config.base_url != null) {
           db.uri = "" + con.config.base_url + "/" + con.config.db_name + "/";
+          console.log("db.uri: " + db.uri)
         }
         return db;
       }
@@ -81,6 +82,7 @@
           var doc, _i, _len, _ref, _temp;
           _temp = [];
           _ref = data.rows;
+          //console.log("data: " + JSON.stringify(data));
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             doc = _ref[_i];
             _temp.push(doc.value);
