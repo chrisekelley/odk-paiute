@@ -239,7 +239,7 @@ input
 input[type="text"] 
 {
     /* width: 200px; */
-    border: 1px solid #CCC;
+    //border: 1px solid #CCC;
     margin-top: 6px;
 }
 
@@ -414,7 +414,7 @@ div#title
 .sectionHeader {
     background: none repeat scroll 0 0 #DDDDDD;
     font-family: Tahoma,Verdana,Arial,sans-serif;
-    font-size: 10pt;
+    font-size: 12pt;
     font-weight: bold;
     padding: 0;
     text-align: left;
@@ -761,6 +761,10 @@ if they are causing problems. If you need enhancedtable, use this one  */
 .formTable {
 	margin: 0px;
 	background-color: transparent;
+}
+
+.formTable td {
+	font-size: 12pt;
 }
 
 .renderedValue {

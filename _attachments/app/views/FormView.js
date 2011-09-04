@@ -86,7 +86,7 @@ window.FormView = Backbone.View.extend({
 	 //console.log("Element: " + identifier + " currentParentName: " + currentParentName);
   },
   events: {
-    "click #form-save " : "saveRecord",
+    "click #form-save" : "saveRecord",
   },
   saveRecord: function(){
 	  //console.log("saving this.model:" + JSON.stringify(this.model));
@@ -136,7 +136,7 @@ window.FormView = Backbone.View.extend({
 		  //$(this.el).remove();
 		  //this.model.clear();
 		  //this.remove();
-		  router.navigate('home', true);
+		  //router.navigate('home', true);
 		  //$(this.$("form")).remove();
 	  } else {
 		  console.log("Errors:" + JSON.stringify(errors));

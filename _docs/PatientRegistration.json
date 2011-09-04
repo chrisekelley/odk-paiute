@@ -23,25 +23,6 @@
             "inputType": "display-tbl-begin"
         },
         {
-            "label": "Personal Data",
-            "value": "",
-            "options": [
-                {
-                    "name": "optional",
-                    "value": "true"
-                }
-            ],
-            "datatype": "display",
-            "visible": "true",
-            "closeRow": "true",
-            "colspan": "4",
-            "size": "0",
-            "rows": "0",
-            "cols": "0",
-            "identifier": "general_info",
-            "inputType": "display-header"
-        },
-        {
             "label": "First Name",
             "value": "",
             "options": [
@@ -73,7 +54,7 @@
             "visible": "true",
             "closeRow": "false",
             "colspan": "1",
-            "size": "30",
+            "size": " 25",
             "rows": "0",
             "cols": "0",
             "identifier": "middle_name",
@@ -92,7 +73,7 @@
             "visible": "true",
             "closeRow": "true",
             "colspan": "1",
-            "size": "30",
+            "size": " 25",
             "rows": "0",
             "cols": "0",
             "identifier": "surname",
@@ -128,34 +109,14 @@
             ],
             "datatype": "string",
             "visible": "true",
-            "closeRow": "true",
-            "colspan": "2",
+            "closeRow": "false",
+            "colspan": "1",
             "size": "20",
             "rows": "0",
             "cols": "0",
             "identifier": "passport_id",
             "inputType": "text"
         },
-      {
-         "label":"Nationality",
-         "value":"",
-         "options":[
-            {
-               "name":"optional",
-               "value":"true"
-            }
-         ],
-         "datatype":"long",
-         "visible":"true",
-         "closeRow":"true",
-         "colspan":"3",
-         "size":"0",
-         "rows":"0",
-         "cols":"0",
-         "identifier":"nationality",
-         "enumerations":"AFGHANISTAN,ALAND ISLANDS,ALBANIA,ALGERIA,AMERICAN SAMOA,ANDORRA,ANGOLA,ANGUILLA,ANTARCTICA,ANTIGUA AND BARBUDA,ARGENTINA,ARMENIA,ARUBA,AUSTRALIA,AUSTRIA,AZERBAIJAN,BAHAMAS,BAHRAIN,BANGLADESH,BARBADOS,BELARUS,BELGIUM,BELIZE,BENIN,BERMUDA,BHUTAN,BOLIVIA,BOSNIA AND HERZEGOVINA,BOTSWANA,BOUVET ISLAND,BRAZIL,BRITISH INDIAN OCEAN TERRITORY,BRUNEI DARUSSALAM,BULGARIA,BURKINA FASO,BURUNDI,CAMBODIA,CAMEROON,CANADA,CAPE VERDE,CAYMAN ISLANDS,CENTRAL AFRICAN REPUBLIC,CHAD,CHILE,CHINA,CHRISTMAS ISLAND,COCOS (KEELING) ISLANDS,COLOMBIA,COMOROS,CONGO,CONGO, THE DEMOCRATIC REPUBLIC OF THE,COOK ISLANDS,COSTA RICA,COTE DIVOIRE,CROATIA,CUBA,CYPRUS,CZECH REPUBLIC,DENMARK,DJIBOUTI,DOMINICA,DOMINICAN REPUBLIC,ECUADOR,EGYPT,EL SALVADOR,EQUATORIAL GUINEA,ERITREA,ESTONIA,ETHIOPIA,FALKLAND ISLANDS (MALVINAS),FAROE ISLANDS,FIJI,FINLAND,FRANCE,FRENCH GUIANA,FRENCH POLYNESIA,FRENCH SOUTHERN TERRITORIES,GABON,GAMBIA,GEORGIA,GERMANY,GHANA,GIBRALTAR,GREECE,GREENLAND,GRENADA,GUADELOUPE,GUAM,GUATEMALA,GUERNSEY,GUINEA,GUINEA-BISSAU,GUYANA,HAITI,HEARD ISLAND AND MCDONALD ISLANDS,HOLY SEE (VATICAN CITY STATE),HONDURAS,HONG KONG,HUNGARY,ICELAND,INDIA,INDONESIA,IRAN, ISLAMIC REPUBLIC OF,IRAQ,IRELAND,ISLE OF MAN,ISRAEL,ITALY,JAMAICA,JAPAN,JERSEY,JORDAN,KAZAKHSTAN,KENYA,KIRIBATI,KOREA, DEMOCRATIC PEOPLES REPUBLIC OF,KOREA, REPUBLIC OF,KUWAIT,KYRGYZSTAN,LAO PEOPLES DEMOCRATIC REPUBLIC,LATVIA,LEBANON,LESOTHO,LIBERIA,LIBYAN ARAB JAMAHIRIYA,LIECHTENSTEIN,LITHUANIA,LUXEMBOURG,MACAO,MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF,MADAGASCAR,MALAWI,MALAYSIA,MALDIVES,MALI,MALTA,MARSHALL ISLANDS,MARTINIQUE,MAURITANIA,MAURITIUS,MAYOTTE,MEXICO,MICRONESIA, FEDERATED STATES OF MOLDOVA,REPUBLIC OF MONACO,MONGOLIA,MONTENEGRO,MONTSERRAT,MOROCCO,MOZAMBIQUE,MYANMAR,NAMIBIA,NAURU,NEPAL,NETHERLANDS,NETHERLANDS ANTILLES,NEW CALEDONIA,NEW ZEALAND,NICARAGUA,NIGER,NIGERIA,NIUE,NORFOLK ISLAND,NORTHERN MARIANA ISLANDS,NORWAY,OMAN,PAKISTAN,PALAU,PALESTINIAN TERRITORY OCCUPIED,PANAMA,PAPUA NEW GUINEA,PARAGUAY,PERU,PHILIPPINES,PITCAIRN,POLAND,PORTUGAL,PUERTO RICO,QATAR,ROMANIA,RUSSIAN FEDERATION,RWANDA,REUNION,SAINT BARTHOLEMY,SAINT HELENA,SAINT KITTS AND NEVIS,SAINT LUCIA,SAINT MARTIN,SAINT PIERRE AND MIQUELON,SAINT VINCENT AND THE GRENADINES,SAMOA,SAN MARINO,SAO TOME AND PRINCIPE,SAUDI ARABIA,SENEGAL,SERBIA,SEYCHELLES,SIERRA LEONE,SINGAPORE,SLOVAKIA,SLOVENIA,SOLOMON ISLANDS,SOMALIA,SOUTH AFRICA,SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS,SPAIN,SRI LANKA,SUDAN,SURINAME,SVALBARD AND JAN MAYEN,SWAZILAND,SWEDEN,SWITZERLAND,SYRIAN ARAB REPUBLIC,TAIWAN, PROVINCE OF CHINA,TAJIKISTAN,TANZANIA, UNITED REPUBLIC OF,THAILAND,TIMOR-LESTE,TOGO,TOKELAU,TONGA,TRINIDAD AND TOBAGO,TUNISIA,TURKEY,TURKMENISTAN,TURKS AND CAICOS ISLANDS,TUVALU,UGANDA,UKRAINE,UNITED ARAB EMIRATES,UNITED KINGDOM,UNITED STATES,UNITED STATES MINOR OUTLYING ISLANDS,URUGUAY,UZBEKISTAN,VANUATU,VENEZUELA, BOLIVARIAN REPUBLIC OF,VIET NAM,VIRGIN ISLANDS, BRITISH,VIRGIN ISLANDS, U.S.,WALLIS AND FUTUNA,WESTERN SAHARA,YEMEN,ZAMBIA,ZIMBABWE",
-         "inputType":"dropdown"
-      },
         {
             "label": "Population Group",
             "value": "",
@@ -167,7 +128,7 @@
             ],
             "datatype": "long",
             "visible": "true",
-            "closeRow": "false",
+            "closeRow": "true",
             "colspan": "0",
             "size": "0",
             "rows": "0",
@@ -176,7 +137,7 @@
             "enumerations": "African/Black,Coloured,Indian/Asian,Other,White,",
             "inputType": "dropdown"
         },
-      {
+        {
          "label":"Language",
          "value":"",
          "options":[
@@ -196,82 +157,6 @@
          "enumerations":"Afrikaans,Dutch,English,French,German,Greek,Gujarati,Hindi,Other,Polish,Portuguese,Sepedi(Northern Sotho),Sesotho(Southern Sotho),Setswana,Sign language,Siswati,Tamil,Tshivenda,Urdu,Xitsonga,Yiddish,isiNdebele,isiXhosa,isiZulu,",
          "inputType":"dropdown"
       },
-        {
-            "label": "Language, Other",
-            "value": "",
-            "options": [
-                {
-                    "name": "optional",
-                    "value": "true"
-                }
-            ],
-            "datatype": "string",
-            "visible": "true",
-            "closeRow": "true",
-            "colspan": "1",
-            "size": "0",
-            "rows": "0",
-            "cols": "0",
-            "identifier": "language_other",
-            "inputType": "text"
-        },
-      {
-         "label":"District",
-         "value":"",
-         "options":[
-            {
-               "name":"optional",
-               "value":"true"
-            }
-         ],
-         "datatype":"string",
-         "visible":"true",
-         "closeRow":"true",
-         "colspan":"3",
-         "size":"0",
-         "rows":"0",
-         "cols":"0",
-         "identifier":"district_identifier",
-         "inputType":"hidden-empty"
-      },
-      {
-         "label":"Site",
-         "value":"",
-         "options":[
-            {
-               "name":"optional",
-               "value":"true"
-            }
-         ],
-         "datatype":"string",
-         "visible":"true",
-         "closeRow":"false",
-         "colspan":"0",
-         "size":"0",
-         "rows":"0",
-         "cols":"0",
-         "identifier":"site_identifier",
-         "inputType":"hidden-empty"
-      },
-        {
-            "label": "Patient ID number",
-            "value": "",
-            "options": [
-                {
-                    "name": "optional",
-                    "value": "true"
-                }
-            ],
-            "datatype": "string",
-            "visible": "true",
-            "closeRow": "true",
-            "colspan": "3",
-            "size": "0",
-            "rows": "0",
-            "cols": "0",
-            "identifier": "patient_id_number",
-            "inputType": "patientid"
-        },
         {
             "label": "Birth Date",
             "value": "",
@@ -306,7 +191,7 @@
             ],
             "datatype": "int",
             "visible": "true",
-            "closeRow": "false",
+            "closeRow": "true",
             "colspan": "0",
             "size": "3",
             "rows": "0",
@@ -314,33 +199,6 @@
             "identifier": "age_at_first_attendence",
             "inputType": "text"
         },
-      {
-         "label":"Age of infant (if less than 12 months old)",
-         "value":"",
-         "options":[
-            {
-               "name":"optional",
-               "value":"true"
-            },
-            {
-               "name":"max",
-               "value":"11"
-            },
-            {
-               "name":"min",
-               "value":"1"
-            }
-         ],
-         "datatype":"int",
-         "visible":"true",
-         "closeRow":"true",
-         "colspan":"1",
-         "size":"2",
-         "rows":"0",
-         "cols":"0",
-         "identifier":"age_months",
-         "inputType":"text"
-      },
         {
             "label": "Gender",
             "value": "",
@@ -371,90 +229,14 @@
             ],
             "datatype": "long",
             "visible": "true",
-            "closeRow": "false",
-            "colspan": "0",
+            "closeRow": "true",
+            "colspan": "2",
             "size": "0",
             "rows": "0",
             "cols": "0",
             "identifier": "marital_status",
             "enumerations": "Single,Married,In a Relationship",
             "inputType": "select"
-        },
-        {
-            "label": "Complainant deceased",
-            "value": "",
-            "options": [
-                {
-                    "name": "optional",
-                    "value": "true"
-                }
-            ],
-            "datatype": "bool",
-            "visible": "true",
-            "closeRow": "true",
-            "colspan": "1",
-            "size": "0",
-            "rows": "0",
-            "cols": "0",
-            "identifier": "complainant_deceased",
-            "inputType": "checkbox"
-        },
-        {
-            "label": "Disability/physically challenged",
-            "value": "",
-            "options": [
-                {
-                    "name": "optional",
-                    "value": "true"
-                }
-            ],
-            "datatype": "byte",
-            "visible": "true",
-            "closeRow": "false",
-            "colspan": "0",
-            "size": "0",
-            "rows": "0",
-            "cols": "0",
-            "identifier": "disablity",
-            "inputType": "yesno_br"
-        },
-        {
-            "label": "Disability, describe",
-            "value": "",
-            "options": [
-                {
-                    "name": "optional",
-                    "value": "true"
-                }
-            ],
-            "datatype": "string",
-            "visible": "true",
-            "closeRow": "true",
-            "colspan": "2",
-            "size": "50",
-            "rows": "0",
-            "cols": "0",
-            "identifier": "disability_descibe",
-            "inputType": "text"
-        },
-        {
-            "label": "Contact Data",
-            "value": "",
-            "options": [
-                {
-                    "name": "optional",
-                    "value": "true"
-                }
-            ],
-            "datatype": "display",
-            "visible": "true",
-            "closeRow": "true",
-            "colspan": "3",
-            "size": "0",
-            "rows": "0",
-            "cols": "0",
-            "identifier": "field2130",
-            "inputType": "display-header"
         },
         {
             "label": "Cell",
@@ -486,8 +268,8 @@
             ],
             "datatype": "byte",
             "visible": "true",
-            "closeRow": "true",
-            "colspan": "2",
+            "closeRow": "false",
+            "colspan": "1",
             "size": "0",
             "rows": "0",
             "cols": "0",
@@ -505,7 +287,7 @@
             ],
             "datatype": "string",
             "visible": "true",
-            "closeRow": "false",
+            "closeRow": "true",
             "colspan": "1",
             "size": "20",
             "rows": "0",
@@ -513,7 +295,7 @@
             "identifier": "phone",
             "inputType": "text"
         },
-      {
+        {
          "label":"E-mail",
          "value":"",
          "options":[
@@ -525,7 +307,7 @@
          "datatype":"string",
          "visible":"true",
          "closeRow":"true",
-         "colspan":"2",
+         "colspan":"3",
          "size":"40",
          "rows":"0",
          "cols":"0",
@@ -544,7 +326,7 @@
          "datatype":"string",
          "visible":"true",
          "closeRow":"true",
-         "colspan":"4",
+         "colspan":"3",
          "size":"60",
          "rows":"0",
          "cols":"0",
@@ -563,7 +345,7 @@
          "datatype":"string",
          "visible":"true",
          "closeRow":"true",
-         "colspan":"4",
+         "colspan":"3",
          "size":"60",
          "rows":"0",
          "cols":"0",
@@ -583,7 +365,7 @@
          "visible":"true",
          "closeRow":"false",
          "colspan":"1",
-         "size":"30",
+         "size":" 25",
          "rows":"0",
          "cols":"0",
          "identifier":"city",
@@ -628,6 +410,26 @@
          "identifier":"postal_code",
          "inputType":"text"
       },
+      {
+         "label":"Save",
+         "value":"",
+         "options":[
+            {
+               "name":"optional",
+               "value":"true"
+            }
+         ],
+         "datatype":"display",
+         "visible":"true",
+         "closeRow":"true",
+         "colspan":"3",
+         "width":"770",
+         "height":"30",
+         "rows":"0",
+         "cols":"0",
+         "identifier":"form-save",
+         "inputType":"button"
+      },
         {
             "label": "END GENERAL TABLE",
             "value": "",
@@ -646,596 +448,6 @@
             "cols": "0",
             "identifier": "field1404",
             "inputType": "display-tbl-end"
-        },
-		{
-			"label": "If learner (at school or institution)",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "display",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "3",
-			"size": "0",
-			"rows": "3",
-			"cols": "0",
-			"identifier": "learner",
-			"inputType": "display-header"
-		},
-		{
-			"label": "Name of Institution",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "1",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "school",
-			"inputType": "text"
-		},
-		{
-			"label": "Contact Name at Institution",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "teacher",
-			"inputType": "text"
-		},
-		{
-			"label": "Contact No",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "teacher_contact_number",
-			"inputType": "text"
-		},
-		{
-			"label": "If complainant under 18",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "display",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "3",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "under18",
-			"inputType": "display-header"
-		},
-		{
-			"label": "Contact Data: Person Accompanying Minor",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "display",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "3",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "accomp_contact_info",
-			"inputType": "infotext"
-		},
-		{
-			"label": "Name of person accompanying minor",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "person_with_minor",
-			"inputType": "text"
-		},
-		{
-			"label": "Age of accompanying person",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "int?",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "companion_age",
-			"inputType": "text"
-		},
-		{
-			"label": "Relation to the complainant",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "long?",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "companion_relation",
-			"enumerations": "Parent,Spouse,Child,Acquaintance,Police,Guardian,Other",
-			"inputType": "select"
-		},
-		{
-			"label": "If other relationship, please specify",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "companion_relation_other",
-			"inputType": "text"
-		},
-		{
-			"label": "SA Id No.",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "2",
-			"size": "20",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "accompanying_sa_id",
-			"inputType": "text"
-		},
-		{
-			"label": "Cell",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "companion_cell",
-			"inputType": "text"
-		},
-		{
-			"label": "Tel",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "companion_tel",
-			"inputType": "text"
-		},
-		{
-			"label": "E-mail",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "companion_email",
-			"inputType": "text"
-		},
-		{
-			"label": "Contact Address",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "3",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "contact_address",
-			"inputType": "textarea"
-		},
-		{
-			"label": "Caregiver/Alternate contact",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "display",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "3",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "caregiver",
-			"inputType": "display-header"
-		},
-		{
-			"label": "Caregiver Forenames",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "caregiver_forenames",
-			"inputType": "text"
-		},
-		{
-			"label": "Caregiver Surname",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "caregiver_surname",
-			"inputType": "text"
-		},
-		{
-			"label": "Caregiver SA Id No.",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "0",
-			"size": "20",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "caregiver_sa_id",
-			"inputType": "text"
-		},
-		{
-			"label": "Caregiver cell",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "caregiver_cell",
-			"inputType": "text"
-		},
-		{
-			"label": "Caregiver tel",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "caregiver_tel",
-			"inputType": "text"
-		},
-		{
-			"label": "Caregiver email",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "3",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "caregiver_email",
-			"inputType": "text"
-		},
-		{
-			"label": "Caregiver address",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "3",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "caregiver_address",
-			"inputType": "textarea"
-		},
-		{
-			"label": "If complainant under 16",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "display",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "conpl_under_16_hdr",
-			"inputType": "display-header"
-		},
-		{
-			"label": "If complainant under 16, did you see proof of age (birth certificate)?",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "byte?",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "3",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "proof_of_age",
-			"inputType": "text"
-		},
-		{
-			"label": "Non-TCC client",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "display",
-			"visible": "true",
-			"closeRow": "true",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "non_tcc_disp",
-			"inputType": "display-header"
-		},
-		{
-			"label": "Non-TCC client",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "bool",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "non_tcc_client",
-			"inputType": "checkbox"
-		},
-		{
-			"label": "Enter C.A.S. for non-TCC client:",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "display",
-			"visible": "false",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "non_tcc_cas_disp",
-			"inputType": "infotext"
-		},
-		{
-			"label": "C.A.S.",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "string",
-			"visible": "false",
-			"closeRow": "false",
-			"colspan": "1",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "cas",
-			"inputType": "text"
-		},
-		{
-			"label": "patientType",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "int?",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "patient_type",
-			"inputType": "hidden-preset"
-		},
-		{
-			"label": "END CONTACTS TABLE",
-			"value": "",
-			"options": [
-				{
-					"name": "optional",
-					"value": "true"
-				}
-			],
-			"datatype": "display",
-			"visible": "true",
-			"closeRow": "false",
-			"colspan": "0",
-			"size": "0",
-			"rows": "0",
-			"cols": "0",
-			"identifier": "field1456",
-			"inputType": "display-tbl-end"
-		}
+        }
     ]
 }

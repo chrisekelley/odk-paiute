@@ -10,6 +10,7 @@ displayInfotextWidgetCompiledHtml = Handlebars.compile($("#displayInfotextWidget
 yesnoWidgetCompiledHtml = Handlebars.compile($("#yesnoWidget").html());
 genderWidgetCompiledHtml = Handlebars.compile($("#genderWidget").html());
 hiddenWidgetCompiledHtml = Handlebars.compile($("#hiddenWidget").html());
+buttonWidgetCompiledHtml = Handlebars.compile($("#buttonWidget").html());
 
 Handlebars.registerHelper("renderWidget", function(context) {
 	//console.log("renderWidget:" + JSON.stringify(context));
@@ -69,6 +70,8 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		template = displayInfotextWidgetCompiledHtml;
 	} else if (inputType == 'hidden') {
 		template = hiddenWidgetCompiledHtml;
+	} else if (inputType == 'button') {
+		template = buttonWidgetCompiledHtml;
 	} else {
 		useTemplate = false; 
 	};
