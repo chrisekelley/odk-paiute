@@ -6,29 +6,33 @@ FORMY.loadForm = function(name, patientId, options) {
 		console.log("fetching from db: " + name);
 		form.fetch({
 			success: function(form){
-				FORMY.forms.add(form);
-				//console.log("added " + name + "; into FORMY.forms: " + JSON.stringify(FORMYForm));
-				console.log("added " + name + "; patientId: " + patientId);
 				var success = options.success;
 				//options.success = function(resp) {
 			        if (success) {
 						//console.log("added form: " + JSON.stringify(form.get("_id")) + " success: " + success);
 						form.patientId = patientId;
 						console.log("form.patientId: " + patientId);
-						success(form);
+						var newModel = new Form();
+						var formView = new FormView({model: newModel, currentForm:form});
+						//FORMY.forms.add(form);
+						FORMY.forms.add(formView);
+						//console.log("added " + name + "; into FORMY.forms: " + JSON.stringify(FORMYForm));
+						//console.log("added " + name + "; patientId: " + patientId);
+						console.log("added " + name);
+						success(formView);
 					}
 			     //};
 				options.error = wrapError(options.error, name, options);
 			}
 		});
 	} else {
-		form = FORMY.forms.get(name);
+		var formView = FORMY.forms.get(name);
 		//console.log("this is a form: " + JSON.stringify(form) );
-		form.patientId = patientId;
+		formView.options.currentForm.patientId = patientId;
 		console.log("fetched from FORMY: " + name + "; patientId: " + patientId);
 		var success = options.success;
 		if (success) {
-			success(form);
+			success(formView);
 		}
 	}
 };
@@ -78,8 +82,10 @@ var AppRouter = Backbone.Router.extend({
         },
         newPatient: function () {
         	FORMY.loadForm("PatientRegistration",null,{
-        			success: function(form, resp){
-        	        	(new FormView({model: form})).render();
+        			success: function(formView, resp){
+        				//var patientRegForm = new Form(form);
+        	        	//(new FormView({model: patientRegForm})).render();
+        				formView.render();
         			},
         			error: function() { 
         				console.log("Error loading PatientRegistration: " + arguments); 
@@ -88,8 +94,10 @@ var AppRouter = Backbone.Router.extend({
         },
         arrestDocket: function (query) {
         	FORMY.loadForm("ArrestDocket",query,{
-    			success: function(form){
-    	        	(new FormView({model: form})).render();
+    			success: function(formView){
+    				//var ArrestDocketForm = new Form(form);
+    	        	//(new FormView({model: ArrestDocketForm})).render();
+    				formView.render();
     			},
     			error : function(){
       				console.log("Error loading ArrestDocket: " + arguments); 
@@ -97,17 +105,20 @@ var AppRouter = Backbone.Router.extend({
     		});
         },
         patientRecords: function (query) {
+        	console.log("patientRecords route.");
         	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
-        	var patient = new Patient({_id: query});
-        	patient.fetch( {
+        	FORMY.sessionPatient = new Patient({_id: query});
+        	console.log("just made a new instance of a patient.");
+        	FORMY.sessionPatient.fetch( {
         		success: function(model){
-        			patient.Records = new PatientRecordList();
-        			patient.Records.db["keys"] = [query];
-        			patient.Records.fetch({
+        			console.log("Just successfully fetched the patient.");
+        			FORMY.sessionPatient.records = new PatientRecordList();
+        			FORMY.sessionPatient.records.db["keys"] = [query];
+        			FORMY.sessionPatient.records.fetch({
         			success : function(){
         				//console.log("Records:" + JSON.stringify(patient.Records));
         				console.log("Fetching Records for :" + query);
-        				(new PatientRecordView({model: patient})).render(); 
+        				(new PatientRecordView({model: FORMY.sessionPatient})).render(); 
         			},
         			error : function(){
         				console.log("Error loading PatientRecordList: " + arguments); 

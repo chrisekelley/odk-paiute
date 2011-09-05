@@ -2,6 +2,18 @@
 	 "_id": "ArrestDocket",
 	  "label": "Arrest Docket",
 	 "formCollection": "arrestDockets",
+	  "flow": 
+    	{
+    		"id": 216,
+    		"name": "Docket",
+    		"flowOrder": 3
+    	},
+  	"formOrder": "2",
+  	"formType": 
+  		{
+    	"id": 1,
+    	"name": "Basic Form"
+    	},
 	"form_elements": [
 		{
 			"label": "BEGIN TABLE ",
@@ -392,6 +404,26 @@
 			"identifier": "conditions_for_bail",
 			"inputType": "textarea"
 		},
+      {
+         "label":"Save",
+         "value":"",
+         "options":[
+            {
+               "name":"optional",
+               "value":"true"
+            }
+         ],
+         "datatype":"display",
+         "visible":"true",
+         "closeRow":"true",
+         "colspan":"3",
+         "width":"770",
+         "height":"30",
+         "rows":"0",
+         "cols":"0",
+         "identifier":"form-save",
+         "inputType":"button"
+      },
 		{
 			"label": "END TABLE",
 			"value": "",

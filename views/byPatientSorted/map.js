@@ -1,5 +1,5 @@
 function(doc) {
-  if (doc.collection === "patients") {
+  if (doc.flowId === "9") {
     emit([doc.lastModified], doc);
   }
-}
+};

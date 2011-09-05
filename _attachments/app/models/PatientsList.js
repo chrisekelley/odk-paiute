@@ -9,7 +9,7 @@ var PatientsList = Backbone.Collection.extend({
 		view: "byPatientSorted?descending=true&limit=15",
 		changes : true,
 	},
-	url : "/patients",
+	url : "/9",
 //	url: function() {
 //		//return this.base_url + '?' + $.param({page: this.page});
 //		return 'patients/limit/10';

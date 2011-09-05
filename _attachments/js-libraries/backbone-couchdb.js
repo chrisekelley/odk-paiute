@@ -47,7 +47,6 @@
         db = $.couch.db(con.config.db_name);
         if (con.config.base_url != null) {
           db.uri = "" + con.config.base_url + "/" + con.config.db_name + "/";
-          console.log("db.uri: " + db.uri)
         }
         return db;
       }
@@ -63,10 +62,9 @@
       var keys, _opts, _view;
       _view = this.config.view_name;
       keys = [this.helpers.extract_collection_name(coll)];
-      //console.log("keys", keys, this.helpers.extract_collection_name(coll));
+      console.log("keys", keys, this.helpers.extract_collection_name(coll));
       if (coll.db != null) {
         if (coll.db.changes || this.config.global_changes) {
-        	console.log("listen to changes for: " + this.helpers.extract_collection_name(coll));
           coll.listen_to_changes();
         }
         if (coll.db.view != null) {
@@ -82,7 +80,6 @@
           var doc, _i, _len, _ref, _temp;
           _temp = [];
           _ref = data.rows;
-          //console.log("data: " + JSON.stringify(data));
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             doc = _ref[_i];
             _temp.push(doc.value);
@@ -112,19 +109,14 @@
       });
     },
     create: function(model, opts) {
-    	console.log("Backbone-couchdb.js create");
       var coll, vals;
       vals = model.toJSON();
       coll = this.helpers.extract_collection_name(model);
       if (coll.length > 0) {
         vals.collection = coll;
-        console.log("vals.collection: " + vals.collection + " coll.length: " + coll.length);
       }
       return this.helpers.make_db().saveDoc(vals, {
         success: function(doc) {
-        	model._id = doc.id;
-        	model._rev = doc.rev;
-        	console.log("adding id: " + doc.id);
           return opts.success({
             _id: doc.id,
             _rev: doc.rev
@@ -179,11 +171,9 @@
     Collection.prototype.listen_to_changes = function() {
       if (!this._db_changes_enabled) {
         this._db_changes_enabled = true;
-        console.log("this._db_changes_enabled = true;"); 
         if (!this._db_inst) {
           this._db_inst = con.helpers.make_db();
         }
-        console.log("returning this._db_inst.info");
         return this._db_inst.info({
           "success": this._db_prepared_for_changes
         });
@@ -211,7 +201,6 @@
       }, this));
     };
     Collection.prototype._db_on_change = function(changes) {
-    	console.log("_db_on_change: " + JSON.stringify(changes)); 	
       var obj, _doc, _i, _len, _ref, _results;
       _ref = changes.results;
       _results = [];

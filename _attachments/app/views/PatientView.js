@@ -9,7 +9,7 @@ window.PatientRecordView = Backbone.View.extend({
 		//console.log("this.model: "+ JSON.stringify(this.model.toJSON()));
 		thisHtml = this.template(this.model.toJSON());
 		$(this.el).html(thisHtml);
-		this.model.Records.each(this.addOne);
+		FORMY.sessionPatient.records.each(this.addOne);
 		return this;
 	},
 	addOne : function(record){

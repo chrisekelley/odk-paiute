@@ -6,9 +6,9 @@ var PatientRecordList = Backbone.Collection.extend({
 	}, 
     db : {
 		view : "byPatientId",
-		changes : false,
+		changes : true,
 		//keys : ["6857e31aa71f998c907d57b25e199cf2"]
 	},
-	url : "/patient/records",
+	url : "/patient-records",
     });
 

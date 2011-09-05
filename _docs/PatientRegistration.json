@@ -1,7 +1,18 @@
 {
     "_id": "PatientRegistration",
     "label": "Patient Registration",
-    "formCollection": "patients",
+    "flow": 
+    	{
+    		"id": 9,
+    		"name": "New Patient",
+    		"flowOrder": 1
+    	},
+  	"formOrder": "0",
+  	"formType": 
+  		{
+    	"id": 1,
+    	"name": "Basic Form"
+    	},
     "form_elements": [
         {
             "label": "BEGIN GENERAL TABLE",
