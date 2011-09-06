@@ -535,6 +535,7 @@ div#search-results h1 {
 	font-family: Tahoma, Verdana, Arial, sans-serif;
 	vertical-align: top;
 	padding-left: 4px;
+	margin-top: 4px;
 	font-size: 10pt;
 	overflow: auto;
 	border: 1px solid black;
@@ -576,7 +577,7 @@ div#search-results h1 {
 	margin-bottom: 1em;
 	background-color: #90bade;
 	color: #fff;
-	font-size: 9pt;
+	font-size: 10pt;
 }
 
 #sidenavcontainer ul {
@@ -590,7 +591,7 @@ div#search-results h1 {
 #sidenavcontainer li {
 	border-bottom: 1px solid #90bade;
 	color: #000;
-	font-size: 10pt;
+	font-size: 11pt;
 }
 
 #sidenavcontainer li a {
@@ -786,4 +787,8 @@ if they are causing problems. If you need enhancedtable, use this one  */
 
 #patients td {
 	font-size: 14pt;
+	padding-right : 10px;
+}
+#patients th {
+	font-size: 10pt;
 }

@@ -145,15 +145,15 @@ window.FormView = Backbone.View.extend({
 		  console.log("flowId: " + flowId);
 		  //var thisForm = FORMY.forms.get(this.formId);
 		  //var thisForm = this.form;
-		  if (typeof thisForm === "undefined") {
-			  console.log("thisForm is undefined:");
-		  } else {
-			  // did not work on arrestdocket:
-			  //console.log(" we have the thisForm _id:" + thisForm.get("_id"));
-			  // also did not work the second time submitting PatientRegistration.
-			  //console.log(" we have the thisForm _id:" + thisForm._id);
-			  console.log("thisForm is available.");
-		  }
+//		  if (typeof thisForm === "undefined") {
+//			  console.log("thisForm is undefined:");
+//		  } else {
+//			  // did not work on arrestdocket:
+//			  //console.log(" we have the thisForm _id:" + thisForm.get("_id"));
+//			  // also did not work the second time submitting PatientRegistration.
+//			  //console.log(" we have the thisForm _id:" + thisForm._id);
+//			  console.log("thisForm is available.");
+//		  }
 		  //this.model = new Form(thisForm);
 		  //this.model = thisForm;
 		  //console.log("this.model.get(\"formId\"):" + thisForm.get("formId"));
@@ -198,7 +198,7 @@ window.FormView = Backbone.View.extend({
 				  FORMY.sessionPatient.records.create(formData,{
 					  success: function(model, resp){
 						  //ids = resp.id;
-						  nextModel = model;
+						  //nextModel = model;
 						  console.log("added new record to FORMY.sessionPatient.records.");
 //						  var success = options.success;
 //						  if (success) {
@@ -230,6 +230,8 @@ window.FormView = Backbone.View.extend({
 			  console.log("Errors:" + JSON.stringify(errors));
 			  alert(errors);
 		  }
+	  } else {
+		  console.log("Record has already been saved.");
 	  }
   },
 //  removeModel: function() {

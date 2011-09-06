@@ -13,7 +13,7 @@ FORMY.loadForm = function(name, patientId, options) {
 						form.patientId = patientId;
 						console.log("form.patientId: " + patientId);
 						var newModel = new Form();
-						var formView = new FormView({model: newModel, currentForm:form});
+						var formView = new FormView({model: newModel, currentForm:form}, {silent: true});
 						//FORMY.forms.add(form);
 						FORMY.forms.add(formView);
 						//console.log("added " + name + "; into FORMY.forms: " + JSON.stringify(FORMYForm));
