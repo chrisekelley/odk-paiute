@@ -103,7 +103,7 @@
     // same arguments as `trigger` is, apart from the event name.
     // Listening for `"all"` passes the true event name as the first argument.
     trigger : function(eventName) {
-    	//console.log("triggering an event: " + eventName);
+    	console.log("triggering an event: " + eventName);
       var list, calls, ev, callback, args;
       var both = 2;
       if (!(calls = this._callbacks)) return this;
@@ -956,6 +956,7 @@
       if (_.isFunction(events)) events = events.call(this);
       $(this.el).unbind('.delegateEvents' + this.cid);
       for (var key in events) {
+    	console.log("event key: " + key);
         var method = this[events[key]];
         if (!method) throw new Error('Event "' + events[key] + '" does not exist');
         var match = key.match(eventSplitter);
@@ -963,8 +964,10 @@
         method = _.bind(method, this);
         eventName += '.delegateEvents' + this.cid;
         if (selector === '') {
+        //console.log("binding " + eventName + " to " + method);
           $(this.el).bind(eventName, method);
         } else {
+        	console.log("binding " + selector + " to " + eventName + " and " + method);
           $(this.el).delegate(selector, eventName, method);
         }
       }
@@ -988,11 +991,14 @@
     // an element from the `id`, `className` and `tagName` proeprties.
     _ensureElement : function() {
       if (!this.el) {
+    	 
         var attrs = this.attributes || {};
         if (this.id) attrs.id = this.id;
         if (this.className) attrs['class'] = this.className;
         this.el = this.make(this.tagName, attrs);
+        //console.log("making this.el: " + this.tagName + " attrs: " + JSON.stringify(attrs));
       } else if (_.isString(this.el)) {
+    	  //console.log("this.el exists: " + this.el);
         this.el = $(this.el).get(0);
       }
     }

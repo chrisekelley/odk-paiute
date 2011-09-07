@@ -1,5 +1,5 @@
 window.RecordView = Backbone.View.extend({
-	el: $("body"),
+	el: $("#patientRecordView"),
 	template: loadTemplate("record.template.html"),
 	initialize: function() {
 		//_.bindAll(this, "render", "addOne");
@@ -8,7 +8,8 @@ window.RecordView = Backbone.View.extend({
 	render: function() {
 		console.log("this.model: "+ JSON.stringify(this.model.toJSON()));
 		thisHtml = this.template(this.model.toJSON());
-		$(this.el).html(thisHtml);
+		//$(this.el).html(thisHtml);
+		$("#patientRecordView").html(thisHtml);
 		return this;
 	},
 });

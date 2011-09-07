@@ -33,12 +33,15 @@ window.FormElementView = Backbone.View.extend({
   },
   render: function(){
 	  this.colspan = this.model.get("colspan");
-	  //console.log("colspan: " + colspan);
 	  if (this.colspan == null) {
 		  this.colspan = 1;
 	  }
 	  $(this.el).attr('colspan',this.colspan);
-	  $(this.el).html(this.template(this.model.toJSON())); 
+	  var currentId = $(this.el).attr('id');
+	  //console.log("currentId: " + currentId);
+	  var renderedHtml = this.template(this.model.toJSON());
+	  $(this.el).html(renderedHtml); 
+	  //console.log("currentId: "  + currentId + " renderedHtml: " + renderedHtml);
 	  return this;
   },
   showErrorMessages: function (error){

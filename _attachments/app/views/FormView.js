@@ -1,58 +1,39 @@
 //var currentParent;
 
-window.FormView = Backbone.View.extend({
-  el: $("body"),
+var FormView = Backbone.View.extend({
+  //el: "body",
+  //el: "#formRenderingView",
+  //el: $("#formRenderingView"),
   template: loadTemplate("form.template.html"),
-  initialize: function (model){
-	//model = this.options.model;
-	//console.log("init this.model:" + JSON.stringify(this.model));
-	this.model = model;
-	this.recordSaved = false;
-	this.form = this.options.currentForm;
-	//console.log("init this.form:" + JSON.stringify(this.form));
-	this.formElements = new FormElements(this.form.get("form_elements"), { view: this });
-	//this.formCollection = this.model.get("formCollection");
-	var flow = this.form.get("flow");
-	var flowId = flow.id;
-	var formId = this.form.get("_id");
-	this.patientId = this.form.patientId;
-	var patientIdWidget = {
-		"label": "patientIdWidget",
-		"value":this.patientId,
-		"identifier": "patientId",
-		"inputType": "hidden"
-	};
-//	var formCollectionWidget = {
-//			"label": "formCollectionWidget",
-//			"value":this.formCollection,
-//			"identifier": "formCollection",
-//			"inputType": "hidden"
-//	};
-	var flowIdWidget = {
-			"label": "flowIdWidget",
-			"value": flowId,
-			"identifier": "flowId",
-			"inputType": "hidden"
-	};
-	var formIdWidget = {
-			"label": "formIdWidget",
-			"value": formId,
-			"identifier": "formId",
-			"inputType": "hidden"
-	};
-	this.formElements.add(patientIdWidget,{at: 0});
-	//this.formElements.add(formCollectionWidget,{at: 1});
-	this.formElements.add(flowIdWidget,{at: 1});
-	this.formElements.add(formIdWidget,{at: 2});
-	console.log("init  this.patientId: " + this.patientId);
-    _.bindAll(this, "render", "addOne", "saveRecord", "remove");   
-    //this.model.bind("saveRecord", this.model);
-    this.bind("reset", this.updateView);
-    //this.model.bind('destroy', this.remove, this);
-    return this;
+  //initialize: function (model){
+	initialize: function (){
+	  //window.FormView.make("div", {id: "formRenderingView"});
+//	  $("#homePageView").remove();
+//	  $("#patientRecordView").remove();
+	  //$("#formRenderingView").remove();
+	  //$("#views").append("<div id=\"formRenderingView\"></div>");
+	  //this.el = $("#formRenderingView");
+	  //model = this.options.model;
+	  //console.log("init this.model:" + JSON.stringify(this.model));
+	  //this.model = model;
+	  this.recordSaved = false;
+
+	  //console.log("init this.form:" + JSON.stringify(this.form));
+	  //console.log("init this.form:" + JSON.stringify(this.options.currentForm.get("form_elements")));
+	  //this.formElements = new FormElements(this.form.get("form_elements"), { view: this });
+	  
+	  //this.formCollection = this.model.get("formCollection");
+
+
+	  
+	  _.bindAll(this, "render", "addOne", "saveRecord", "remove");   
+	  //this.bind("saveRecord", this.saveRecord, this);
+	  this.bind("reset", this.updateView);
+	  //this.model.bind('destroy', this.remove, this);
+	  return this;
   },
   remove: function() {
-	  console.log("remove the view");
+	  console.log("remove the view in FormView");
 	  $(this.el).remove();
   },
   clear: function() {
@@ -64,18 +45,48 @@ window.FormView = Backbone.View.extend({
 	  this.remove();
 	  this.render();
 	},
-  render: function(){
-	console.log("view cid: " + this.cid);
-	$(this.el).html(this.template(this.form.toJSON()));
-	//console.log("render patientId:: " + this.model.get("patientId"));
-	this.formElements.each(this.addOne);
-	return this;
-  },
+	render: function(){
+		console.log("view cid: " + this.cid);
+		
+		this.form = this.options.currentForm;
+		var currentId = $(this.el).attr('id');
+		var formRenderingViewId = $("#formRenderingView").attr('id');
+		console.log("currentId from FormView: " + currentId + " formRenderingViewId: " + formRenderingViewId);
+		var renderedHtml = this.template(this.form.toJSON());
+		//$(this.el).html(this.template(this.form.toJSON()));
+		$(this.el).html(renderedHtml);
+		//$(this.el).html("test 123");
+		console.log("view el: " + this.el.html());
+		//$("#formRenderingView").html(this.template(this.form.toJSON()));
+		//console.log("view formRenderingView html: " + $("#formRenderingView").html());
+		//console.log("render patientId:: " + this.model.get("patientId"));
+		//this.formElements.each(this.addOne);
+		//console.log("render this.form:" + JSON.stringify(this.options.currentForm.get("form_elements")));
+	
+		var flow = this.options.currentForm.get("flow");
+		var flowId = flow.id;
+		var formId = this.options.currentForm.get("_id");
+		this.patientId = this.options.currentForm.patientId;
+		var formElements = new FormElements(this.options.currentForm.get("form_elements"), { view: this });
+		//var formElements = new FormElements(this.options.currentForm.get("form_elements"));
+		var patientIdWidget = {"label": "patientIdWidget","value":this.patientId,"identifier": "patientId","inputType": "hidden"};
+		var flowIdWidget = {"label": "flowIdWidget","value": flowId,"identifier": "flowId","inputType": "hidden"};
+		var formIdWidget = {"label": "formIdWidget","value": formId,"identifier": "formId","inputType": "hidden"};
+		formElements.add(patientIdWidget,{at: 0});
+		formElements.add(flowIdWidget,{at: 1});
+		formElements.add(formIdWidget,{at: 2}); 
+
+		formElements.each(this.addOne);
+		//var renderedHtml = this.template(this.form.toJSON());
+		//console.log("render renderedHtml: " + renderedHtml);
+		//$("#formRenderingView").html(renderedHtml);
+		return this;
+	},
   recordSaved: false,
-  currentParentName: "body",
+  currentParentName: "formElements",
   currentParent: $(this.currentParentName),
   addOne: function(formElement){
-	//console.log("add one:" + JSON.stringify(formElement));
+//	console.log("add one:" + JSON.stringify(formElement));
 	var inputType = formElement.get("inputType");
 	var closeRow = formElement.get("closeRow");
 	var identifier = formElement.get("identifier");
@@ -86,7 +97,8 @@ window.FormView = Backbone.View.extend({
 	if (inputType == 'display-tbl-begin') {
 		template = displayTableWidgetCompiledHtml;
 		html = template(formElement.toJSON());	
-		 $(this.$("#formElements")).append(html);
+		 //$(this.$("#formElements")).append(html);
+		 $("#formElements").append(html);
 		 currentParentName = "#beginTableRow" + identifier;
 		 currentParent = $(currentParentName);
 	} else if (inputType == 'display-tbl-end') {
@@ -112,7 +124,7 @@ window.FormView = Backbone.View.extend({
 		currentParentName = "#row" + identifier;
 		currentParent = $(currentParentName);
 	}
-	 //console.log("Element: " + identifier + " currentParentName: " + currentParentName);
+	 //log("Element: " + identifier + " currentParentName: " + currentParentName);
   },
   events: {
     "click #form-save" : "saveRecord",
@@ -127,7 +139,18 @@ window.FormView = Backbone.View.extend({
 		  e.preventDefault();
 		  //console.log("saving this.model:" + JSON.stringify(this.model));
 		  var validationErrors = [];
-		  this.formElements.each(function(formElement){
+		  
+			var formElements = new FormElements(this.options.currentForm.get("form_elements"), { view: this });
+			//var formElements = new FormElements(this.options.currentForm.get("form_elements"));
+			var patientIdWidget = {"label": "patientIdWidget","value":this.patientId,"identifier": "patientId","inputType": "hidden"};
+			var flowIdWidget = {"label": "flowIdWidget","value": flowId,"identifier": "flowId","inputType": "hidden"};
+			var formIdWidget = {"label": "formIdWidget","value": formId,"identifier": "formId","inputType": "hidden"};
+			formElements.add(patientIdWidget,{at: 0});
+			formElements.add(flowIdWidget,{at: 1});
+			formElements.add(formIdWidget,{at: 2}); 
+		  
+		  
+		  formElements.each(function(formElement){
 			  var datatype = formElement.get("datatype");
 			  if (datatype != "display") {
 				  var inputValue = $("#" + formElement.get("identifier")).val();
@@ -219,6 +242,8 @@ window.FormView = Backbone.View.extend({
 			  this.recordSaved = true;
 			  this.options.currentForm = null;
 			  this.form = null;
+			  
+			  $("#formRenderingView").remove();
 
 			  //this.removeModel();
 			  //$(this.el).remove();
