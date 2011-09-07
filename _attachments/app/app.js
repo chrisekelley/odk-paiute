@@ -173,8 +173,13 @@ var AppRouter = Backbone.Router.extend({
         	});
         }
     });
+
+// Booststrap app after delay to avoid continuous activity spinner 
+_.delay(function(){
     // Initiate the router
-    var router = new AppRouter;
-    // Start Backbone history a neccesary step for bookmarkable URL's
+	FORMY.router = new AppRouter();
+	
+    // Start Backbone history a necessary step for bookmarkable URL's
     Backbone.history.start();
     new PatientsList();
+}, 100);

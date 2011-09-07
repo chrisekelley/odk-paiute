@@ -175,5 +175,5 @@ function inspectModelAndGo(newRecord) {
 			queryId = patientId;
 			console.log("patientId is queryId: " + queryId + "for formId: " + formId);
 		 }
-		router.navigate('patientRecords/' + queryId, true);
+		FORMY.router.navigate('patientRecords/' + queryId, true);
 }
