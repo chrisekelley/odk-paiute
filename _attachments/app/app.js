@@ -83,60 +83,49 @@ var AppRouter = Backbone.Router.extend({
         	//console.log("end home route.");
         },
         newPatient: function () {
+			$("#homePageView").remove();
+			$("#patientRecordView").remove();
+			$("#formRenderingView").remove();
+			if (! $("#formRenderingView").length){
+				var viewDiv = document.createElement("div");
+				viewDiv.setAttribute("id", "formRenderingView");
+				$("#views").append(viewDiv);
+			}
         	FORMY.loadForm("PatientRegistration",null,{
-        			success: function(form, resp){
-        				//var patientRegForm = new Form(form);
-        	        	//(new FormView({model: patientRegForm})).render();
-        				  $("#homePageView").remove();
-        				  $("#patientRecordView").remove();
-        				  //$("#formRenderingView").remove();
-        				  if (! $("#formRenderingView").length){
-        					  //$("#views").append("<div id=\"formRenderingView\"></div>");
-        					  var viewDiv = document.createElement("div");
-        					  viewDiv.setAttribute("id", "formRenderingView");
-        					  $("#views").append(viewDiv);
-        				  }
-        				//formView.render();
-						var newModel = new Form();
-						//var newPatientFormView = new FormView({model: newModel, currentForm:form, el: $("#formRenderingView")}, {silent: true});
-						var newPatientFormView = new FormView({model: newModel, currentForm:form, el: $("#formRenderingView")});
-						newPatientFormView.render();
-        			},
-        			error: function() { 
-        				console.log("Error loading PatientRegistration: " + arguments); 
-        			}
-        		});
+        		success: function(form, resp){
+        			var newModel = new Form();
+        			var newPatientFormView = new FormView({model: newModel, currentForm:form, el: $("#formRenderingView")});
+        			newPatientFormView.render();
+        		},
+        		error: function() { 
+        			console.log("Error loading PatientRegistration: " + arguments); 
+        		}
+        	});
         },
         arrestDocket: function (query) {
+			$("#homePageView").remove();
+			$("#patientRecordView").remove();
+			$("#formRenderingView").remove();
+			if (! $("#formRenderingView").length){
+				var viewDiv = document.createElement("div");
+				viewDiv.setAttribute("id", "formRenderingView");
+				$("#views").append(viewDiv);
+			}
         	FORMY.loadForm("ArrestDocket",query,{
-    			success: function(form){
-    				//var ArrestDocketForm = new Form(form);
-    	        	//(new FormView({model: ArrestDocketForm})).render();
-    				  $("#homePageView").remove();
-    				  $("#patientRecordView").remove();
-    				  if (! $("#formRenderingView").length){
-    					  //$("#views").append("<div id=\"formRenderingView\"></div>");
-    					  var viewDiv = document.createElement("div");
-    					  viewDiv.setAttribute("id", "formRenderingView");
-    					  $("#views").append(viewDiv);
-    				  }
-    				  //$("#formRenderingView").remove();
-    				//$("#views").append("<div id=\"formRenderingView\"></div>");
-    				//formView.render();
-    				  var newPatientFormView = new FormView({model: new Form(), currentForm:form, el: $("#formRenderingView")});
-					newPatientFormView.render();
-    			},
-    			error : function(){
-      				console.log("Error loading ArrestDocket: " + arguments); 
-      			}
-    		});
+        		success: function(form){
+        			var newPatientFormView = new FormView({model: new Form(), currentForm:form, el: $("#formRenderingView")});
+        			newPatientFormView.render();
+        		},
+        		error : function(){
+        			console.log("Error loading ArrestDocket: " + arguments); 
+        		}
+        	});
         },
         patientRecords: function (query) {
         	console.log("patientRecords route.");
         	$("#homePageView").remove();
         	$("#formRenderingView").remove();
         	if (! $("#patientRecordView").length){
-        		//$("#views").append("<div id=\"formRenderingView\"></div>");
         		var viewDiv = document.createElement("div");
         		viewDiv.setAttribute("id", "patientRecordView");
         		$("#views").append(viewDiv);
