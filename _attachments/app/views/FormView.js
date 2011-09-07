@@ -16,7 +16,7 @@ var FormView = Backbone.View.extend({
 	  //model = this.options.model;
 	  //console.log("init this.model:" + JSON.stringify(this.model));
 	  //this.model = model;
-	  this.recordSaved = false;
+	  //this.recordSaved = false;
 
 	  //console.log("init this.form:" + JSON.stringify(this.form));
 	  //console.log("init this.form:" + JSON.stringify(this.options.currentForm.get("form_elements")));
@@ -82,7 +82,7 @@ var FormView = Backbone.View.extend({
 		//$("#formRenderingView").html(renderedHtml);
 		return this;
 	},
-  recordSaved: false,
+  //recordSaved: false,
   currentParentName: "formElements",
   currentParent: $(this.currentParentName),
   addOne: function(formElement){
@@ -130,8 +130,8 @@ var FormView = Backbone.View.extend({
     "click #form-save" : "saveRecord",
   },
   saveRecord: function(e){
-	  console.log("this.recordSaved: " + this.recordSaved);
-	  if (!this.recordSaved) {
+	  //console.log("this.recordSaved: " + this.recordSaved);
+	  //if (!this.recordSaved) {
 		  //alert("Saving New Record.");
 		  console.log("******");
 		  console.log("*** saveRecord ***");
@@ -239,7 +239,7 @@ var FormView = Backbone.View.extend({
 //				  success(formData);
 				  //model.clear;
 			  }
-			  this.recordSaved = true;
+			  //this.recordSaved = true;
 			  this.options.currentForm = null;
 			  this.form = null;
 			  
@@ -255,9 +255,9 @@ var FormView = Backbone.View.extend({
 			  console.log("Errors:" + JSON.stringify(errors));
 			  alert(errors);
 		  }
-	  } else {
-		  console.log("Record has already been saved.");
-	  }
+	  //} else {
+		 // console.log("Record has already been saved.");
+	  //}
   },
 //  removeModel: function() {
 //	  console.log("removing this.model: " + this.model)
