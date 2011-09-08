@@ -91,7 +91,7 @@ var FormView = Backbone.View.extend({
   },
   saveRecord: function(e){ 
 	  e.preventDefault();
-	  //console.log("saving this.model:" + JSON.stringify(this.model));
+	  console.log("validating the form submission.");
 	  var validationErrors = [];
 	  this.formElements.each(function(formElement){
 		  var datatype = formElement.get("datatype");
@@ -123,7 +123,7 @@ var FormView = Backbone.View.extend({
 				  }
 			  });
 		  } else {
-			  console.log("Saving the record.");
+			  console.log("Saving the record using FORMY.sessionPatient.records.create");
 			  FORMY.sessionPatient.records.create(formData,{
 				  success: function(model, resp){
 					  console.log("added new record to FORMY.sessionPatient.records.");
@@ -176,4 +176,5 @@ function inspectModelAndGo(newRecord) {
 			console.log("patientId is queryId: " + queryId + "for formId: " + formId);
 		 }
 		FORMY.router.navigate('patientRecords/' + queryId, true);
+		//FORMY.router.navigate('patientRecords/' + queryId);
 }

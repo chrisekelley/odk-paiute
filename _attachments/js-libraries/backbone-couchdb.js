@@ -62,7 +62,7 @@
       var keys, _opts, _view;
       _view = this.config.view_name;
       keys = [this.helpers.extract_collection_name(coll)];
-      console.log("keys", keys, this.helpers.extract_collection_name(coll));
+      console.log("backbone.-couchdb.js read_collection: keys", keys, this.helpers.extract_collection_name(coll));
       if (coll.db != null) {
         if (coll.db.changes || this.config.global_changes) {
           coll.listen_to_changes();
@@ -195,6 +195,7 @@
         filter: "" + con.config.ddoc_name + "/by_collection"
       };
       _.extend(opts, this.db);
+  	console.log("backbone-couchdb.js _db_prepared_for_changes: opts: " + JSON.stringify(opts));
       return _.defer(__bind(function() {
         this._db_changes_handler = this._db_inst.changes(this._db_update_seq, opts);
         return this._db_changes_handler.onChange(this._db_on_change);

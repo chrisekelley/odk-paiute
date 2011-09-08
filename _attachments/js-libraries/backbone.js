@@ -103,7 +103,6 @@
     // same arguments as `trigger` is, apart from the event name.
     // Listening for `"all"` passes the true event name as the first argument.
     trigger : function(eventName) {
-    	console.log("triggering an event: " + eventName);
       var list, calls, ev, callback, args;
       var both = 2;
       if (!(calls = this._callbacks)) return this;
@@ -120,6 +119,7 @@
           }
         }
       }
+      console.log("triggering an event: " + eventName + "; ev: " + ev);
       return this;
     }
 
@@ -444,6 +444,7 @@
     // Add a model, or list of models to the set. Pass **silent** to avoid
     // firing the `added` event for every new model.
     add : function(models, options) {
+    	console.log("backbone.js add models to collection.")
       if (_.isArray(models)) {
         for (var i = 0, l = models.length; i < l; i++) {
           this._add(models[i], options);
@@ -502,6 +503,7 @@
     // you can reset the entire set with a new list of models, without firing
     // any `added` or `removed` events. Fires `reset` when finished.
     reset : function(models, options) {
+    	console.log("Backbone.js collection reset ");
       models  || (models = []);
       options || (options = {});
       this.each(this._removeReference);
@@ -515,6 +517,7 @@
     // collection when they arrive. If `add: true` is passed, appends the
     // models to the collection instead of resetting.
     fetch : function(options) {
+    	console.log("Backbone.js collection fetch ");
       options || (options = {});
       var collection = this;
       var success = options.success;
@@ -530,15 +533,20 @@
     // has been created on the server, it will be added to the collection.
     // Returns the model, or 'false' if validation on a new model fails.
     create : function(model, options) {
+    	//console.log("Backbone.js collection create");
       var coll = this;
       options || (options = {});
       model = this._prepareModel(model, options);
+      console.log("Backbone.js collection create _prepareModel: " + JSON.stringify(model));
       if (!model) return false;
       var success = options.success;
+      console.log("Backbone.js collection create about to options.success. options: " + JSON.stringify(options)); 
       options.success = function(nextModel, resp, xhr) {
+    	  console.log("Backbone.js collection create about to coll.add. ");  
         coll.add(nextModel, options);
         if (success) success(nextModel, resp, xhr);
       };
+      console.log("Backbone.js collection create about tomodel.save " +  + JSON.stringify(options));  
       model.save(null, options);
       return model;
     },
@@ -955,9 +963,9 @@
       if (!(events || (events = this.events))) return;
       if (_.isFunction(events)) events = events.call(this);
       $(this.el).unbind('.delegateEvents' + this.cid);
-      for (var key in events) {
-    	console.log("event key: " + key);
+      for (var key in events) {	
         var method = this[events[key]];
+       // console.log("event key: " + key);
         if (!method) throw new Error('Event "' + events[key] + '" does not exist');
         var match = key.match(eventSplitter);
         var eventName = match[1], selector = match[2];

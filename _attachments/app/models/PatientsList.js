@@ -7,7 +7,7 @@ var PatientsList = Backbone.Collection.extend({
 	db : {
 		//view: "byPatientSorted?limit=15",
 		view: "byPatientSorted?descending=true&limit=15",
-		changes : true,
+		//changes : true,
 	},
 	url : "/9",
 //	url: function() {
@@ -18,4 +18,4 @@ var PatientsList = Backbone.Collection.extend({
 
 });
 FORMY.Patients = new PatientsList();
-console.log("Creating Patients ");
+console.log("Populating FORMY.Patients ");
