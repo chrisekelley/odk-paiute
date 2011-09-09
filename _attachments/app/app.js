@@ -7,28 +7,17 @@ FORMY.loadForm = function(name, patientId, options) {
 		form.fetch({
 			success: function(form){
 				var success = options.success;
-				//options.success = function(resp) {
 			        if (success) {
-						//console.log("added form: " + JSON.stringify(form.get("_id")) + " success: " + success);
 						form.patientId = patientId;
 						console.log("form.patientId: " + patientId);
-						//var newModel = new Form();
-						//var formView = new FormView({model: newModel, currentForm:form, el: $("#formRenderingView")}, {silent: true});
 						FORMY.forms.add(form);
-						//FORMY.forms.add(formView);
-						//console.log("added " + name + "; into FORMY.forms: " + JSON.stringify(FORMYForm));
-						//console.log("added " + name + "; patientId: " + patientId);
 						console.log("added " + name);
 						success(form);
 					}
-			     //};
 				options.error = wrapError(options.error, name, options);
 			}
 		});
 	} else {
-		//var formView = FORMY.forms.get(name);
-		//console.log("this is a form: " + JSON.stringify(form) );
-		//formView.options.currentForm.patientId = patientId;
 		form = FORMY.forms.get(name);
 		form.patientId = patientId;
 		console.log("fetched from FORMY: " + name + "; patientId: " + patientId);
@@ -69,10 +58,10 @@ var AppRouter = Backbone.Router.extend({
         	"record/:query":                 "record",    // #patientRecords
             "*actions": "home" // matches http://example.com/#anything-here - used to point to defaultRoute
         },
+        // The following route is unused.
         defaultRoute: function( actions ){
         	console.log("defaultRoute route.");
             // The variable passed in matches the variable in the route definition "actions"
-        	//FORMY.Patients.fetch();
         	FORMY.Patients.fetch();
         	page = new Page({content: "Default List of patients:"});
         	//page = new Page({});
