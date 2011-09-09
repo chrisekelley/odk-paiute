@@ -12,8 +12,11 @@ var HomeView = Backbone.View.extend({
 		_.bindAll(this, 'addOne', 'reseted', 'render', 'search');
 		//Patients = new PatientsList();
 		FORMY.Patients.bind('add',   this.addOne, this);
+		//FORMY.Patients.bind('search',   this.search, this);
 		FORMY.Patients.bind('reset', this.reseted, this);
 		FORMY.Patients.bind('all',   this.render, this);
+		FORMY.Patients.bind('change', this.search, this);
+		FORMY.Patients.bind('render', this.render, this);
 		FORMY.Patients.fetch();
 		return this;
 	}, 
@@ -36,9 +39,41 @@ var HomeView = Backbone.View.extend({
 		  console.log("remove the view in homeView");
 		  $(this.el).remove();
 	  },
-	search: function() {
-		console.log("Searching...");
-		alert("Search TBD");
+	search: function(e) {
+		e.preventDefault();
+		var searchTerm =  $('#search_string').val();
+		//FORMY.Patients = new PatientsList({db : {view : "byPatientId"}});
+		console.log("Searching for " + searchTerm);
+		//var searchPatient = new Patient({surname: searchTerm});
+		var searchResults = new PatientsList();
+		if (searchTerm !== "") {
+			searchResults.db["keys"] = [searchTerm];
+			searchResults.db["view"] = ["bySurnameOrId"];
+		} else {
+			console.log("This should reset the collection.")
+		}
+		//var that = this;
+		searchResults.fetch({
+		success : function(){
+			//console.log("Records:" + JSON.stringify(patient.Records));
+			console.log("Fetching Records for:" + searchTerm);
+			console.log("searchResults: " + JSON.stringify(searchResults));
+			FORMY.Patients = searchResults;
+			console.log("render; Patients count: " + FORMY.Patients.length);
+			var page = new Page({content: "Default List of patients:"});
+        	var homeView = new HomeView({model: page});
+			FORMY.Patients.each(homeView.addOne);
+			//(new PatientRecordView({model: FORMY.sessionPatient})).render(); 
+		},
+		error : function(){
+			console.log("Error loading PatientRecordList: " + arguments); 
+		}
+		});
+		
+		
+		//db : {view : "byPatientId",}
+		//console.log("Searching...");
+		//alert("Search TBD");
 	},
 	render: function() {
 		$("#formRenderingView").remove();

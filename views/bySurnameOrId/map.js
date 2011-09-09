@@ -1,5 +1,5 @@
 function(doc) {
-  if (doc.flowId === "9") {
-    emit([doc.lastModified], doc);
-  }
-};
+	if(doc.surname) {
+		emit(doc.surname, doc);
+	}
+}

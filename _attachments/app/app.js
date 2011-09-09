@@ -72,12 +72,22 @@ var AppRouter = Backbone.Router.extend({
         	console.log("defaultRoute route.");
             // The variable passed in matches the variable in the route definition "actions"
         	//FORMY.Patients.fetch();
+        	FORMY.Patients.fetch();
         	page = new Page({content: "Default List of patients:"});
         	//page = new Page({});
         	(new HomeView({model: page})).render(); 
         },
         home: function () {
         	//console.log("home route.");
+//        	$("#homePageView").remove();
+//			$("#patientRecordView").remove();
+//			$("#formRenderingView").remove();
+//			if (! $("#homePageView").length){
+//				var viewDiv = document.createElement("div");
+//				viewDiv.setAttribute("id", "homePageView");
+//				$("#views").append(viewDiv);
+//			}
+        	//FORMY.Patients.fetch();
         	var page = new Page({});
         	(new HomeView({model: page})).render(); 
         	//console.log("end home route.");
