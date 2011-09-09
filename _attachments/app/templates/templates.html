@@ -5,7 +5,7 @@
     <a href="#record/{{_id}}">{{formId}}: {{lastModified}}</a>
 </script>
 <script id="patient-template" type="text/x-handlebars-template">
-    <td><a href="#patientRecords/{{_id}}">{{surname}}, {{forenames}}</a></td><td>{{#dateFormat lastModified}}{{/dateFormat}}</td>
+    <td><a href="#patientRecords/{{_id}}">{{surname}}, {{forenames}}</a></td><td>{{age_at_first_attendence}}</td><td>{{country_id_number}}</td><td>{{#dateFormat lastModified}}{{/dateFormat}}</td>
 </script>
 <script id="inputTextWidget" type="text/x-handlebars-template">
     <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}' size='{{size}}' maxlength='{{maxlength}}'></input>
