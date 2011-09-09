@@ -17,5 +17,5 @@ var PatientsList = Backbone.Collection.extend({
 	model : Patient
 
 });
-FORMY.Patients = new PatientsList();
-console.log("Populating FORMY.Patients ");
+//FORMY.Patients = new PatientsList();
+//console.log("Populating FORMY.Patients ");

@@ -1,14 +1,8 @@
 var HomeView = Backbone.View.extend({
-	el: $("#homePageView"),
+	//el: $("#homePageView"),
 	template: loadTemplate("home.template.html"),
 
 	initialize: function() {
-		$("#formRenderingView").remove;
-		$("#patientRecordView").remove;
-//		var viewDiv = $("#views").createElement("div");
-//		$(viewDiv).attr({id: "homePageView"});
-		$("#views").append("<div id=\"homePageView\"></div>");
-		//_.bindAll(this, "render", "addOne");
 		_.bindAll(this, 'addOne', 'reseted', 'render', 'search');
 		//Patients = new PatientsList();
 		FORMY.Patients.bind('add',   this.addOne, this);
@@ -17,7 +11,7 @@ var HomeView = Backbone.View.extend({
 		FORMY.Patients.bind('all',   this.render, this);
 		FORMY.Patients.bind('change', this.search, this);
 		FORMY.Patients.bind('render', this.render, this);
-		FORMY.Patients.fetch();
+		//FORMY.Patients.fetch();
 		return this;
 	}, 
 	addOne : function(patient){
@@ -41,39 +35,9 @@ var HomeView = Backbone.View.extend({
 	  },
 	search: function(e) {
 		e.preventDefault();
+		console.log("Searching");
 		var searchTerm =  $('#search_string').val();
-		//FORMY.Patients = new PatientsList({db : {view : "byPatientId"}});
-		console.log("Searching for " + searchTerm);
-		//var searchPatient = new Patient({surname: searchTerm});
-		var searchResults = new PatientsList();
-		if (searchTerm !== "") {
-			searchResults.db["keys"] = [searchTerm];
-			searchResults.db["view"] = ["bySurnameOrId"];
-		} else {
-			console.log("This should reset the collection.")
-		}
-		//var that = this;
-		searchResults.fetch({
-		success : function(){
-			//console.log("Records:" + JSON.stringify(patient.Records));
-			console.log("Fetching Records for:" + searchTerm);
-			console.log("searchResults: " + JSON.stringify(searchResults));
-			FORMY.Patients = searchResults;
-			console.log("render; Patients count: " + FORMY.Patients.length);
-			var page = new Page({content: "Default List of patients:"});
-        	var homeView = new HomeView({model: page});
-			FORMY.Patients.each(homeView.addOne);
-			//(new PatientRecordView({model: FORMY.sessionPatient})).render(); 
-		},
-		error : function(){
-			console.log("Error loading PatientRecordList: " + arguments); 
-		}
-		});
-		
-		
-		//db : {view : "byPatientId",}
-		//console.log("Searching...");
-		//alert("Search TBD");
+		FORMY.router.navigate('search/' + searchTerm, true);
 	},
 	render: function() {
 		$("#formRenderingView").remove();

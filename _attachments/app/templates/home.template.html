@@ -10,7 +10,7 @@
 		</div>
         <div id="twocols" class="clearfix">
         	<div id="search-results">
-	            <form name="searchForm" id="search-results-form">
+	            <form name="searchForm" id="search-results-form" onsubmit="return false;">
 	                <!-- <input type="hidden" id="first_surname" name="first_surname"/>
 	                <input type="hidden" id="start_row" name="start_row"/> -->
 	                <table>
@@ -47,7 +47,7 @@
 	                                            <option value="22">Umlazi</option>
 	                                        </select>
 	                                    </td>								
-	                                    <td><button type='Search' id='form-search'>Search</button></td>
+	                                    <td><input type='button' id='form-search' value="Search"/></td>
 	                                    <td style="vertical-align: middle">Search keywords: surname, TCC ID, TCC#, SA ID#, passport ID, C.A.S., or Court Case #.</td>
 	                                </tr>
 	                            </tbody></table>

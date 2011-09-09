@@ -62,6 +62,7 @@ var AppRouter = Backbone.Router.extend({
         routes: {
         	"/":                 "home",    // #home
         	"home":                 "home",    // #home
+        	"search/:query":                 "search",    // #search
         	"newPatient":                 "newPatient",    // #newPatient
         	"arrestDocket/:query":                 "arrestDocket",    // #arrestDocket
         	"patientRecords/:query":                 "patientRecords",    // #patientRecords
@@ -78,19 +79,65 @@ var AppRouter = Backbone.Router.extend({
         	(new HomeView({model: page})).render(); 
         },
         home: function () {
-        	//console.log("home route.");
-//        	$("#homePageView").remove();
-//			$("#patientRecordView").remove();
-//			$("#formRenderingView").remove();
-//			if (! $("#homePageView").length){
-//				var viewDiv = document.createElement("div");
-//				viewDiv.setAttribute("id", "homePageView");
-//				$("#views").append(viewDiv);
-//			}
-        	//FORMY.Patients.fetch();
-        	var page = new Page({});
-        	(new HomeView({model: page})).render(); 
-        	//console.log("end home route.");
+        	console.log("home route.");
+        	$("#homePageView").remove();
+			$("#patientRecordView").remove();
+			$("#formRenderingView").remove();
+			if (! $("#homePageView").length){
+				var viewDiv = document.createElement("div");
+				viewDiv.setAttribute("id", "homePageView");
+				$("#views").append(viewDiv);
+			}
+    		var searchResults = new PatientsList();
+    		searchResults.db["keys"] = null;
+    		searchResults.db["view"] = ["byPatientSorted?descending=true&limit=15"];
+    		searchResults.fetch({
+    		success : function(){
+    			console.log("Fetching All Records.");
+    			FORMY.Patients = searchResults;
+    			console.log("render; Patients count: " + FORMY.Patients.length);
+    			var page = new Page({content: "Default List of patients:"});
+            	(new HomeView({model: page, el: $("#homePageView")})).render();
+    		},
+    		error : function(){
+    			console.log("Error loading PatientRecordList: " + arguments); 
+    		}
+    		});
+        },
+        search: function (searchTerm) {
+        	console.log("search route.");
+        	$("#homePageView").remove();
+			$("#patientRecordView").remove();
+			$("#formRenderingView").remove();
+			if (! $("#homePageView").length){
+				var viewDiv = document.createElement("div");
+				viewDiv.setAttribute("id", "homePageView");
+				$("#views").append(viewDiv);
+			}
+    		console.log("Searching for " + searchTerm);
+    		var searchResults = new PatientsList();
+    		if (searchTerm !== "") {
+    			searchResults.db["keys"] = [searchTerm];
+    			searchResults.db["view"] = ["bySurnameOrId"];
+    		} else {
+    			console.log("This should reset the collection.");
+    			searchResults.db["keys"] = null;
+    			searchResults.db["view"] = ["byPatientSorted?descending=true&limit=15"];
+    		}
+    		searchResults.fetch({
+    		success : function(){
+    			//console.log("Records:" + JSON.stringify(patient.Records));
+    			console.log("Fetching Records for:" + searchTerm);
+    			console.log("searchResults: " + JSON.stringify(searchResults));
+    			FORMY.Patients = searchResults;
+    			console.log("render; Patients count: " + FORMY.Patients.length);
+    			var page = new Page({content: "Default List of patients:"});
+            	(new HomeView({model: page, el: $("#homePageView")})).render();
+    		},
+    		error : function(){
+    			console.log("Error loading PatientRecordList: " + arguments); 
+    		}
+    		});
         },
         newPatient: function () {
 			$("#homePageView").remove();
