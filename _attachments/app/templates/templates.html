@@ -1,0 +1,56 @@
+<script id="form-element-template" type="text/x-handlebars-template">
+  	{{{renderWidget}}}
+</script>
+<script id="record-template" type="text/x-handlebars-template">
+    <a href="#record/{{_id}}">{{formId}}: {{lastModified}}</a>
+</script>
+<script id="patient-template" type="text/x-handlebars-template">
+    <td><a href="#patientRecords/{{_id}}">{{surname}}, {{forenames}}</a></td><td>{{#dateFormat lastModified}}{{/dateFormat}}</td>
+</script>
+<script id="inputTextWidget" type="text/x-handlebars-template">
+    <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}' size='{{size}}' maxlength='{{maxlength}}'></input>
+</script>
+<script id="datepickerWidget" type="text/x-handlebars-template">
+  	<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='text' value='{{value}}'></input>
+</script>
+<script id="checkboxWidget" type="text/x-handlebars-template">
+  	<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1'></input>
+</script>
+<script id="textareaWidget" type="text/x-handlebars-template">
+  	<br/><textarea id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'></textarea>
+</script>
+<script id="dropdownWidget" type="text/x-handlebars-template">
+	<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
+	{{#dropdown enumerations}}
+	{{/dropdown}}
+	</select>
+</script>
+<script id="displayTableWidget" type="text/x-handlebars-template">
+	<table id="tbl{{{identifier}}}" border="0" cellpadding="4" cellspacing="2" width="95%" class="formTable">
+	<tr id="beginTableRow{{{identifier}}}"></tr>
+</script>
+<script id="displayHeaderWidget" type="text/x-handlebars-template">
+	<span id='sectionHeader{{identifier}}' class='sectionHeader''> {{label}}</span>
+</script>
+<script id="displaySubHeaderWidget" type="text/x-handlebars-template">
+	<span id='sectionSubHeader{{identifier}}' class='sectionHeader'>{{label}}</span>
+</script>
+<script id="displayInfotextWidget" type="text/x-handlebars-template">
+	<strong>{{label}}</strong>
+</script>
+<script id="yesnoWidget" type="text/x-handlebars-template">
+	<br/>
+	<input type="radio" id = "yes{{identifier}}" name="{{identifier}}" value="1" /><label for="yes{{identifier}}">Yes</label><br />
+	<input type="radio" id = "no{{identifier}}" name="{{identifier}}" value="0" /><label for="no{{identifier}}">No</label>
+</script>
+<script id="genderWidget" type="text/x-handlebars-template">
+	<br/>
+	<input type="radio" id = "f{{identifier}}" name="{{identifier}}" value="1" /><label for="f{{identifier}}">Female</label><br />
+	<input type="radio" id = "m{{identifier}}" name="{{identifier}}" value="2" /><label for="m{{identifier}}">Male</label>
+</script>
+<script id="hiddenWidget" type="text/x-handlebars-template">
+    <input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='hidden' value='{{value}}'></input>
+</script>
+<script id="buttonWidget" type="text/x-handlebars-template">
+    <button id='{{identifier}}' type='button' style="width:{{width}}; height:{{height}}; font-size: 12pt;">{{label}}</button>
+</script>
