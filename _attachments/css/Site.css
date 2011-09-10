@@ -525,6 +525,10 @@ div#search-results h1 {
 	padding: 8px 10px;
 	margin: 0;
 }
+div#search-results input[type=text] {
+	font-size: 1.6em;
+	height: 26px;
+}
 #search-results-form {
 	height:40px;
 	margin-bottom:2px;
@@ -790,5 +794,10 @@ if they are causing problems. If you need enhancedtable, use this one  */
 	padding-right : 10px;
 }
 #patients th {
+	font-size: 10pt;
+}
+#form-search {
+	width: 65px;
+	height: 25px;
 	font-size: 10pt;
 }
