@@ -595,7 +595,7 @@ div#search-results input[type=text] {
 #sidenavcontainer li {
 	border-bottom: 1px solid #90bade;
 	color: #000;
-	font-size: 11pt;
+	font-size: 12pt;
 }
 
 #sidenavcontainer li a {
@@ -796,8 +796,64 @@ if they are causing problems. If you need enhancedtable, use this one  */
 #patients th {
 	font-size: 10pt;
 }
-#form-search {
+/*#form-search {
 	width: 65px;
 	height: 25px;
 	font-size: 10pt;
-}
+}*/
+    
+    /* shiny blue (inspired by rdio iphone interface)
+     * https://github.com/ubuwaits/css3-buttons
+     *******************************************************************************/
+button.shiny-blue {
+  background-color: #2175BC;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#2175BC 0%), to(#2175BC 50%));
+  /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #2175BC 0%, #2175BC 50%, #1a5ad9 50%, #2463de 100%);
+  background-image: -moz-linear-gradient(top, #2175BC 0%, #2175BC 50%, #1a5ad9 50%, #2463de 100%);
+  background-image: -ms-linear-gradient(top, #2175BC 0%, #2175BC 50%, #1a5ad9 50%, #2463de 100%);
+  background-image: -o-linear-gradient(top, #2175BC 0%, #2175BC 50%, #1a5ad9 50%, #2463de 100%);
+  background-image: linear-gradient(top, #2175BC 0%, #2175BC 50%, #1a5ad9 50%, #2463de 100%);
+  border-top: 1px solid #1f58cc;
+  border-right: 1px solid #1b4db3;
+  border-bottom: 1px solid #174299;
+  border-left: 1px solid #1b4db3;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 0 2px 0 rgba(57, 140, 255, 0.8);
+  -moz-box-shadow: inset 0 0 2px 0 rgba(57, 140, 255, 0.8);
+  -ms-box-shadow: inset 0 0 2px 0 rgba(57, 140, 255, 0.8);
+  -o-box-shadow: inset 0 0 2px 0 rgba(57, 140, 255, 0.8);
+  box-shadow: inset 0 0 2px 0 rgba(57, 140, 255, 0.8);
+  color: #fff;
+  /*font: bold 12px "helvetica neue", helvetica, arial, sans-serif;*/
+  padding: 4px 0;
+  /*text-shadow: 0 -1px 1px #1a5ad9;*/
+  width: 75px;
+  font-size: 12pt;
+   }
+  
+  button.shiny-blue:hover {
+    background-color: #2175BC;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#2175BC 0%), to(#2261e0 50%));
+    /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #2175BC 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+    background-image: -moz-linear-gradient(top, #2175BC 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+    background-image: -ms-linear-gradient(top, #2175BC 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+    background-image: -o-linear-gradient(top, #2175BC 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+    background-image: linear-gradient(top, #2175BC 0%, #2261e0 50%, #044bd9 50%, #0d53de 100%);
+    cursor: pointer; }
+    
+  button.shiny-blue:active {
+    border-top: 1px solid #1b4db3;
+    border-right: 1px solid #174299;
+    border-bottom: 1px solid #133780;
+    border-left: 1px solid #174299;
+    -webkit-box-shadow: inset 0 0 5px 2px #1a47a0, 0 1px 0 #eeeeee;
+    -moz-box-shadow: inset 0 0 5px 2px #1a47a0, 0 1px 0 #eeeeee;
+    -ms-box-shadow: inset 0 0 5px 2px #1a47a0, 0 1px 0 #eeeeee;
+    -o-box-shadow: inset 0 0 5px 2px #1a47a0, 0 1px 0 #eeeeee;
+    box-shadow: inset 0 0 5px 2px #1a47a0, 0 1px 0 #eeeeee; }
