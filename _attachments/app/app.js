@@ -107,8 +107,9 @@ var AppRouter = Backbone.Router.extend({
     		console.log("Searching for " + searchTerm);
     		var searchResults = new PatientsList();
     		if (searchTerm !== "") {
-    			searchResults.db["keys"] = [searchTerm];
-    			searchResults.db["view"] = ["bySurnameOrId"];
+    			searchResults.db["keys"] = null;
+    			//searchResults.db["view"] = ["bySurnameOrId?startkey=\"" + searchTerm + "\"&endkey=\"" + searchTerm + "\u9999\""];
+    			searchResults.db["view"] = ["bySurnameOrId?startkey=\"" + searchTerm + "\"&endkey=\"" + searchTerm + "Z\""];   			
     		} else {
     			console.log("This should reset the collection.");
     			searchResults.db["keys"] = null;

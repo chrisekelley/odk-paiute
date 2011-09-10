@@ -1,20 +1,18 @@
 
-//This allows us to have separate template files
+//This allows us to have a single file for template widgets.
 var loadWidgetTemplates = function(){
-	//console.log("filename in config: " + filename);
 	//var templateFunction;
 	$.ajax("app/templates/templates.html",{
 		dataType: "html",
 		async:false, // make sure we pause execution until this template is loaded
 		success: function(result){
-			console.log("loaded templates.html: " + result);
+			//console.log("loaded templates.html: " + result);
 			$("head").append(result);
 		},
 		error: function(error){
 			console.log("Error loaded templates.html: " + JSON.stringify(error));
 		}
 	});
-	console.log("Loading templates.html");
 };
 
 loadWidgetTemplates();
