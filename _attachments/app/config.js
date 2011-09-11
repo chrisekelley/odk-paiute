@@ -21,3 +21,6 @@ $.ajax("app/templates/" + filename,{
 return templateFunction;
 };
 var FORMY = {};
+var supportsOrientationChange = "onorientationchange" in window,
+orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+

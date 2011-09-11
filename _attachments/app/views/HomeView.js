@@ -3,7 +3,7 @@ var HomeView = Backbone.View.extend({
 	template: loadTemplate("home.template.html"),
 
 	initialize: function() {
-		_.bindAll(this, 'addOne', 'reseted', 'render', 'search');
+		_.bindAll(this, 'addOne', 'reseted', 'render', 'search', 'orientation');
 		//Patients = new PatientsList();
 		FORMY.Patients.bind('add',   this.addOne, this);
 		//FORMY.Patients.bind('search',   this.search, this);
@@ -23,6 +23,7 @@ var HomeView = Backbone.View.extend({
 	},
 	events: {
 		"click #form-search " : "search",
+		"orientationEvent " : "orientation",
 	},
 	reseted: function() {
 		console.log("reseted; Patients count: " + FORMY.Patients.length);
@@ -39,18 +40,38 @@ var HomeView = Backbone.View.extend({
 		var searchTerm =  $('#search_string').val();
 		FORMY.router.navigate('search/' + searchTerm, true);
 	},
+	orientation: "horiz",
 	render: function() {
-		$("#formRenderingView").remove();
-		$("#patientRecordView").remove();
+//		$("#formRenderingView").remove();
+//		$("#patientRecordView").remove();
 		//console.log("render in HomeView:" + JSON.stringify(this.model));
 		//this.content = this.model.toJSON();
+		
+//		window.addEventListener(orientationEvent, function() {
+//			alert('HOLY ROTATING SCREENS BATMAN:' + window.orientation + " " + screen.width);
+//			}, false);
+		// -90 480
+		if (window.orientation == -90) {
+			//alert('HOLY ROTATING SCREENS BATMAN - render vertical:' + window.orientation + " screen.width: " + screen.width);
+			this.orientation = "vert";
+			this.template =  loadTemplate("home.vert.template.html");
+		} else {
+			//alert('HOLY ROTATING SCREENS BATMAN - otherwise:' + window.orientation + " screen.width: " + screen.width);
+			this.orientation = "horiz";
+			this.template =  loadTemplate("home.vert.template.html");
+			//this.template =  loadTemplate("home.template.html");
+		}
+		
 		var homeViewHtml = this.template(this.model.toJSON());
 		console.log("rendering HomeView");
 		//$(this.el).html(homeViewHtml);
 		$("#homePageView").html(homeViewHtml);
 		//if(FORMY.Patients.length > 0){
 		FORMY.Patients.each(this.addOne);
+
 		//}
+		$(".stripeMe tr").mouseover(function(){$(this).addClass("over");}).mouseout(function(){$(this).removeClass("over");});
+		   $(".stripeMe tr:even").addClass("alt");
 		return this;
 	},
 });

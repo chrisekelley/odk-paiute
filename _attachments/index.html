@@ -48,6 +48,12 @@
 	<script type="text/javascript" src="app/views/PatientView.js"></script>
 	<script type="text/javascript" src="app/views/RecordView.js"></script>
 	<script type="text/javascript" src="app/app.js"></script>
-
+ <script type="text/javascript">
+ $(document).ready(function(){
+ 	console.log("starting stripeme.");
+   $(".stripeMe tr").mouseover(function(){$(this).addClass("over");}).mouseout(function(){$(this).removeClass("over");});
+   $(".stripeMe tr:even").addClass("alt");
+ });
+ </script>
 </html>
 
