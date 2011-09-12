@@ -23,6 +23,8 @@ var HomeView = Backbone.View.extend({
 	},
 	events: {
 		"click #form-search " : "search",
+		"click #form-client " : "clientLink",
+		"click #form-config " : "configLink",
 		"orientationEvent " : "orientation",
 	},
 	reseted: function() {
@@ -33,6 +35,12 @@ var HomeView = Backbone.View.extend({
 	remove: function() {
 		  console.log("remove the view in homeView");
 		  $(this.el).remove();
+	  },
+	  clientLink: function() {
+		  FORMY.router.navigate('newPatient', true);
+	  },
+	  configLink: function() {
+		  window.location.href = '/mobilefuton/_design/mobilefuton/index.html';
 	  },
 	search: function(e) {
 		e.preventDefault();

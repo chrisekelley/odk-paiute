@@ -29,12 +29,27 @@ window.PatientRecordView = Backbone.View.extend({
 		this.view = new RecordListItemView({model: record});
 		this.rendered = this.view.render().el;
 		//$(this.$("#records")).append(this.rendered);	
-		$("#records").append(this.rendered);	
-	}
+		$("#records").append(this.rendered);
+	},
+	events: {
+		"click #form-client " : "clientLink",
+		"click #form-home " : "homeLink",
+		"click #form-docket " : "docketLink",
+	},
+	clientLink: function() {
+		FORMY.router.navigate('newPatient', true);
+	},
+	homeLink: function() {
+		FORMY.router.navigate('home', true);
+	},
+	docketLink: function() {
+		//arrestDocket/{{_id}}
+		FORMY.router.navigate('arrestDocket/' + FORMY.sessionPatient.get("_id"), true);
+	},
 });
 
 var RecordListItemView = Backbone.View.extend({
-	tagName : "li",
+	tagName : "tr",
 	template: Handlebars.compile($("#record-template").html()),
 	initialize : function(){
 	},

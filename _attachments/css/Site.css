@@ -442,6 +442,14 @@ div#title
 	color: white;
 	/*background-image: url("/Content/images/banner_bkgd.gif"); */
 }
+.banner-home-vert {
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	font-size: 10pt;
+	color: white;
+	/*background-image: url("../images/banner_bkgd.gif"); */
+	background-color:#6EA8E4
+}
 .patient-home-vert {
 	font-family: Tahoma, Verdana, Arial, sans-serif;
 	vertical-align: top;

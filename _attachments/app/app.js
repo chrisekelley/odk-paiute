@@ -229,5 +229,6 @@ var AppRouter = Backbone.Router.extend({
 
 	// Start Backbone history a necessary step for bookmarkable URL's
 	Backbone.history.start();
-	new PatientsList();
+	FORMY.Patients = new PatientsList();
+	//new PatientsList();
 //}, 100);

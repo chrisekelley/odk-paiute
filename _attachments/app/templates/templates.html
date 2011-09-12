@@ -2,7 +2,7 @@
   	{{{renderWidget}}}
 </script>
 <script id="record-template" type="text/x-handlebars-template">
-    <a href="#record/{{_id}}">{{formId}}: {{lastModified}}</a>
+    <td><a href="#record/{{_id}}">{{formId}}</a></td><td>{{lastModified}}</td>
 </script>
 <script id="patient-template" type="text/x-handlebars-template">
     <td><a href="#patientRecords/{{_id}}">{{surname}}, {{forenames}}</a></td><td>{{age_at_first_attendence}}</td><td>{{country_id_number}}</td><td>{{#dateFormat lastModified}}{{/dateFormat}}</td>
