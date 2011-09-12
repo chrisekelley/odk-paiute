@@ -442,10 +442,18 @@ div#title
 	color: white;
 	/*background-image: url("/Content/images/banner_bkgd.gif"); */
 }
-.banner-home-vert {
+.patient-home-vert {
 	font-family: Tahoma, Verdana, Arial, sans-serif;
 	vertical-align: top;
 	font-size: 10pt;
+	color: white;
+	/*background-image: url("../images/banner_bkgd.gif"); */
+	background-color:#6EA8E4
+}
+.patient-home-vert td {
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	font-size: 16pt;
 	color: white;
 	/*background-image: url("../images/banner_bkgd.gif"); */
 	background-color:#6EA8E4
@@ -1008,6 +1016,65 @@ button.menu-blue {
 	vertical-align: top;
 }
 #patients .odd
+{
+	background: #e8edff; 
+}
+
+tr.alt td 
+{
+	/*background: #ecf6fc; */
+	/*background: #ADCEF2; */
+	/*background: #FFE183; */
+	background: #FCF3D7; 
+}
+tr.over td, tr: hover td
+{
+	/*background: #bcd4ec;*/ 
+}
+
+#records
+{
+	/*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+	font-size: 12px;
+	/*margin: 10px;*/
+	/*width: 480px;*/
+	text-align: left;
+	border-collapse: collapse;
+}
+
+/*#records th
+{
+	font-size: 16px;
+	font-weight: normal;
+	padding: 6px 4px;
+	color: #039;
+}*/
+#records th {
+	font-size: 16px;
+		/*background: #3E83C9;*/
+		/*background: #FF8040;*/
+		/*background: #6989AB;*/
+		background: #BFA040;
+		color: white;
+		font-weight: bold;
+		padding: 2px 11px;
+		text-align: left;
+		border-right: 1px solid white;
+		line-height: 1.2;
+	}
+
+#records td
+{
+	/*padding: 6px;*/
+	color: #669;
+	font-size: 16px;
+	
+	padding: 6px 11px;
+	/*border-bottom: 1px solid #2175BC;*/
+	border-bottom: 1px solid #BBB195;
+	vertical-align: top;
+}
+#records .odd
 {
 	background: #e8edff; 
 }

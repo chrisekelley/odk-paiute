@@ -10,6 +10,14 @@ window.PatientRecordView = Backbone.View.extend({
 	},      
 	render: function() {
 		//console.log("this.model: "+ JSON.stringify(this.model.toJSON()));
+		if (window.orientation == -90) {
+			this.orientation = "vert";
+			this.template =  loadTemplate("patient.vert.template.html");
+		} else {
+			this.orientation = "horiz";
+			this.template =  loadTemplate("patient.vert.template.html");
+			//this.template =  loadTemplate("home.template.html");
+		}
 		thisHtml = this.template(this.model.toJSON());
 		//$(this.el).html(thisHtml);
 		$("#patientRecordView").html(thisHtml);
