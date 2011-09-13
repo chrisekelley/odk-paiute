@@ -577,7 +577,7 @@ div#search-results input[type=text] {
 	font-family: Tahoma, Verdana, Arial, sans-serif;
 	vertical-align: top;
 	/*padding-left: 4px;*/
-	/*margin-top: 4px;*/
+	/*margin-top: 2px;*/
 	font-size: 10pt;
 	overflow: auto;
 	/*border: 1px solid black;*/
@@ -1043,6 +1043,7 @@ tr.over td, tr: hover td
 #records
 {
 	/*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+	margin-top: 1px;
 	font-size: 12px;
 	/*margin: 10px;*/
 	/*width: 480px;*/

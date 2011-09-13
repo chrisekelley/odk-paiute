@@ -159,15 +159,27 @@ var AppRouter = Backbone.Router.extend({
 				viewDiv.setAttribute("id", "formRenderingView");
 				$("#views").append(viewDiv);
 			}
-        	FORMY.loadForm("ArrestDocket",query,{
-        		success: function(form){
-        			var newPatientFormView = new FormView({model: new Form(), currentForm:form, el: $("#formRenderingView")});
-        			newPatientFormView.render();
-        		},
-        		error : function(){
-        			console.log("Error loading ArrestDocket: " + arguments); 
+			//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
+        	FORMY.sessionPatient = new Patient({_id: query});
+        	console.log("just made a new instance of a patient.");
+        	FORMY.sessionPatient.fetch( {
+        		success: function(model){
+        			console.log("Just successfully fetched the patient.");
+                	FORMY.loadForm("ArrestDocket",query,{
+                		success: function(form){
+                			form.set({"patientSurname": FORMY.sessionPatient.get('surname')});
+                			form.set({"patientForenames": FORMY.sessionPatient.get('forenames')});
+                			form.set({"patientMiddle_name": FORMY.sessionPatient.get('Middle_name')});
+                			var newPatientFormView = new FormView({model: new Form(), currentForm:form, el: $("#formRenderingView")});
+                			newPatientFormView.render();
+                		},
+                		error : function(){
+                			console.log("Error loading ArrestDocket: " + arguments); 
+                		}
+                	});
         		}
         	});
+        	
         },
         patientRecords: function (query) {
         	console.log("patientRecords route.");
@@ -181,7 +193,6 @@ var AppRouter = Backbone.Router.extend({
         	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
         	FORMY.sessionPatient = new Patient({_id: query});
         	console.log("just made a new instance of a patient.");
-
         	FORMY.sessionPatient.fetch( {
         		success: function(model){
         			console.log("Just successfully fetched the patient.");
@@ -191,7 +202,7 @@ var AppRouter = Backbone.Router.extend({
         			success : function(){
         				//console.log("Records:" + JSON.stringify(patient.Records));
         				console.log("Fetching Records for :" + query);
-        				(new PatientRecordView({model: FORMY.sessionPatient})).render(); 
+        				(new PatientRecordView({model: FORMY.sessionPatient})).render();
         			},
         			error : function(){
         				console.log("Error loading PatientRecordList: " + arguments); 
@@ -210,14 +221,36 @@ var AppRouter = Backbone.Router.extend({
         		viewDiv.setAttribute("id", "patientRecordView");
         		$("#views").append(viewDiv);
         	}
+        	
         	var record = new Record({_id: query});
         	record.fetch( {
         		success: function(model){
-        			(new RecordView({model: record})).render(); 
+        			console.log("record: " + JSON.stringify(record));
+        			var patient = new Patient({_id: record.get("patientId")});
+        			console.log("just made a new instance of a patient.");
+        			patient.fetch( {
+        				success: function(model){
+        					console.log("Just successfully fetched the patient.");
+        					//record.set({"patient" : patient});
+        					record.set({"patientSurname": patient.get('surname')});
+        					record.set({"patientForenames": patient.get('forenames')});
+        					record.set({"patientMiddle_name": patient.get('Middle_name')});
+        					FORMY.sessionPatient = patient;
+        					//console.log("record: " + JSON.stringify(record));        					
+        					FORMY.loadForm(record.get("formId"), null,{
+                        		success: function(form){
+                        			(new RecordView({model: record, currentForm:form})).render();
+                        		},
+                        		error : function(){
+                        			console.log("Error loading form: " + arguments); 
+                        		}
+                        	});
+        				}
+        			});
         		},
-				error : function(){
-					console.log("Error loading RecordView: " + arguments); 
-				}
+        		error : function(){
+        			console.log("Error loading RecordView: " + arguments); 
+        		}
         	});
         }
     });

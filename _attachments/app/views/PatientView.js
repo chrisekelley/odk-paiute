@@ -7,7 +7,7 @@ window.PatientRecordView = Backbone.View.extend({
 //		$("#views").append("<div id=\"patientRecordView\"></div>");
 		_.bindAll(this, "render", "addOne");
 		return this;
-	},      
+	},
 	render: function() {
 		//console.log("this.model: "+ JSON.stringify(this.model.toJSON()));
 		if (window.orientation == -90) {
@@ -22,6 +22,7 @@ window.PatientRecordView = Backbone.View.extend({
 		//$(this.el).html(thisHtml);
 		$("#patientRecordView").html(thisHtml);
 		FORMY.sessionPatient.records.each(this.addOne);
+		console.log("sessionPatient: " + JSON.stringify(FORMY.sessionPatient));
 		return this;
 	},
 	addOne : function(record){
@@ -32,9 +33,9 @@ window.PatientRecordView = Backbone.View.extend({
 		$("#records").append(this.rendered);
 	},
 	events: {
-		"click #form-client " : "clientLink",
-		"click #form-home " : "homeLink",
-		"click #form-docket " : "docketLink",
+//		"click #form-client " : "clientLink",
+//		"click #form-home " : "homeLink",
+//		"click #form-docket " : "docketLink",
 	},
 	clientLink: function() {
 		FORMY.router.navigate('newPatient', true);

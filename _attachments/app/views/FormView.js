@@ -25,6 +25,18 @@ var FormView = Backbone.View.extend({
 	  this.render();
 	},
 	render: function(){
+		if (window.orientation == -90) {
+			this.orientation = "vert";
+		} else {
+			//this.orientation = "horiz";
+			this.orientation = "vert";
+		}
+		if (this.orientation === "vert") {
+			this.template =  loadTemplate("form.vert.template.html");
+		} else {
+			this.template =  loadTemplate("form.vert.template.html");
+		}
+		
 		this.form = this.options.currentForm;
 		this.patientId = this.options.currentForm.patientId;
 		$(this.el).html(this.template(this.form.toJSON()));
@@ -44,16 +56,50 @@ var FormView = Backbone.View.extend({
   //recordSaved: false,
   currentParentName: "formElements",
   currentParent: $(this.currentParentName),
+  currentTableName: "",
+  currentRow:0,
   formElements: null,
   addOne: function(formElement){
 //	console.log("add one:" + JSON.stringify(formElement));
+	 this.currentRow ++;
+	 //console.log("currentRow: " + this.currentRow);
 	var inputType = formElement.get("inputType");
 	var closeRow = formElement.get("closeRow");
 	var identifier = formElement.get("identifier");
 	var tblCols = formElement.get("cols");
-	if (tblCols == null) {
-		tblCols = 3;	
+	var size = formElement.get("size");
+	if (this.orientation === "vert") {
+		tblCols = 2;
+		if (this.currentRow % 2) {
+			closeRow = "false";
+		} else {
+			closeRow = "true";
+			//console.log("Setting closeRow to true; currentRow: " + this.currentRow);
+		}
+		if (inputType == 'button') {
+			closeRow = "true";
+			formElement.set({"width":"450"});
+		} else if (inputType == 'text') {
+			if (size > 25) {
+				console.log("Size: " + size);
+				closeRow = "true";
+				formElement.set({"colspan":"2"});
+			}
+		} else if (inputType == 'textarea') {
+				closeRow = "true";
+				formElement.set({"colspan":"2"});
+		} else {
+			formElement.set({"colspan":"1"});
+		}
 	}
+	if (tblCols == null) {
+		if (this.orientation === "vert") {
+			tblCols = 2;
+		} else {
+			tblCols = 3;
+		}
+	}
+	//console.log("add one:" + JSON.stringify(formElement));
 	if (inputType == 'display-tbl-begin') {
 		template = displayTableWidgetCompiledHtml;
 		html = template(formElement.toJSON());	
@@ -61,6 +107,7 @@ var FormView = Backbone.View.extend({
 		 $("#formElements").append(html);
 		 currentParentName = "#beginTableRow" + identifier;
 		 currentParent = $(currentParentName);
+		 currentTableName = "#beginTableRow" + identifier;;
 	} else if (inputType == 'display-tbl-end') {
 	} else if (inputType == 'hidden-empty') {
 	    html = "<input id='" + identifier + "'name='" + identifier + "' type='hidden'></input>";
@@ -74,17 +121,20 @@ var FormView = Backbone.View.extend({
 	} else if (inputType == 'hidden') {
 		currentParentName = "#theForm";
 		currentParent = $(currentParentName);
-		closeRow == "true";
+		closeRow = "false";
 		$(this.$("#formElements")).append((new FormElementView({model: formElement})).render().el);
+		console.log("Hidden Element: " + identifier + " currentParentName: " + currentParentName);
 	} else {
 	    currentParent.append((new FormElementView({model: formElement})).render().el);
 	}
 	if (closeRow == "true") {
-		$("table").append("<tr id=\"row" + identifier + "\"></tr>");
+		//$("table").append("<tr id=\"row" + identifier + "\"></tr>");
+		$(currentTableName).append("<tr id=\"row" + identifier + "\"></tr>");
 		currentParentName = "#row" + identifier;
 		currentParent = $(currentParentName);
+		console.log("CloseRow currentParentName: " + currentParentName);
 	}
-	 //log("Element: " + identifier + " currentParentName: " + currentParentName);
+	 console.log("Element: " + identifier + " currentParentName: " + currentParentName);
   },
   events: {
     "click #form-save" : "saveRecord",
