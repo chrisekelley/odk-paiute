@@ -91,7 +91,7 @@
 			"visible": "true",
 			"closeRow": "true",
 			"colspan": "1",
-			"size": "0",
+			"size": "10",
 			"rows": "0",
 			"cols": "0",
 			"identifier": "cas",

@@ -20,7 +20,7 @@
   	<input id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' type='checkbox' value='1'></input>
 </script>
 <script id="textareaWidget" type="text/x-handlebars-template">
-  	<br/><textarea id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'></textarea>
+  	<br/><textarea id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}' rows='{{rows}}' cols='{{cols}}'></textarea>
 </script>
 <script id="dropdownWidget" type="text/x-handlebars-template">
 	<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
@@ -29,7 +29,7 @@
 	</select>
 </script>
 <script id="displayTableWidget" type="text/x-handlebars-template">
-	<table id="tbl{{{identifier}}}" border="0" cellpadding="4" cellspacing="2" width="95%" class="formTable">
+	<table id="tbl{{{identifier}}}" border="0" cellpadding="4" cellspacing="2" class="formTable">
 	<tr id="beginTableRow{{{identifier}}}"></tr>
 </script>
 <script id="displayHeaderWidget" type="text/x-handlebars-template">

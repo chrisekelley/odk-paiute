@@ -3,10 +3,10 @@
 	<tbody>
 		<tr>
 			<td style="vertical-align: top;">
+				<button id='form-home' class="menu-blue" onClick="window.location.href = '#home'")>Home</button>
+				{{#if patientSurname}}
 				{{patientSurname}}, {{patientForenames}} {{patientMiddle_name}}
-			<button id='form-home' class="menu-blue" onClick="window.location.href = '#home'")>
-				Home
-			</button>
+				{{/if}}
 			</td>
 		</tr>
 	</tbody>

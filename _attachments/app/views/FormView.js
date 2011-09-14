@@ -79,15 +79,21 @@ var FormView = Backbone.View.extend({
 		if (inputType == 'button') {
 			closeRow = "true";
 			formElement.set({"width":"450"});
+			formElement.set({"colspan":"2"});
 		} else if (inputType == 'text') {
 			if (size > 25) {
 				console.log("Size: " + size);
 				closeRow = "true";
 				formElement.set({"colspan":"2"});
+				if (size >= 50) {
+					formElement.set({"size":"50"});
+				}
 			}
 		} else if (inputType == 'textarea') {
 				closeRow = "true";
 				formElement.set({"colspan":"2"});
+				formElement.set({"rows":"4"});
+				formElement.set({"cols":"60"});
 		} else {
 			formElement.set({"colspan":"1"});
 		}
