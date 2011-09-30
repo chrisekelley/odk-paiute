@@ -25,6 +25,7 @@ var HomeView = Backbone.View.extend({
 		"click #form-search " : "search",
 		"click #form-client " : "clientLink",
 		"click #form-config " : "configLink",
+		"click #form-design " : "designLink",
 		"orientationEvent " : "orientation",
 	},
 	reseted: function() {
@@ -41,6 +42,9 @@ var HomeView = Backbone.View.extend({
 	  },
 	  configLink: function() {
 		  window.location.href = '/mobilefuton/_design/mobilefuton/index.html';
+	  },
+	  designLink: function() {
+		  FORMY.router.navigate('design', true);
 	  },
 	search: function(e) {
 		e.preventDefault();
