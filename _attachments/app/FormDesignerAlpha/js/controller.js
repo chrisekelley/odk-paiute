@@ -503,21 +503,82 @@ formdesigner.controller = (function () {
     var generateItextJSON = function () {
     	var idata, row, iID, lang, form, val, Itext,
     	out = '';
+    	var fieldEnumerationsMap = new Object();
+
+    	function getFieldEnumerations(k) {
+    	    return fieldEnumerationsMap[k];
+    	}
+    	
     	Itext = formdesigner.model.Itext;
     	idata = Itext.getAllData();
     	console.log("idata: " + JSON.stringify(idata));
-    	//Form = formdesigner.controller.form;
+    	// console.log("formdesigner: " + JSON.stringify(formdesigner, null, 3));
+    	Form = formdesigner.controller.form;
     	//controlTree = formdesigner.controller.form.controlTree;
-    	console.log("controltree: " + formdesigner.controller.form.controlTree.printTree());
-    	//bList = formdesigner.controller.form.getBindList();
-    	console.log("getBindList: " + formdesigner.controller.form.getBindList());
+    	//console.log("controltree: " + formdesigner.controller.form.controlTree.printTree());
+    	//console.log("controltree: " + formdesigner.controller.form.controlTree.printTree());
+    	
+    	function mapFunc(node) {
+            if(node.isRootNode) { //skip
+                return;
+            }
+
+            var mugType = node.getValue(),
+                cProps = mugType.mug.properties.controlElement.properties,
+                parentId = cProps.labelItextID;
+            mugType.mug.properties.controlElement.properties.label = idata["en"][cProps.labelItextID]["default"];
+            tagName = cProps.tagName.toLowerCase();    
+            cProps.label = idata["en"][cProps.labelItextID]["default"];
+            if (tagName === 'item' && cProps.defaultValue) {
+                //console.log("item Cprops: " + JSON.stringify(cProps) + " defaultValue: " + cProps.defaultValue);
+            }
+            if (tagName !== 'item') {
+                var attr, absPath;
+                if (tagName === 'repeat') {
+                    attr = 'nodeset';
+                } else {
+                    attr = 'ref';
+                }
+                absPath = formdesigner.controller.form.dataTree.getAbsolutePath(mugType);
+                var result, child, fieldEnumerations = new Array(), i = 0;
+                for(child in node.getChildren()){
+                    if(node.getChildren().hasOwnProperty(child)){
+                    	var ChildItem = node.getChildren()[child];
+                    	mugType = ChildItem.getValue();
+                        cProps = mugType.mug.properties.controlElement.properties;
+                        //this.getChildren()[child].treeMap(nodeFunc, store, afterChildFunc); //have each children also perform the func
+                        //console.log("this.getChildren for parentId: " + parentId + " in absPath: " + absPath + " ChildItem: " + JSON.stringify(cProps));
+                        fieldEnumerations[i] = cProps;
+                        i++;
+                    }
+                }
+                
+                if (fieldEnumerations.length > 0) {
+                	//var nestedEnum = [parentId][fieldEnumerations];
+                	fieldEnumerationsMap[parentId] = fieldEnumerations;
+                	//console.log("parentId:" + parentId + " fieldEnumerations: " + JSON.stringify(fieldEnumerations));
+                	//return nestedEnum;
+                }
+                //console.log("other Cprops: " + JSON.stringify(cProps) + " attr: " + attr + " absPath: " + absPath);
+            }
+        }
+    	
+    	var ctm = formdesigner.controller.form.controlTree.treeMap(mapFunc);
+    	//console.log("fieldEnumerationsMapOuter: " + JSON.stringify(fieldEnumerationsMap));
+
+    	//console.log("control treemap: " + ctm);
+    	//console.log("getBindList: " + formdesigner.controller.form.getBindList());
+    	//tree = formdesigner.model.Tree('data');
+    	//model1 = formdesigner.model;
+    	//console.log("form: " + JSON.stringify(Form,null,5));
 
     	var dataTree = formdesigner.controller.form.dataTree;
     	 var MT,
          //vars populated by populateVariables()
-         bEl,cons,consMsg,nodeset,type,relevant,required,calc,
+         bEl,cons,consMsg,nodeset,type,relevant,required,calc,tagName,
          i, attrs, j;
     	var bList = formdesigner.controller.form.getBindList();
+    	//cProps = mugType.mug.properties.controlElement.properties,
     	var sanitizeXML = function(xmlString) {
     		if(!xmlString) {
     			return;
@@ -546,6 +607,8 @@ formdesigner.controller = (function () {
                 relevant = sanitizeXML(bEl.properties.relevantAttr);
                 required = sanitizeXML(createBindRequiredAttribute(bEl.properties.requiredAttr));
                 calc = sanitizeXML(bEl.properties.calculateAttr);
+                tagName = MT.mug.properties.controlElement.properties.tagName;
+                //console.log("tagName: " + tagName);
                 //preld = bEl.properties.preload;
                 //preldParams = bEl.properties.preloadParams;
                 return {
@@ -556,6 +619,7 @@ formdesigner.controller = (function () {
                     relevant: relevant,
                     required: required,
                     calculate: calc,
+                    tagName: tagName
                     //preload: preld,
                     //preloadParams: preldParams
                 }
@@ -563,24 +627,119 @@ formdesigner.controller = (function () {
                 return null;
             }
         }
-        var formDef = { _id : formdesigner.controller.form.formID, label: formdesigner.controller.form.formName};
+
+        var formDef = { _id : formdesigner.controller.form.formID, formBuilder : "FormDesignerAlpha", label: formdesigner.controller.form.formName, flow: {id: 300, name: "auto", flowOrder: 1 }};
         var form_elements = [];
-        var j = 0;
+        var beginFormelement = { "label": "BEGIN TABLE ",
+        		"value": "",
+    			"options": [
+    				{
+    					"name": "optional",
+    					"value": "true"
+    				}
+    			],
+    			"datatype": "display",
+    			"visible": "true",
+    			"closeRow": "false",
+    			"colspan": "null",
+    			"size": "null",
+    			"rows": "null",
+    			"cols": "2",
+    			"identifier": "beginTableIdentifier",
+    			"inputType": "display-tbl-begin"
+    		};
+        form_elements[0] = beginFormelement;
+        var i = 0;
+        var j = 1;
 		for (i in bList) {
 			if(bList.hasOwnProperty(i)){
 				MT = bList[i];
 				attrs = populateVariables(MT);
 				console.log("bList MT: " + MT + " attrs: " + JSON.stringify(attrs));
+				var identifier = MT.mug.properties.dataElement.properties.nodeID;
+				//var tagname = $(cEl)[0].nodeName;
+				//var tagname = $ ( this )[0].nodeName;
+				var tagName = attrs["tagName"];
+				console.log("tagName: " + tagName);
 				var form_element =  {
 			            "label": idata["en"][MT.mug.properties.dataElement.properties.nodeID]["default"],
+			            "value": "",
+						"options": [
+							{
+								"name": "optional",
+								"value": "true"
+							}
+						],
 			            "datatype": attrs["type"],
-			            "identifier": MT.mug.properties.dataElement.properties.nodeID,
+			            "visible": "true",
+						"closeRow": "false",
+						"colspan": "1",
+						"size": "0",
+						"rows": "0",
+						"cols": "0",
+			            "identifier": identifier,
 			            //"identifier": attrs["nodeset"],
-			        }
-				form_elements[j] = form_element
+			        };
+				
+				tagName = tagName.toLowerCase();
+				if(tagName === 'select') {	//stdMSelect
+					form_element["inputType"] = "select";
+				}else if (tagName === 'select1') {	//stdSelect
+					form_element["inputType"] = "select";
+				}else if (tagName === 'trigger') {	//stdTrigger
+					form_element["inputType"] = "text";
+				}else if (tagName === 'input') {	//stdTextQuestion
+					form_element["inputType"] = "text";
+				}else if (tagName === 'item') {		//stdItem
+				}else if (tagName === 'group') {	//stdGroup
+					form_element["inputType"] = "text";
+				}else if (tagName === 'secret') {	//stdSecret
+					form_element["inputType"] = "text";
+				}
+				
+				var enumerations = fieldEnumerationsMap[identifier];
+				if (enumerations != null && enumerations.length > 0) {
+					form_element["enumerations"] = enumerations;
+				}
+				form_elements[j] = form_element;
 				j++;
 			}
 		}
+		var saveButtonFormElement = {
+		         "label":"Save",
+		         "value": "",
+		         "options": [
+		                     {
+		                    	 "name": "optional",
+		                    	 "value": "true"
+		                     }
+		                 ],
+		         "datatype":"display",
+		         "visible":"true",
+		         "closeRow":"true",
+		         "colspan":"3",
+		         "width":"770",
+		         "height":"30",
+		         "rows":"0",
+		         "cols":"0",
+		         "identifier":"form-save",
+		         "inputType":"button"
+		      };
+		form_elements[j] = saveButtonFormElement;
+		j++;
+		var endFormElement = {
+			"label": "END TABLE","value": "","options": [{"name": "optional","value": "true"}],
+			"datatype": "display",
+			"visible": "true",
+			"closeRow": "false",
+			"colspan": "null",
+			"size": "null",
+			"rows": "null",
+			"cols": "null",
+			"identifier": "endTableIdentifier",
+			"inputType": "display-tbl-end"
+		};
+		form_elements[j] = endFormElement;
 		formDef["form_elements"] = form_elements;
         //form_elements
     	//console.log("formdesigner: " + JSON.stringify(formdesigner, undefined, 2));

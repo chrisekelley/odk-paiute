@@ -537,16 +537,16 @@
       var coll = this;
       options || (options = {});
       model = this._prepareModel(model, options);
-      console.log("Backbone.js collection create _prepareModel: " + JSON.stringify(model));
+      //console.log("Backbone.js collection create _prepareModel: " + JSON.stringify(model));
       if (!model) return false;
       var success = options.success;
-      console.log("Backbone.js collection create about to options.success. options: " + JSON.stringify(options)); 
+      //console.log("Backbone.js collection create about to options.success. options: " + JSON.stringify(options)); 
       options.success = function(nextModel, resp, xhr) {
-    	  console.log("Backbone.js collection create about to coll.add. ");  
+    	  //console.log("Backbone.js collection create about to coll.add. ");  
         coll.add(nextModel, options);
         if (success) success(nextModel, resp, xhr);
       };
-      console.log("Backbone.js collection create about tomodel.save " +  + JSON.stringify(options));  
+      //console.log("Backbone.js collection create about tomodel.save " +  + JSON.stringify(options));  
       model.save(null, options);
       return model;
     },

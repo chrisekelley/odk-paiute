@@ -1580,10 +1580,7 @@ formdesigner.launch = function (opts) {
     formdesigner.saveUrl = opts["saveUrl"];
     formdesigner.loadMe = opts["form"];
     
-    formdesigner.iconUrl = opts.iconUrl ? opts.iconUrl : "css/smoothness/images/ui-icons_888888_256x240.png";
-
-
-
+    formdesigner.iconUrl = opts.iconUrl ? opts.iconUrl : "app/FormDesignerAlpha/css/smoothness/images/ui-icons_888888_256x240.png";
 
     formdesigner.ui.controller = formdesigner.controller;
     formdesigner.controller.initFormDesigner();

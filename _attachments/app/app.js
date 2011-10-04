@@ -56,7 +56,8 @@ var AppRouter = Backbone.Router.extend({
         	"newPatient":                 "newPatient",    // #newPatient
         	"arrestDocket/:query":                 "arrestDocket",    // #arrestDocket
         	"patientRecords/:query":                 "patientRecords",    // #patientRecords
-        	"record/:query":                 "record",    // #patientRecords
+        	"patientRecords/:query":                 "patientRecords",    // #patientRecords
+        	"renderForm/:query1/:query2":                 "renderForm",    // #renderForm
             "design": "design",    // #design
             "*actions": "home", // matches http://example.com/#anything-here - used to point to defaultRoute
 
@@ -183,6 +184,37 @@ var AppRouter = Backbone.Router.extend({
         	});
         	
         },
+        renderForm: function (query1,query2) {
+        	$("#homePageView").remove();
+        	$("#patientRecordView").remove();
+        	$("#formRenderingView").remove();
+        	if (! $("#formRenderingView").length){
+        		var viewDiv = document.createElement("div");
+        		viewDiv.setAttribute("id", "formRenderingView");
+        		$("#views").append(viewDiv);
+        	}
+        	//Set the _id and then call fetch to use the backbone connector to retrieve it from couch
+        	FORMY.sessionPatient = new Patient({_id: query1});
+        	console.log("just made a new instance of a patient.");
+        	FORMY.sessionPatient.fetch( {
+        		success: function(model){
+        			console.log("Just successfully fetched the patient.");
+        			FORMY.loadForm(query2,query1,{
+        				success: function(form){
+        					form.set({"patientSurname": FORMY.sessionPatient.get('surname')});
+        					form.set({"patientForenames": FORMY.sessionPatient.get('forenames')});
+        					form.set({"patientMiddle_name": FORMY.sessionPatient.get('Middle_name')});
+        					var newPatientFormView = new FormView({model: new Form(), currentForm:form, el: $("#formRenderingView")});
+        					newPatientFormView.render();
+        				},
+        				error : function(){
+        					console.log("Error loading ArrestDocket: " + arguments); 
+        				}
+        			});
+        		}
+        	});
+        	
+        },
         patientRecords: function (query) {
         	console.log("patientRecords route.");
         	$("#homePageView").remove();
@@ -268,7 +300,7 @@ var AppRouter = Backbone.Router.extend({
 			}
 			formdesigner.launch({
 	            rootElement: "#designer",
-	            staticPrefix: "FormDesignerAlpha/",
+	            staticPrefix: "app/FormDesignerAlpha/",
 //	            form: "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<h:html xmlns:h=\"http://www.w3.org/1999/xhtml\" xmlns:orx=\"http://openrosa.org/jr/xforms\" xmlns=\"http://www.w3.org/2002/xforms\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:jr=\"http://openrosa.org/javarosa\">\n\t<h:head>\n\t\t<h:title>Awesome Form</h:title>\n\t\t<model>\n\t\t\t<instance>\n\t\t\t\t<data xmlns:jrm=\"http://dev.commcarehq.org/jr/xforms\" xmlns=\"http://openrosa.org/formdesigner/D1465656-8E57-4307-AD3D-CD8F8492782B\" uiVersion=\"1\" version=\"1\" name=\"Awesome Form\">\n\t\t\t\t\t<question1 />\n\t\t\t\t\t<question2 />\n\t\t\t\t\t<question3 />\n\t\t\t\t\t<question4 />\n\t\t\t\t</data>\n\t\t\t</instance>\n\t\t\t<bind nodeset=\"/data/question1\" type=\"xsd:string\" />\n\t\t\t<bind nodeset=\"/data/question2\" type=\"xsd:string\" />\n\t\t\t<bind nodeset=\"/data/question3\" type=\"xsd:string\" />\n\t\t\t<bind nodeset=\"/data/question4\" type=\"xsd:string\" />\n\t\t\t<itext>\n\t\t\t\t<translation lang=\"en\" default=\"\">\n\t\t\t\t\t<text id=\"question1\">\n\t\t\t\t\t\t<value>So what's your name?</value>\n\t\t\t\t\t</text>\n\t\t\t\t\t<text id=\"question2\">\n\t\t\t\t\t\t<value>Are you male or female?</value>\n\t\t\t\t\t</text>\n\t\t\t\t\t<text id=\"question3\">\n\t\t\t\t\t\t<value>question3</value>\n\t\t\t\t\t</text>\n\t\t\t\t\t<text id=\"question4\">\n\t\t\t\t\t\t<value>question4</value>\n\t\t\t\t\t</text>\n\t\t\t\t</translation>\n\t\t\t</itext>\n\t\t</model>\n\t</h:head>\n\t<h:body>\n\t\t<input ref=\"/data/question1\">\n\t\t\t<label ref=\"jr:itext('question1')\" />\n\t\t</input>\n\t\t<input ref=\"/data/question2\">\n\t\t\t<label ref=\"jr:itext('question2')\" />\n\t\t</input>\n\t\t<input ref=\"/data/question3\">\n\t\t\t<label ref=\"jr:itext('question3')\" />\n\t\t</input>\n\t\t<input ref=\"/data/question4\">\n\t\t\t<label ref=\"jr:itext('question4')\" />\n\t\t</input>\n\t</h:body>\n</h:html>",
 	            langs: ""
 	        });
