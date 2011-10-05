@@ -21,6 +21,7 @@ inputTextWidgetCompiledHtml = Handlebars.compile($("#inputTextWidget").html());
 datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html());
 checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
 dropdownWidgetCompiledHtml = Handlebars.compile($("#dropdownWidget").html());
+dropdownWidgetFormDesignerCompiledHtml = Handlebars.compile($("#dropdownWidgetFormDesigner").html());
 textareaWidgetCompiledHtml = Handlebars.compile($("#textareaWidget").html());
 displayTableWidgetCompiledHtml = Handlebars.compile($("#displayTableWidget").html());
 displayHeaderWidgetCompiledHtml = Handlebars.compile($("#displayHeaderWidget").html());
@@ -69,6 +70,8 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		template = dropdownWidgetCompiledHtml;
 	} else if (inputType == 'dropdown') {
 		template = dropdownWidgetCompiledHtml;
+	} else if (inputType == 'selectFDA') {
+		template = dropdownWidgetFormDesignerCompiledHtml;
 	} else if (inputType == 'select') {
 		template = dropdownWidgetCompiledHtml;
 	} else if (inputType == 'textarea') {
@@ -94,23 +97,23 @@ Handlebars.registerHelper("renderWidget", function(context) {
 	} else {
 		useTemplate = false; 
 	};
-	  if (useTemplate) {
-		  if (datatype == "display") {
-			  html = beginElement + template(this) + endElement;  
-		  } else if (inputType == 'hidden') {
-			  html = beginElement + template(this) + endElement;  
-		  } else {
-			  var labelHtml = "<label for='" + identifier + "'>" + this.label + "</label>: ";
-			  var errorHtml = " <span class='error-message' style='display:none'></span>";
-			  html = beginElement + labelHtml + template(this) + errorHtml + endElement; 
-			  //console.log("useTemplate: " + useTemplate + " inputType: " + inputType + " closeRow: " + closeRow + " html: "+ html);
-		  }
-	  } else {
-		  if (html == "") {
-			  html = beginElement + "No template- inputType: " + inputType + endElement; 
-		  }
-		  console.log("html: " + html);
-	  }
+	if (useTemplate) {
+		if (datatype == "display") {
+			html = beginElement + template(this) + endElement;  
+		} else if (inputType == 'hidden') {
+			html = beginElement + template(this) + endElement;  
+		} else {
+			var labelHtml = "<label for='" + identifier + "'>" + this.label + "</label>: ";
+			var errorHtml = " <span class='error-message' style='display:none'></span>";
+			html = beginElement + labelHtml + template(this) + errorHtml + endElement; 
+			//console.log("useTemplate: " + useTemplate + " inputType: " + inputType + " closeRow: " + closeRow + " html: "+ html);
+		}
+	} else {
+		if (html == "") {
+			html = beginElement + "No template for inputType: |" + inputType + "|" + endElement; 
+		}
+		console.log("html: " + html);
+	}
 	  return html;
 	});
 

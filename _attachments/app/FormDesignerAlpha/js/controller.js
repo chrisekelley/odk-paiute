@@ -500,7 +500,7 @@ formdesigner.controller = (function () {
 
         return out;
     }
-    var generateItextJSON = function () {
+    var generateJSON = function () {
     	var idata, row, iID, lang, form, val, Itext,
     	out = '';
     	var fieldEnumerationsMap = new Object();
@@ -514,8 +514,6 @@ formdesigner.controller = (function () {
     	console.log("idata: " + JSON.stringify(idata));
     	// console.log("formdesigner: " + JSON.stringify(formdesigner, null, 3));
     	Form = formdesigner.controller.form;
-    	//controlTree = formdesigner.controller.form.controlTree;
-    	//console.log("controltree: " + formdesigner.controller.form.controlTree.printTree());
     	//console.log("controltree: " + formdesigner.controller.form.controlTree.printTree());
     	
     	function mapFunc(node) {
@@ -681,11 +679,20 @@ formdesigner.controller = (function () {
 			            //"identifier": attrs["nodeset"],
 			        };
 				
+				var enumerations = fieldEnumerationsMap[identifier];
+				if (enumerations != null && enumerations.length > 0) {
+					form_element["enumerations"] = enumerations;
+				}
+				
 				tagName = tagName.toLowerCase();
 				if(tagName === 'select') {	//stdMSelect
-					form_element["inputType"] = "select";
+					form_element["inputType"] = "selectFDA";
 				}else if (tagName === 'select1') {	//stdSelect
-					form_element["inputType"] = "select";
+					if (enumerations != null && enumerations.length > 0) {
+						form_element["inputType"] = "selectFDA";
+					} else {
+						form_element["inputType"] = "checkbox";
+					}
 				}else if (tagName === 'trigger') {	//stdTrigger
 					form_element["inputType"] = "text";
 				}else if (tagName === 'input') {	//stdTextQuestion
@@ -697,10 +704,7 @@ formdesigner.controller = (function () {
 					form_element["inputType"] = "text";
 				}
 				
-				var enumerations = fieldEnumerationsMap[identifier];
-				if (enumerations != null && enumerations.length > 0) {
-					form_element["enumerations"] = enumerations;
-				}
+				
 				form_elements[j] = form_element;
 				j++;
 			}
@@ -751,7 +755,7 @@ formdesigner.controller = (function () {
     }
     
     that.generateItextXLS = generateItextXLS;
-    that.generateItextJSON = generateItextJSON;
+    that.generateJSON = generateJSON;
 
     var showLoadItextFromClipboard = function () {
         var input = $('#fd-source'),
@@ -808,7 +812,7 @@ formdesigner.controller = (function () {
     	var source = $('#fd-source');
     	
     	//var db = $.urlParam('db');
-    	var formData = formdesigner.controller.generateItextJSON();
+    	var formData = formdesigner.controller.generateJSON();
     	source.val(JSON.stringify(formData, undefined, 5));
     	//console.log("db: " + db);
     	console.log("Saving the record using FORMY.forms.create.");

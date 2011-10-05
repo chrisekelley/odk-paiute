@@ -28,6 +28,13 @@
 	{{/dropdown}}
 	</select>
 </script>
+<script id="dropdownWidgetFormDesigner" type="text/x-handlebars-template">
+	<select id='{{identifier}}' {{#options}}data-{{name}}='{{value}}' {{/options}} name='{{identifier}}'>
+	{{#each enumerations}}
+	<option value="{{this.defaultValue}}">{{this.label}}</option>
+	{{/each}}
+	</select>
+</script>
 <script id="displayTableWidget" type="text/x-handlebars-template">
 	<table id="tbl{{{identifier}}}" border="0" cellpadding="4" cellspacing="2" class="formTable">
 	<tr id="beginTableRow{{{identifier}}}"></tr>

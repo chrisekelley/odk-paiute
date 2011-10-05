@@ -55,6 +55,7 @@ var AppRouter = Backbone.Router.extend({
         	"search/:query":                 "search",    // #search
         	"newPatient":                 "newPatient",    // #newPatient
         	"arrestDocket/:query":                 "arrestDocket",    // #arrestDocket
+        	"problem/:query":                 "problem",    // #arrestDocket
         	"patientRecords/:query":                 "patientRecords",    // #patientRecords
         	"patientRecords/:query":                 "patientRecords",    // #patientRecords
         	"renderForm/:query1/:query2":                 "renderForm",    // #renderForm
@@ -181,8 +182,7 @@ var AppRouter = Backbone.Router.extend({
                 		}
                 	});
         		}
-        	});
-        	
+        	});        	
         },
         renderForm: function (query1,query2) {
         	$("#homePageView").remove();
@@ -204,16 +204,15 @@ var AppRouter = Backbone.Router.extend({
         					form.set({"patientSurname": FORMY.sessionPatient.get('surname')});
         					form.set({"patientForenames": FORMY.sessionPatient.get('forenames')});
         					form.set({"patientMiddle_name": FORMY.sessionPatient.get('Middle_name')});
-        					var newPatientFormView = new FormView({model: new Form(), currentForm:form, el: $("#formRenderingView")});
-        					newPatientFormView.render();
+        					var formView = new FormView({model: new Form(), currentForm:form, el: $("#formRenderingView")});
+        					formView.render();
         				},
         				error : function(){
         					console.log("Error loading ArrestDocket: " + arguments); 
         				}
         			});
         		}
-        	});
-        	
+        	});        	
         },
         patientRecords: function (query) {
         	console.log("patientRecords route.");

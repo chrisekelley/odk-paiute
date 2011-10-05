@@ -138,9 +138,9 @@ var FormView = Backbone.View.extend({
 		$(currentTableName).append("<tr id=\"row" + identifier + "\"></tr>");
 		currentParentName = "#row" + identifier;
 		currentParent = $(currentParentName);
-		console.log("CloseRow currentParentName: " + currentParentName);
+		//console.log("CloseRow currentParentName: " + currentParentName);
 	}
-	 console.log("Element: " + identifier + " currentParentName: " + currentParentName);
+	 //console.log("Element: " + identifier + " currentParentName: " + currentParentName);
   },
   events: {
     "click #form-save" : "saveRecord",

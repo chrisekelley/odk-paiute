@@ -1,5 +1,5 @@
 function(doc) {
   if (doc.formBuilder) {
-	  emit(doc.formBuilder, doc);
+	  emit(doc._id, doc);
   }
 };

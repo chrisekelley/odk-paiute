@@ -21,6 +21,7 @@ inputTextWidgetCompiledHtml = Handlebars.compile($("#inputTextWidget").html());
 datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html());
 checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
 dropdownWidgetCompiledHtml = Handlebars.compile($("#dropdownWidget").html());
+dropdownWidgetFormDesignerCompiledHtml = Handlebars.compile($("#dropdownWidgetFormDesigner").html());
 textareaWidgetCompiledHtml = Handlebars.compile($("#textareaWidget").html());
 displayTableWidgetCompiledHtml = Handlebars.compile($("#displayTableWidget").html());
 displayHeaderWidgetCompiledHtml = Handlebars.compile($("#displayHeaderWidget").html());
@@ -71,6 +72,8 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		template = dropdownWidgetCompiledHtml;
 	} else if (inputType == 'select') {
 		template = dropdownWidgetCompiledHtml;
+	} else if (inputType == 'selectFDA') {
+		template = dropdownWidgetFormDesignerCompiledHtml;
 	} else if (inputType == 'textarea') {
 		template = textareaWidgetCompiledHtml;
 	} else if (inputType == 'yesno_br') {
@@ -107,7 +110,7 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		  }
 	  } else {
 		  if (html == "") {
-			  html = beginElement + "No template- inputType: " + inputType + endElement; 
+			  html = beginElement + "No template for inputType: " + inputType + endElement; 
 		  }
 		  console.log("html: " + html);
 	  }
