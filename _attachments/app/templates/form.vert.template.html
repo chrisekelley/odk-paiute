@@ -5,14 +5,14 @@
 			<td style="vertical-align: top;">
 				<button id='form-home' class="menu-blue" onClick="window.location.href = '#home'")>Home</button>
 				{{#if patientSurname}}
-				{{patientSurname}}, {{patientForenames}} {{patientMiddle_name}}
+				<span class="patientName"><a href="#patientRecords/{{patientId}}">{{patientSurname}}, {{patientForenames}} {{patientMiddle_name}}</a></span>
 				{{/if}}
 			</td>
 		</tr>
 	</tbody>
 </table>
 </div>
-<div id="search-results-body-vert">
+<div id="form-container-vert">
 	 <h1>{{label}}</h1>
 <form id="theForm">
 <div id="formElements"></div>

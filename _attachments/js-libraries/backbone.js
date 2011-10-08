@@ -119,7 +119,7 @@
           }
         }
       }
-      console.log("triggering an event: " + eventName + "; ev: " + ev);
+      //console.log("triggering an event: " + eventName + "; ev: " + ev);
       return this;
     }
 
@@ -444,7 +444,7 @@
     // Add a model, or list of models to the set. Pass **silent** to avoid
     // firing the `added` event for every new model.
     add : function(models, options) {
-    	console.log("backbone.js add models to collection.")
+    	//console.log("backbone.js add models to collection.");
       if (_.isArray(models)) {
         for (var i = 0, l = models.length; i < l; i++) {
           this._add(models[i], options);
@@ -503,7 +503,7 @@
     // you can reset the entire set with a new list of models, without firing
     // any `added` or `removed` events. Fires `reset` when finished.
     reset : function(models, options) {
-    	console.log("Backbone.js collection reset ");
+    	//console.log("Backbone.js collection reset ");
       models  || (models = []);
       options || (options = {});
       this.each(this._removeReference);
@@ -517,7 +517,7 @@
     // collection when they arrive. If `add: true` is passed, appends the
     // models to the collection instead of resetting.
     fetch : function(options) {
-    	console.log("Backbone.js collection fetch ");
+    	//console.log("Backbone.js collection fetch ");
       options || (options = {});
       var collection = this;
       var success = options.success;
@@ -975,7 +975,7 @@
         //console.log("binding " + eventName + " to " + method);
           $(this.el).bind(eventName, method);
         } else {
-        	console.log("binding " + selector + " to " + eventName + " and " + method);
+        	//console.log("binding " + selector + " to " + eventName + " and " + method);
           $(this.el).delegate(selector, eventName, method);
         }
       }

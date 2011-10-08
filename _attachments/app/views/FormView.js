@@ -44,12 +44,24 @@ var FormView = Backbone.View.extend({
 		var flowId = flow.id;
 		var formId = this.options.currentForm.get("_id");
 		this.formElements = new FormElements(this.options.currentForm.get("form_elements"), { view: this });
+
+
 		var patientIdWidget = {"label": "patientIdWidget","value":this.patientId,"identifier": "patientId","inputType": "hidden"};
 		var flowIdWidget = {"label": "flowIdWidget","value": flowId,"identifier": "flowId","inputType": "hidden"};
 		var formIdWidget = {"label": "formIdWidget","value": formId,"identifier": "formId","inputType": "hidden"};
 		this.formElements.add(patientIdWidget,{at: 0});
 		this.formElements.add(flowIdWidget,{at: 1});
-		this.formElements.add(formIdWidget,{at: 2}); 
+		this.formElements.add(formIdWidget,{at: 2});
+		var _id = this.model.get("_id");
+		if (_id != null) {
+			var idWidget = {"label": "idWidget","value":_id,"identifier": "_id","inputType": "hidden"};
+			this.formElements.add(idWidget,{at: 3});
+		}
+		var _rev = this.model.get("_rev");
+		if (_rev != null) {
+			var revWidget = {"label": "revWidget","value":_rev,"identifier": "_rev","inputType": "hidden"};
+			this.formElements.add(revWidget,{at: 4});
+		}
 		this.formElements.each(this.addOne);
 		return this;
 	},
@@ -68,6 +80,12 @@ var FormView = Backbone.View.extend({
 	var identifier = formElement.get("identifier");
 	var tblCols = formElement.get("cols");
 	var size = formElement.get("size");
+	this.value = this.model.get(identifier);
+	if (this.value != null) {
+		console.log("value for " + identifier + ": " + this.value);
+		formElement.set({"value": this.value});
+		formElement.set({"recordValue": this.value});
+	}
 	if (this.orientation === "vert") {
 		tblCols = 2;
 		if (this.currentRow % 2) {
@@ -163,34 +181,56 @@ var FormView = Backbone.View.extend({
 		  var formData = $("#theForm").toObject();
 		  var flowId = $("#flowId").val();
 		  console.log("formData: " + JSON.stringify(formData));
-		  formData.created =  new Date();
-		  formData.lastModified =  formData.created;
-		  if (flowId === "9") {
-			  console.log("FORMY.Patients.create(formData);" + JSON.stringify(formData));
-			  FORMY.Patients.create(formData,{
-				  success: function(model, resp){
-					  nextModel = model;
-					  console.log("saveDoc nextModel.");
-					  FORMY.sessionPatient = model;
-					  inspectModelAndGo(model);
-				  },
-				  error: function() { 
-					  console.log("Error saving: " + arguments); 
-				  }
-			  });
+		  var _id = formData._id;
+		  if (_id == null) {
+			  formData.created =  new Date();
+			  formData.lastModified =  formData.created;  
+			  if (flowId === "9") {
+				  console.log("FORMY.Patients.create(formData);" + JSON.stringify(formData));
+				  FORMY.Patients.create(formData,{
+					  success: function(model, resp){
+						  nextModel = model;
+						  console.log("saveDoc nextModel.");
+						  FORMY.sessionPatient = model;
+						  inspectModelAndGo(model);
+					  },
+					  error: function() { 
+						  console.log("Error saving: " + arguments); 
+					  }
+				  });
+			  } else {
+				  console.log("Saving the record using FORMY.sessionPatient.records.create");
+				  FORMY.sessionPatient.records.create(formData,{
+					  success: function(model, resp){
+						  console.log("added new record to FORMY.sessionPatient.records.");
+						  inspectModelAndGo(model);
+					  },
+					  error: function() { 
+						  console.log("Error saving: " + arguments); 
+					  }
+				  });
+				  //model.clear;
+			  }
 		  } else {
-			  console.log("Saving the record using FORMY.sessionPatient.records.create");
-			  FORMY.sessionPatient.records.create(formData,{
+			  formData.lastModified =  new Date();
+			  console.log("Updating the record using record.save");
+			  var record = new Record(formData);
+			  record.collection = "patient-records";
+			  record.urlRoot = "patient-records";
+			  console.log("record: " + JSON.stringify(record));
+			  record.save({},{
 				  success: function(model, resp){
-					  console.log("added new record to FORMY.sessionPatient.records.");
+					  console.log("Updated the record.");
 					  inspectModelAndGo(model);
 				  },
 				  error: function() { 
-					  console.log("Error saving: " + arguments); 
+					  console.log("Error saving: " + JSON.stringify(arguments)); 
 				  }
 			  });
 			  //model.clear;
 		  }
+		  
+		  
 		  this.options.currentForm = null;
 		  this.form = null;
 

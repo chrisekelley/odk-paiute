@@ -50,18 +50,19 @@ var wrapError = function(onError, model, options) {
 var AppRouter = Backbone.Router.extend({
 
         routes: {
-        	"/":                 "home",    // #home
-        	"home":                 "home",    // #home
-        	"search/:query":                 "search",    // #search
-        	"newPatient":                 "newPatient",    // #newPatient
-        	"arrestDocket/:query":                 "arrestDocket",    // #arrestDocket
-        	"problem/:query":                 "problem",    // #arrestDocket
-        	"patientRecords/:query":                 "patientRecords",    // #patientRecords
-        	"patientRecords/:query":                 "patientRecords",    // #patientRecords
-        	"renderForm/:query1/:query2":                 "renderForm",    // #renderForm
-            "design": "design",    // #design
-            "*actions": "home", // matches http://example.com/#anything-here - used to point to defaultRoute
-
+        	"/":                 			"home",    			// #home
+        	"home":                 		"home",    			// #home
+        	"search/:query":        		"search",    		// #search
+        	"newPatient":           		"newPatient",    	// #newPatient
+        	"arrestDocket/:query":  		"arrestDocket",    	// #arrestDocket
+        	"problem/:query":       		"problem",    		// #arrestDocket
+        	"patientRecords/:query":		"patientRecords",   // #patientRecords
+        	"edit/:query":          		"edit",    			// #edit
+        	"record/:query":        		"record",    		// #record
+        	"renderForm/:query1/:query2":	"renderForm",    	// #renderForm
+            "destroy/:query": 				"destroy",    		// #destroy
+            "design": 						"design",    		// #design
+            "*actions": 					"home", 			// matches http://example.com/#anything-here - used to point to defaultRoute
         },
         // The following route is unused.
         defaultRoute: function( actions ){
@@ -87,9 +88,8 @@ var AppRouter = Backbone.Router.extend({
     		searchResults.db["view"] = ["byPatientSorted?descending=true&limit=15"];
     		searchResults.fetch({
     		success : function(){
-    			console.log("Fetching All Records.");
     			FORMY.Patients = searchResults;
-    			console.log("render; Patients count: " + FORMY.Patients.length);
+    			//console.log("render; Patients count: " + FORMY.Patients.length);
     			var page = new Page({content: "Default List of patients:"});
             	(new HomeView({model: page, el: $("#homePageView")})).render();
     		},
@@ -244,10 +244,51 @@ var AppRouter = Backbone.Router.extend({
         		}
         	});
         },
-        record: function (query) {
+        edit: function (query) {
         	$("#homePageView").remove();
         	$("#formRenderingView").remove();
         	$("#patientRecordView").remove();
+        	if (! $("#formRenderingView").length){
+        		//$("#views").append("<div id=\"formRenderingView\"></div>");
+        		var viewDiv = document.createElement("div");
+        		viewDiv.setAttribute("id", "formRenderingView");
+        		$("#views").append(viewDiv);
+        	}
+        	
+        	var record = new Record({_id: query});
+        	record.fetch( {
+        		success: function(model){
+        			var patient = new Patient({_id: record.get("patientId")});
+        			console.log("just made a new instance of a patient.");
+        			patient.fetch( {
+        				success: function(model){
+        					console.log("Just successfully fetched the patient.");
+        					FORMY.sessionPatient = patient;
+        					console.log("record: " + JSON.stringify(record));        					
+        					FORMY.loadForm(record.get("formId"), null,{
+                        		success: function(form){
+                        			form.set({"patientSurname": patient.get('surname')});
+                        			form.set({"patientForenames": patient.get('forenames')});
+                        			form.set({"patientMiddle_name": patient.get('Middle_name')});
+                        			form.set({"patientId": patient.get('_id')});
+                        			(new FormView({model: record, currentForm:form, el: $("#formRenderingView")})).render();
+                        		},
+                        		error : function(){
+                        			console.log("Error loading form: " + arguments); 
+                        		}
+                        	});
+        				}
+        			});
+        		},
+        		error : function(){
+        			console.log("Error loading FormView: " + arguments); 
+        		}
+        	});
+        },
+        record: function (query) {
+        	$("#homePageView").remove();
+        	$("#formRenderingView").remove();
+        	$("#formRenderingView").remove();
         	if (! $("#patientRecordView").length){
         		//$("#views").append("<div id=\"formRenderingView\"></div>");
         		var viewDiv = document.createElement("div");
@@ -258,31 +299,51 @@ var AppRouter = Backbone.Router.extend({
         	var record = new Record({_id: query});
         	record.fetch( {
         		success: function(model){
-        			console.log("record: " + JSON.stringify(record));
         			var patient = new Patient({_id: record.get("patientId")});
         			console.log("just made a new instance of a patient.");
         			patient.fetch( {
         				success: function(model){
         					console.log("Just successfully fetched the patient.");
-        					//record.set({"patient" : patient});
-        					record.set({"patientSurname": patient.get('surname')});
-        					record.set({"patientForenames": patient.get('forenames')});
-        					record.set({"patientMiddle_name": patient.get('Middle_name')});
         					FORMY.sessionPatient = patient;
-        					//console.log("record: " + JSON.stringify(record));        					
+        					console.log("record: " + JSON.stringify(record));        					
         					FORMY.loadForm(record.get("formId"), null,{
-                        		success: function(form){
-                        			(new RecordView({model: record, currentForm:form})).render();
-                        		},
-                        		error : function(){
-                        			console.log("Error loading form: " + arguments); 
-                        		}
-                        	});
+        						success: function(form){
+        							form.set({"patientSurname": patient.get('surname')});
+        							form.set({"patientForenames": patient.get('forenames')});
+        							form.set({"patientMiddle_name": patient.get('Middle_name')});
+        							form.set({"recordId": record.get('_id')});
+                					form.set({"patientId": patient.get('_id')});
+        							(new RecordView({model: record, currentForm:form, el: $("#patientRecordView")})).render();
+        						},
+        						error : function(){
+        							console.log("Error loading form: " + arguments); 
+        						}
+        					});
         				}
         			});
         		},
         		error : function(){
-        			console.log("Error loading RecordView: " + arguments); 
+        			console.log("Error loading FormView: " + arguments); 
+        		}
+        	});
+        },
+        destroy: function (query) {
+        	var record = new Record({_id: query});
+        	record.fetch( {
+        		success: function(model){
+        			record.destroy( {
+        				success: function(model, response){
+        					var patientId = record.get("patientId");
+        					console.log("Just successfully deleted the record for patientId: " + patientId);
+        					FORMY.router.navigate('patientRecords/' + patientId, true);
+        				},
+						error : function(){
+							console.log("Error loading form: " + arguments); 
+						}
+        			});
+        		},
+        		error : function(){
+        			console.log("Error loading record: " + arguments); 
         		}
         	});
         },

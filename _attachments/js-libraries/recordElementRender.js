@@ -17,23 +17,20 @@ var loadWidgetTemplates = function(){
 
 loadWidgetTemplates();
 
-inputTextWidgetCompiledHtml = Handlebars.compile($("#inputTextWidget").html());
-datepickerWidgetCompiledHtml = Handlebars.compile($("#datepickerWidget").html());
-checkboxWidgetCompiledHtml = Handlebars.compile($("#checkboxWidget").html());
-dropdownWidgetCompiledHtml = Handlebars.compile($("#dropdownWidget").html());
-dropdownWidgetFormDesignerCompiledHtml = Handlebars.compile($("#dropdownWidgetFormDesigner").html());
-textareaWidgetCompiledHtml = Handlebars.compile($("#textareaWidget").html());
+recordValueCompiledHtml = Handlebars.compile($("#recordValue").html());
+recordDropdownValueCompiledHtml = Handlebars.compile($("#recordDropdownValue").html());
+doNotRenderCompiledHtml = Handlebars.compile($("#doNotRender").html());
+recordCheckboxValueCompiledHtml = Handlebars.compile($("#recordCheckboxValue").html());
+recordDropdownCSVValueCompiledHtml = Handlebars.compile($("#recordDropdownCSVValue").html());
+recordYesnoValueCompiledHtml = Handlebars.compile($("#recordYesnoValue").html());
+recordGenderValueCompiledHtml = Handlebars.compile($("#recordGenderValue").html());
 displayTableWidgetCompiledHtml = Handlebars.compile($("#displayTableWidget").html());
 displayHeaderWidgetCompiledHtml = Handlebars.compile($("#displayHeaderWidget").html());
 displaySubHeaderWidgetCompiledHtml = Handlebars.compile($("#displaySubHeaderWidget").html());
 displayInfotextWidgetCompiledHtml = Handlebars.compile($("#displayInfotextWidget").html());
-yesnoWidgetCompiledHtml = Handlebars.compile($("#yesnoWidget").html());
-genderWidgetCompiledHtml = Handlebars.compile($("#genderWidget").html());
-hiddenWidgetCompiledHtml = Handlebars.compile($("#hiddenWidget").html());
-buttonWidgetCompiledHtml = Handlebars.compile($("#buttonWidget").html());
 
-Handlebars.registerHelper("renderWidget", function(context) {
-	//console.log("renderWidget:" + JSON.stringify(context));
+Handlebars.registerHelper("renderValue", function(context) {
+	//console.log("renderValue:" + JSON.stringify(context));
 	var template;
 	var html = "";
 	var useTemplate = true;
@@ -57,31 +54,31 @@ Handlebars.registerHelper("renderWidget", function(context) {
 		if (maxlength == null || maxlength == 0) {
 			this.maxlength = 255;
 		}
-		template = inputTextWidgetCompiledHtml;
+		template = recordValueCompiledHtml;
 	} else if (inputType == 'patientid') {
-			template = inputTextWidgetCompiledHtml;
+			template = recordValueCompiledHtml;
 	} else if (inputType == 'birthdate') {
-		template = datepickerWidgetCompiledHtml;
+		template = recordValueCompiledHtml;
 	} else if (inputType == 'emptyDate') {
-		template = datepickerWidgetCompiledHtml;
+		template = recordValueCompiledHtml;
 	} else if (inputType == 'checkbox') {
-		template = checkboxWidgetCompiledHtml;
+		template = recordCheckboxValueCompiledHtml;
 	} else if (inputType == 'dropdown-add-one') {
-		template = dropdownWidgetCompiledHtml;
+		template = recordDropdownCSVValueCompiledHtml;
 	} else if (inputType == 'dropdown') {
-		template = dropdownWidgetCompiledHtml;
+		template = recordDropdownCSVValueCompiledHtml;
 	} else if (inputType == 'select') {
-		template = dropdownWidgetCompiledHtml;
+		template = recordDropdownCSVValueCompiledHtml;
 	} else if (inputType == 'selectFDA') {
-		template = dropdownWidgetFormDesignerCompiledHtml;
+		template = recordDropdownValueCompiledHtml;
 	} else if (inputType == 'textarea') {
-		template = textareaWidgetCompiledHtml;
+		template = recordValueCompiledHtml;
 	} else if (inputType == 'yesno_br') {
-		template = yesnoWidgetCompiledHtml;
+		template = recordYesnoValueCompiledHtml;
 	} else if (inputType == 'Yes/No') {
-		template = yesnoWidgetCompiledHtml;
+		template = recordYesnoValueCompiledHtml;
 	} else if (inputType == 'gender') {
-		template = genderWidgetCompiledHtml;
+		template = recordGenderValueCompiledHtml;
 //	} else if (inputType == 'display-tbl-begin') {
 //		template = displayTableWidgetCompiledHtml;
 	} else if (inputType == 'display-header') {
@@ -91,9 +88,9 @@ Handlebars.registerHelper("renderWidget", function(context) {
 	} else if (inputType == 'infotext') {
 		template = displayInfotextWidgetCompiledHtml;
 	} else if (inputType == 'hidden') {
-		template = hiddenWidgetCompiledHtml;
+		template = doNotRenderCompiledHtml;
 	} else if (inputType == 'button') {
-		template = buttonWidgetCompiledHtml;
+		template = doNotRenderCompiledHtml;
 	} else {
 		useTemplate = false; 
 	};
@@ -117,36 +114,62 @@ Handlebars.registerHelper("renderWidget", function(context) {
 	  return html;
 	});
 
-// Debug handlebars.js templates
-// place {{debug}} in your template
-// kudos: http://thinkvitamin.com/code/handlebars-js-part-3-tips-and-tricks/
-Handlebars.registerHelper("debug", function(optionalValue) {
-	  console.log("Current Context");
-	  console.log("====================");
-	  console.log(this);
-	 
-	  if (optionalValue) {
-	    console.log("Value");
-	    console.log("====================");
-	    console.log(optionalValue);
-	  }
+Handlebars.registerHelper("checkboxValue", function(value) {
+	var out = "";
+	if (value != null) {
+		  if (value === "1") {
+			  out = "Yes";
+		  } else if (value === "0") {
+			  out = "No";
+		  }
+	 }
+	return out;
 	});
+Handlebars.registerHelper("yesNoValue", function(value) {
+	var out = "";
+	if (value != null) {
+		if (value === 1) {
+			out = "Yes";
+		} else if (value === 0) {
+			out = "No";
+		}
+	}
+	return out;
+});
+Handlebars.registerHelper("genderValue", function(value) {
+	var out = "";
+	if (value != null) {
+		if (value === 1) {
+			out = "Female";
+		} else if (value === 2) {
+			out = "Male";
+		}
+	}
+	return out;
+});
 
-Handlebars.registerHelper('dropdown', function(items) {
+Handlebars.registerHelper('dropdownCSVValue', function(items, value) {
 	  var out = "";
 	  var arry = items.split(',');
-	  out = out + "<option value=\"\">--Select--</option>";
 	  for(var i=0, l=arry.length; i<l; i++) {
 	    out = out + "<option value=\"" + arry[i] + "\">" + arry[i] + "</option>";
+	    if (arry[i] === value) {
+			out = value;
+		}
 	  }
-
 	  return out;
 	});
 
-Handlebars.registerHelper('dateFormat', function(item) {
+Handlebars.registerHelper('dropdownValue', function(enumerations, value) {
 	var out = "";
-	var d1 = new Date(item);
-	//out = d1.toString('yyyy-MM-dd hh:mm');
-	out = $.format.date(d1, "yyyy-MM-dd hh:mm:ss");
+	console.log("enums: " + JSON.stringify(enumerations));
+	for (fenum in enumerations) {
+		var record = enumerations[fenum];
+		console.log("record: " + JSON.stringify(record));
+		console.log("defaultValue: " + record.defaultValue + " value: " + value);
+		if (record.defaultValue === value) {
+			out = record.label;
+		}
+	}
 	return out;
 });

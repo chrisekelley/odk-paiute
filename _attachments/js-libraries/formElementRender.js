@@ -142,7 +142,19 @@ Handlebars.registerHelper('dropdown', function(items) {
 
 	  return out;
 	});
-
+Handlebars.registerHelper('dropdownWidgetValue', function(enumerations, value) {
+	var out = "";
+	out = out + "<option value=\"\">--Select--</option>";
+	for (fenum in enumerations) {
+		var record = enumerations[fenum];
+		if (record.defaultValue === value) {
+			out = out + "<option value=\"" + record.defaultValue + "\" selected=\"selected\">" + record.label + "</option>";
+		} else {
+			out = out + "<option value=\"" + record.defaultValue + "\">" + record.label + "</option>";
+		}
+	}
+	return out;
+});
 Handlebars.registerHelper('dateFormat', function(item) {
 	var out = "";
 	var d1 = new Date(item);

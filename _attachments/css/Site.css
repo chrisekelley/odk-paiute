@@ -25,7 +25,7 @@ body
 a:link
 {
     color: #034af3;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 a:visited
 {
@@ -586,6 +586,20 @@ div#search-results input[type=text] {
 	/*border-right: 1px solid black;*/
 }
 
+#form-container-vert {
+	/*background: #ffffff;*/
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+	vertical-align: top;
+	padding-left: 4px;
+	/*margin-top: 2px;*/
+	font-size: 10pt;
+	overflow: auto;
+	/*border: 1px solid black;*/
+	/*border-top: 1px solid black;
+	border-left: 1px solid black;*/
+	/*border-right: 1px solid black;*/
+}
+
 #search-results-list {
 	position: relative;
 }
@@ -1124,3 +1138,7 @@ tr.over td, tr: hover td
 {
 	/*background: #bcd4ec;*/ 
 }
+
+.patientName A:link {text-decoration: none; color: white}
+.patientName A:visited {text-decoration: none; color: white}
+.patientName A:active {text-decoration: none; color: white}

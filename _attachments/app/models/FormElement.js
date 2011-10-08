@@ -4,6 +4,7 @@ var FormElement = Backbone.Model.extend({
     // If name is not defined then use the label as the name (after downcasing and replacing spaces with dashes)
     this.set({"name" : (typeof this.get("name") == "undefined") ? this.get("label").toLowerCase().dasherize() : this.name});
   },
+  value: null,
   validate: function(attributes){
     var validationErrors = [];
     _.each(this.get("options"), function(option){

@@ -7,30 +7,6 @@ window.RecordElementView = Backbone.View.extend({
 	  this.model.bind('validationError', this.showErrorMessages, this);
 	  this.model.view = this;
   },
-  events: {
-    "change" : "validate",
-  },
-  validate: function() {
-    // clear old error messages before validation occurs
-    this.$(".error-message").html("").hide();
-    console.log("inputType: " + this.model.get("inputType"));
-    this.inputType = this.model.get("inputType");
-    this.currentValue = this.$("input").val();
-    if (this.inputType == "dropdown") {
-    	this.currentValue = this.$("select").val();
-    } else if (this.inputType == "dropdown-add-one") {
-    	this.currentValue = this.$("select").val();
-    } else if (this.inputType == "checkbox") {
-    	this.currentValue = this.$("checkbox").val();
-    }
-    console.log("FormElementView validate currentValue: " + this.currentValue);
-    this.validationResult = this.model.validate({value:this.currentValue });
-    if (this.validationResult == null) {
-    } else {
-        console.log("validation error: " + this.validationResult);
-    }
-    return this.validationResult;
-  },
   render: function(){
 	  this.colspan = this.model.get("colspan");
 	  if (this.colspan == null) {
@@ -44,13 +20,4 @@ window.RecordElementView = Backbone.View.extend({
 	  //console.log("currentId: "  + currentId + " renderedHtml: " + renderedHtml);
 	  return this;
   },
-  showErrorMessages: function (error){
-    this.$(".error-message").html(error.join(". ")).show();
-  },
-//  remove: function() {
-//	  $(this.el).remove();
-//  },
-//  clear: function() {
-//	  this.model.destroy();
-//  }
 });
